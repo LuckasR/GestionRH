@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit regle_travail</h2>
+<form th:action='@{/regle_travail/update}' th:object='${regle_travail}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+nom: <input type='text' th:field='*{nom}'/><br/>
+duree_normale: <input type='text' th:field='*{duree_normale}'/><br/>
+est_weekend: <input type='text' th:field='*{est_weekend}'/><br/>
+est_ferie: <input type='text' th:field='*{est_ferie}'/><br/>
+description: <input type='text' th:field='*{description}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

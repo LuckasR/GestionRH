@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Detail_contrat_employee</h5>
+<div class="card-body">
+<form th:action='@{/detail_contrat_employee/save}' th:object='${detail_contrat_employee}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='admin_id'>Admin_id</label>
+    <select class='form-select' th:field='*{admin}'>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='contrat_employee_id'>Contrat_employee_id</label>
+    <select class='form-select' th:field='*{contrat_employee}'>
+      <option th:each='item : ${contrat_employees}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='type_contrat_id'>Type_contrat_id</label>
+    <select class='form-select' th:field='*{type_contrat}'>
+      <option th:each='item : ${type_contrats}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='duree_contrat'>Duree contrat</label>
+    <input type='number' class='form-control' id='duree_contrat' th:field='*{duree_contrat}' placeholder='duree_contrat...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_debut_contrat'>Date debut contrat</label>
+    <input type='date' class='form-control' id='date_debut_contrat' th:field='*{date_debut_contrat}' placeholder='date_debut_contrat...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_fin_contrat'>Date fin contrat</label>
+    <input type='date' class='form-control' id='date_fin_contrat' th:field='*{date_fin_contrat}' placeholder='date_fin_contrat...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='periode_essai'>Periode essai</label>
+    <input type='number' class='form-control' id='periode_essai' th:field='*{periode_essai}' placeholder='periode_essai...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='duree_preavis'>Duree preavis</label>
+    <input type='number' class='form-control' id='duree_preavis' th:field='*{duree_preavis}' placeholder='duree_preavis...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='statut_id'>Statut_id</label>
+    <select class='form-select' th:field='*{status_contrat}'>
+      <option th:each='item : ${status_contrats}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='renouvellement_auto'>Renouvellement auto</label>
+    <input type='checkbox' class='form-check-input' id='renouvellement_auto' th:field='*{renouvellement_auto}'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='commentaire'>Commentaire</label>
+    <input type='text' class='form-control' id='commentaire' th:field='*{commentaire}' placeholder='commentaire...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

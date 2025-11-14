@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Contrat_employee</h5>
+<div class="card-body">
+<form th:action='@{/contrat_employee/save}' th:object='${contrat_employee}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='employee_id'>Employee_id</label>
+    <select class='form-select' th:field='*{employee}'>
+      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_debut'>Date debut</label>
+    <input type='date' class='form-control' id='date_debut' th:field='*{date_debut}' placeholder='date_debut...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_fin'>Date fin</label>
+    <input type='date' class='form-control' id='date_fin' th:field='*{date_fin}' placeholder='date_fin...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='renouvellement_auto'>Renouvellement auto</label>
+    <input type='checkbox' class='form-check-input' id='renouvellement_auto' th:field='*{renouvellement_auto}'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='has_active'>Has active</label>
+    <input type='checkbox' class='form-check-input' id='has_active' th:field='*{has_active}'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Organisme_social</h5>
+<div class="card-body">
+<form th:action='@{/organisme_social/save}' th:object='${organisme_social}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='name'>Name</label>
+    <input type='text' class='form-control' id='name' th:field='*{name}' placeholder='name...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='pourcentage'>Pourcentage</label>
+    <input type='number' class='form-control' id='pourcentage' th:field='*{pourcentage}' placeholder='pourcentage...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_debut'>Date debut</label>
+    <input type='time' class='form-control' id='date_debut' th:field='*{date_debut}' placeholder='date_debut...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_fin'>Date fin</label>
+    <input type='time' class='form-control' id='date_fin' th:field='*{date_fin}' placeholder='date_fin...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

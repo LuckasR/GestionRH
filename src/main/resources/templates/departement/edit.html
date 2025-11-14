@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit departement</h2>
+<form th:action='@{/departement/update}' th:object='${departement}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+name: <input type='text' th:field='*{name}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Liste de regle_travail</h2>
+<a th:href='@{/regle_travail/create}'>Créer</a>
+<table  class="table table-hover" >
+<thead><tr>
+<th>id</th>
+<th>nom</th>
+<th>duree_normale</th>
+<th>est_weekend</th>
+<th>est_ferie</th>
+<th>description</th>
+<th>Actions</th>
+</tr></thead>
+<tbody>
+<tr th:each='row : ${regle_travails}'>
+<td th:text='${row.id}'></td>
+<td th:text='${row.nom}'></td>
+<td th:text='${row.duree_normale}'></td>
+<td th:text='${row.est_weekend}'></td>
+<td th:text='${row.est_ferie}'></td>
+<td th:text='${row.description}'></td>
+<td>
+<a th:href='@{/regle_travail/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/regle_travail/delete/{id}(id=${row.id})}'>Delete</a>
+</td></tr>
+</tbody></table> </div> </body></html>

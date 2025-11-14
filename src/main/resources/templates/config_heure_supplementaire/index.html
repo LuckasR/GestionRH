@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Liste de config_heure_supplementaire</h2>
+<a th:href='@{/config_heure_supplementaire/create}'>Créer</a>
+<table  class="table table-hover" >
+<thead><tr>
+<th>id</th>
+<th>regle_id</th>
+<th>heure_max_jour</th>
+<th>heure_max_semaine</th>
+<th>taux_multiplicateur_jour</th>
+<th>taux_multiplicateur_nuit</th>
+<th>taux_multiplicateur_weekend</th>
+<th>taux_multiplicateur_ferie</th>
+<th>type_compensation</th>
+<th>besoin_validation_admin</th>
+<th>status_id</th>
+<th>admin_id</th>
+<th>commentaire</th>
+<th>date_creation</th>
+<th>date_fin</th>
+<th>est_actif</th>
+<th>Actions</th>
+</tr></thead>
+<tbody>
+<tr th:each='row : ${config_heure_supplementaires}'>
+<td th:text='${row.id}'></td>
+<td th:text='${row.regle_travail}'></td>
+<td th:text='${row.heure_max_jour}'></td>
+<td th:text='${row.heure_max_semaine}'></td>
+<td th:text='${row.taux_multiplicateur_jour}'></td>
+<td th:text='${row.taux_multiplicateur_nuit}'></td>
+<td th:text='${row.taux_multiplicateur_weekend}'></td>
+<td th:text='${row.taux_multiplicateur_ferie}'></td>
+<td th:text='${row.type_compensation}'></td>
+<td th:text='${row.besoin_validation_admin}'></td>
+<td th:text='${row.status_general}'></td>
+<td th:text='${row.admin}'></td>
+<td th:text='${row.commentaire}'></td>
+<td th:text='${row.date_creation}'></td>
+<td th:text='${row.date_fin}'></td>
+<td th:text='${row.est_actif}'></td>
+<td>
+<a th:href='@{/config_heure_supplementaire/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/config_heure_supplementaire/delete/{id}(id=${row.id})}'>Delete</a>
+</td></tr>
+</tbody></table> </div> </body></html>

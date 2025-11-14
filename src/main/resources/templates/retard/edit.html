@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit retard</h2>
+<form th:action='@{/retard/update}' th:object='${retard}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+employee_id: <select th:field='*{employee_id}'>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${retard.employee_id.id}'></option>
+</select><br/>
+pointage_id: <select th:field='*{pointage_id}'>
+<option th:each='item : ${pointages}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${retard.pointage_id.id}'></option>
+</select><br/>
+minutes_retard: <input type='text' th:field='*{minutes_retard}'/><br/>
+justification: <input type='text' th:field='*{justification}'/><br/>
+statut_id: <select th:field='*{statut_id}'>
+<option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${retard.statut_id.id}'></option>
+</select><br/>
+admin_id: <select th:field='*{admin_id}'>
+<option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${retard.admin_id.id}'></option>
+</select><br/>
+date_creation: <input type='text' th:field='*{date_creation}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

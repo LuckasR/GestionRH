@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Liste de status_contrat</h2>
+<a th:href='@{/status_contrat/create}'>Créer</a>
+<table  class="table table-hover" >
+<thead><tr>
+<th>id</th>
+<th>name</th>
+<th>Actions</th>
+</tr></thead>
+<tbody>
+<tr th:each='row : ${status_contrats}'>
+<td th:text='${row.id}'></td>
+<td th:text='${row.name}'></td>
+<td>
+<a th:href='@{/status_contrat/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/status_contrat/delete/{id}(id=${row.id})}'>Delete</a>
+</td></tr>
+</tbody></table> </div> </body></html>

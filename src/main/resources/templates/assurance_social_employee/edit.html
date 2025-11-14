@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit assurance_social_employee</h2>
+<form th:action='@{/assurance_social_employee/update}' th:object='${assurance_social_employee}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+employee_id: <select th:field='*{employee_id}'>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${assurance_social_employee.employee_id.id}'></option>
+</select><br/>
+organisme_id: <select th:field='*{organisme_id}'>
+<option th:each='item : ${organisme_socials}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${assurance_social_employee.organisme_id.id}'></option>
+</select><br/>
+date_attribution: <input type='text' th:field='*{date_attribution}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

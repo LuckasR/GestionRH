@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Periode_paie</h5>
+<div class="card-body">
+<form th:action='@{/periode_paie/save}' th:object='${periode_paie}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='mois'>Mois</label>
+    <input type='number' class='form-control' id='mois' th:field='*{mois}' placeholder='mois...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='annee'>Annee</label>
+    <input type='number' class='form-control' id='annee' th:field='*{annee}' placeholder='annee...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_debut'>Date debut</label>
+    <input type='date' class='form-control' id='date_debut' th:field='*{date_debut}' placeholder='date_debut...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_fin'>Date fin</label>
+    <input type='date' class='form-control' id='date_fin' th:field='*{date_fin}' placeholder='date_fin...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='statut'>Statut</label>
+    <select class='form-select' th:field='*{status_general}'>
+      <option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='admin_id'>Admin_id</label>
+    <select class='form-select' th:field='*{admin}'>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_generation'>Date generation</label>
+    <input type='time' class='form-control' id='date_generation' th:field='*{date_generation}' placeholder='date_generation...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

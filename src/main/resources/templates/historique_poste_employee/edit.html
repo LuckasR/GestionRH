@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit historique_poste_employee</h2>
+<form th:action='@{/historique_poste_employee/update}' th:object='${historique_poste_employee}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+admin_id: <select th:field='*{admin_id}'>
+<option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${historique_poste_employee.admin_id.id}'></option>
+</select><br/>
+employee_id: <select th:field='*{employee_id}'>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${historique_poste_employee.employee_id.id}'></option>
+</select><br/>
+poste_id: <select th:field='*{poste_id}'>
+<option th:each='item : ${postes}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${historique_poste_employee.poste_id.id}'></option>
+</select><br/>
+type_changement_id: <select th:field='*{type_changement_id}'>
+<option th:each='item : ${type_changements}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${historique_poste_employee.type_changement_id.id}'></option>
+</select><br/>
+date_debut: <input type='text' th:field='*{date_debut}'/><br/>
+date_fin: <input type='text' th:field='*{date_fin}'/><br/>
+commentaire: <input type='text' th:field='*{commentaire}'/><br/>
+date_creation: <input type='text' th:field='*{date_creation}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

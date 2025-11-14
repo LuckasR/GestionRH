@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit salaire_employee</h2>
+<form th:action='@{/salaire_employee/update}' th:object='${salaire_employee}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+admin_id: <select th:field='*{admin_id}'>
+<option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${salaire_employee.admin_id.id}'></option>
+</select><br/>
+employee_id: <select th:field='*{employee_id}'>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${salaire_employee.employee_id.id}'></option>
+</select><br/>
+salaire: <input type='text' th:field='*{salaire}'/><br/>
+motif_modification: <input type='text' th:field='*{motif_modification}'/><br/>
+date_attribution: <input type='text' th:field='*{date_attribution}'/><br/>
+date_fin: <input type='text' th:field='*{date_fin}'/><br/>
+est_actif: <input type='text' th:field='*{est_actif}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

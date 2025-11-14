@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<div layout:fragment="navigation">
+  <!-- Menu de navigation -->
+  <ul class="menu-inner py-1">
+    <li class="menu-item active open">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-home-smile"></i>
+        <div class="text-truncate" data-i18n="Dashboards">gestion vente</div>
+        <span class="badge rounded-pill bg-danger ms-auto">5</span>
+      </a>
+      <ul class="menu-sub">
+
+         <li class="menu-item">
+          <a href="/conge" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des conge</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/retard" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des retard</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/absence" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des absence</div>
+          </a>
+        </li>
+      
+   
+        <li class="menu-item">
+          <a href="/type_contrat" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des type_contrat</div>
+          </a>
+        </li>
+     
+        <li class="menu-item">
+          <a href="/societe" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des societe</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/employee" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des employee</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/utilisateur" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des utilisateur</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/organisme_social" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des organisme_social</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/contrat_employee" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des contrat_employee</div>
+          </a>
+        </li>
+       
+        <li class="menu-item">
+          <a href="/detail_contrat_employee" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des detail_contrat_employee</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/parcours_academique" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des parcours_academique</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/detail_parcours_academique" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des detail_parcours_academique</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/information_employee" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des information_employee</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/historique_poste_employee" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des historique_poste_employee</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/assurance_social_employee" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des assurance_social_employee</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/historique_role" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des historique_role</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/solde_conge" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des solde_conge</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/type_conge" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des type_conge</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/type_operation_conge" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des type_operation_conge</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/historique_solde_conge" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des historique_solde_conge</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/calendrier_entreprise" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des calendrier_entreprise</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/evenement_calendrier" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des evenement_calendrier</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/type_evenement" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des type_evenement</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/notification" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des notification</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/type_notification" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des type_notification</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/pointage" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des pointage</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/regle_travail" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des regle_travail</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/config_heure_supplementaire" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des config_heure_supplementaire</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/heure_supplementaire" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des heure_supplementaire</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/parametre_taux" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des parametre_taux</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/salaire_employee" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des salaire_employee</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/periode_paie" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des periode_paie</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/paie_employee" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des paie_employee</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/paie_detail" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des paie_detail</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/log_action" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des log_action</div>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="menu-item active open">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-home-smile"></i>
+        <div class="text-truncate" data-i18n="Dashboards">gestion scolaire</div>
+        <span class="badge rounded-pill bg-danger ms-auto">5</span>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="/filiere" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des filiere</div>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="menu-item active open">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-home-smile"></i>
+        <div class="text-truncate" data-i18n="Dashboards">gestion RH</div>
+        <span class="badge rounded-pill bg-danger ms-auto">5</span>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="/departement" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des departement</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/poste" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des poste</div>
+          </a>
+        </li>
+         <li class="menu-item">
+          <a href="/genre" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des genre</div>
+          </a>
+        </li>
+             <li class="menu-item">
+          <a href="/siege_entreprise" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des siege_entreprise</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/status_traitement" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des status_traitement</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/role" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des role</div>
+          </a>
+        </li>
+   <li class="menu-item">
+          <a href="/status_contrat" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des status_contrat</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/niveau_etude" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des niveau_etude</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/type_changement" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des type_changement</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/status_general" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des status_general</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/methode" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des methode</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="/type_compensation" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des type_compensation</div>
+          </a>
+        </li>
+         <li class="menu-item">
+          <a href="/admin" class="menu-link">
+            <div class="text-truncate" data-i18n="Analytics">Liste des admin</div>
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

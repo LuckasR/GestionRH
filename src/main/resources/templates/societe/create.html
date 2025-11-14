@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Societe</h5>
+<div class="card-body">
+<form th:action='@{/societe/save}' th:object='${societe}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='name'>Name</label>
+    <input type='text' class='form-control' id='name' th:field='*{name}' placeholder='name...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='nombre_qcm_test'>Nom bre qcm test</label>
+    <input type='number' class='form-control' id='nombre_qcm_test' th:field='*{nombre_qcm_test}' placeholder='nombre_qcm_test...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='durre_entretient'>Durre entretient</label>
+    <input type='number' class='form-control' id='durre_entretient' th:field='*{durre_entretient}' placeholder='durre_entretient...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='pourcentage_passed'>Pourcentage passed</label>
+    <input type='number' class='form-control' id='pourcentage_passed' th:field='*{pourcentage_passed}' placeholder='pourcentage_passed...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_creation'>Date creation</label>
+    <input type='time' class='form-control' id='date_creation' th:field='*{date_creation}' placeholder='date_creation...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

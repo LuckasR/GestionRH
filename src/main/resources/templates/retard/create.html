@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Retard</h5>
+<div class="card-body">
+<form th:action='@{/retard/save}' th:object='${retard}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='employee_id'>Employee_id</label>
+    <select class='form-select' th:field='*{employee}'>
+      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='pointage_id'>Pointage_id</label>
+    <select class='form-select' th:field='*{pointage}'>
+      <option th:each='item : ${pointages}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='minutes_retard'>Minutes retard</label>
+    <input type='number' class='form-control' id='minutes_retard' th:field='*{minutes_retard}' placeholder='minutes_retard...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='justification'>Justification</label>
+    <input type='text' class='form-control' id='justification' th:field='*{justification}' placeholder='justification...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='statut_id'>Statut_id</label>
+    <select class='form-select' th:field='*{status_general}'>
+      <option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='admin_id'>Admin_id</label>
+    <select class='form-select' th:field='*{admin}'>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_creation'>Date creation</label>
+    <input type='time' class='form-control' id='date_creation' th:field='*{date_creation}' placeholder='date_creation...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

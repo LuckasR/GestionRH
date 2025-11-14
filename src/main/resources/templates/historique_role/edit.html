@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit historique_role</h2>
+<form th:action='@{/historique_role/update}' th:object='${historique_role}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+employee_id: <select th:field='*{employee_id}'>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${historique_role.employee_id.id}'></option>
+</select><br/>
+role_id: <select th:field='*{role_id}'>
+<option th:each='item : ${roles}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${historique_role.role_id.id}'></option>
+</select><br/>
+date_modification: <input type='text' th:field='*{date_modification}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

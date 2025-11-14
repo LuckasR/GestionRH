@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Absence</h5>
+<div class="card-body">
+<form th:action='@{/absence/save}' th:object='${absence}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='employee_id'>Employee_id</label>
+    <select class='form-select' th:field='*{employee}'>
+      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_absence'>Date absence</label>
+    <input type='date' class='form-control' id='date_absence' th:field='*{date_absence}' placeholder='date_absence...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='est_justifie'>Est justifie</label>
+    <input type='checkbox' class='form-check-input' id='est_justifie' th:field='*{est_justifie}'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='commentaire'>Commentaire</label>
+    <input type='text' class='form-control' id='commentaire' th:field='*{commentaire}' placeholder='commentaire...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='statut_id'>Statut_id</label>
+    <select class='form-select' th:field='*{status_general}'>
+      <option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='admin_id'>Admin_id</label>
+    <select class='form-select' th:field='*{admin}'>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_creation'>Date creation</label>
+    <input type='time' class='form-control' id='date_creation' th:field='*{date_creation}' placeholder='date_creation...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

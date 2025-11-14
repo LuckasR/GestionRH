@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit admin</h2>
+<form th:action='@{/admin/update}' th:object='${admin}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+username: <input type='text' th:field='*{username}'/><br/>
+password: <input type='text' th:field='*{password}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit paie_employee</h2>
+<form th:action='@{/paie_employee/update}' th:object='${paie_employee}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+employee_id: <select th:field='*{employee_id}'>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${paie_employee.employee_id.id}'></option>
+</select><br/>
+periode_id: <select th:field='*{periode_id}'>
+<option th:each='item : ${periode_paies}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${paie_employee.periode_id.id}'></option>
+</select><br/>
+salaire_base: <input type='text' th:field='*{salaire_base}'/><br/>
+total_primes: <input type='text' th:field='*{total_primes}'/><br/>
+total_heures_sup: <input type='text' th:field='*{total_heures_sup}'/><br/>
+total_absences: <input type='text' th:field='*{total_absences}'/><br/>
+total_deductions: <input type='text' th:field='*{total_deductions}'/><br/>
+total_contributions: <input type='text' th:field='*{total_contributions}'/><br/>
+net_a_payer: <input type='text' th:field='*{net_a_payer}'/><br/>
+date_calcul: <input type='text' th:field='*{date_calcul}'/><br/>
+statut: <select th:field='*{statut}'>
+<option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${paie_employee.statut.id}'></option>
+</select><br/>
+admin_id: <select th:field='*{admin_id}'>
+<option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${paie_employee.admin_id.id}'></option>
+</select><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

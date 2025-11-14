@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Historique_solde_conge</h5>
+<div class="card-body">
+<form th:action='@{/historique_solde_conge/save}' th:object='${historique_solde_conge}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='solde_id'>Solde_id</label>
+    <select class='form-select' th:field='*{solde_conge}'>
+      <option th:each='item : ${solde_conges}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='type_operation_id'>Type_operation_id</label>
+    <select class='form-select' th:field='*{type_operation_conge}'>
+      <option th:each='item : ${type_operation_conges}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='jours_pris'>Jours pris</label>
+    <input type='number' class='form-control' id='jours_pris' th:field='*{jours_pris}' placeholder='jours_pris...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_debut'>Date debut</label>
+    <input type='date' class='form-control' id='date_debut' th:field='*{date_debut}' placeholder='date_debut...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_fin'>Date fin</label>
+    <input type='date' class='form-control' id='date_fin' th:field='*{date_fin}' placeholder='date_fin...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='commentaire'>Commentaire</label>
+    <input type='text' class='form-control' id='commentaire' th:field='*{commentaire}' placeholder='commentaire...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='admin_id'>Admin_id</label>
+    <select class='form-select' th:field='*{admin}'>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_action'>Date action</label>
+    <input type='time' class='form-control' id='date_action' th:field='*{date_action}' placeholder='date_action...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

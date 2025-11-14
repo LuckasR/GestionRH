@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Paie_employee</h5>
+<div class="card-body">
+<form th:action='@{/paie_employee/save}' th:object='${paie_employee}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='employee_id'>Employee_id</label>
+    <select class='form-select' th:field='*{employee}'>
+      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='periode_id'>Periode_id</label>
+    <select class='form-select' th:field='*{periode_paie}'>
+      <option th:each='item : ${periode_paies}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='salaire_base'>Salaire base</label>
+    <input type='number' class='form-control' id='salaire_base' th:field='*{salaire_base}' placeholder='salaire_base...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='total_primes'>Total primes</label>
+    <input type='number' class='form-control' id='total_primes' th:field='*{total_primes}' placeholder='total_primes...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='total_heures_sup'>Total heures sup</label>
+    <input type='number' class='form-control' id='total_heures_sup' th:field='*{total_heures_sup}' placeholder='total_heures_sup...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='total_absences'>Total absences</label>
+    <input type='number' class='form-control' id='total_absences' th:field='*{total_absences}' placeholder='total_absences...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='total_deductions'>Total deductions</label>
+    <input type='number' class='form-control' id='total_deductions' th:field='*{total_deductions}' placeholder='total_deductions...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='total_contributions'>Total contributions</label>
+    <input type='number' class='form-control' id='total_contributions' th:field='*{total_contributions}' placeholder='total_contributions...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='net_a_payer'>Net a payer</label>
+    <input type='number' class='form-control' id='net_a_payer' th:field='*{net_a_payer}' placeholder='net_a_payer...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_calcul'>Date calcul</label>
+    <input type='time' class='form-control' id='date_calcul' th:field='*{date_calcul}' placeholder='date_calcul...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='statut'>Statut</label>
+    <select class='form-select' th:field='*{status_general}'>
+      <option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='admin_id'>Admin_id</label>
+    <select class='form-select' th:field='*{admin}'>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

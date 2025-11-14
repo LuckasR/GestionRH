@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit detail_parcours_academique</h2>
+<form th:action='@{/detail_parcours_academique/update}' th:object='${detail_parcours_academique}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+parcours_id: <select th:field='*{parcours_id}'>
+<option th:each='item : ${parcours_academiques}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${detail_parcours_academique.parcours_id.id}'></option>
+</select><br/>
+filiere_id: <select th:field='*{filiere_id}'>
+<option th:each='item : ${filieres}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${detail_parcours_academique.filiere_id.id}'></option>
+</select><br/>
+niveau_etude_id: <select th:field='*{niveau_etude_id}'>
+<option th:each='item : ${niveau_etudes}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${detail_parcours_academique.niveau_etude_id.id}'></option>
+</select><br/>
+etablissement: <input type='text' th:field='*{etablissement}'/><br/>
+mention: <input type='text' th:field='*{mention}'/><br/>
+document_diplome: <input type='text' th:field='*{document_diplome}'/><br/>
+date_obtention: <input type='text' th:field='*{date_obtention}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

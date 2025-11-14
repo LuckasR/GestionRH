@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Config_heure_supplementaire</h5>
+<div class="card-body">
+<form th:action='@{/config_heure_supplementaire/save}' th:object='${config_heure_supplementaire}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='regle_id'>Regle_id</label>
+    <select class='form-select' th:field='*{regle_travail}'>
+      <option th:each='item : ${regle_travails}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='heure_max_jour'>Heure max jour</label>
+    <input type='number' class='form-control' id='heure_max_jour' th:field='*{heure_max_jour}' placeholder='heure_max_jour...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='heure_max_semaine'>Heure max semaine</label>
+    <input type='number' class='form-control' id='heure_max_semaine' th:field='*{heure_max_semaine}' placeholder='heure_max_semaine...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='taux_multiplicateur_jour'>Taux multiplicateur jour</label>
+    <input type='number' class='form-control' id='taux_multiplicateur_jour' th:field='*{taux_multiplicateur_jour}' placeholder='taux_multiplicateur_jour...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='taux_multiplicateur_nuit'>Taux multiplicateur nuit</label>
+    <input type='number' class='form-control' id='taux_multiplicateur_nuit' th:field='*{taux_multiplicateur_nuit}' placeholder='taux_multiplicateur_nuit...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='taux_multiplicateur_weekend'>Taux multiplicateur weekend</label>
+    <input type='number' class='form-control' id='taux_multiplicateur_weekend' th:field='*{taux_multiplicateur_weekend}' placeholder='taux_multiplicateur_weekend...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='taux_multiplicateur_ferie'>Taux multiplicateur ferie</label>
+    <input type='number' class='form-control' id='taux_multiplicateur_ferie' th:field='*{taux_multiplicateur_ferie}' placeholder='taux_multiplicateur_ferie...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='type_compensation'>Type_compensation</label>
+    <select class='form-select' th:field='*{type_compensation}'>
+      <option th:each='item : ${type_compensations}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='besoin_validation_admin'>Besoin validation admin</label>
+    <input type='checkbox' class='form-check-input' id='besoin_validation_admin' th:field='*{besoin_validation_admin}'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='status_id'>Status_id</label>
+    <select class='form-select' th:field='*{status_general}'>
+      <option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='admin_id'>Admin_id</label>
+    <select class='form-select' th:field='*{admin}'>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='commentaire'>Commentaire</label>
+    <input type='text' class='form-control' id='commentaire' th:field='*{commentaire}' placeholder='commentaire...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_creation'>Date creation</label>
+    <input type='time' class='form-control' id='date_creation' th:field='*{date_creation}' placeholder='date_creation...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_fin'>Date fin</label>
+    <input type='time' class='form-control' id='date_fin' th:field='*{date_fin}' placeholder='date_fin...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='est_actif'>Est actif</label>
+    <input type='checkbox' class='form-check-input' id='est_actif' th:field='*{est_actif}'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

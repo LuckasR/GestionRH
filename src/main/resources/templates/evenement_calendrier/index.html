@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Liste de evenement_calendrier</h2>
+<a th:href='@{/evenement_calendrier/create}'>Créer</a>
+<table  class="table table-hover" >
+<thead><tr>
+<th>id</th>
+<th>calendrier_id</th>
+<th>employee_id</th>
+<th>type_evenement_id</th>
+<th>titre</th>
+<th>description</th>
+<th>date_debut</th>
+<th>date_fin</th>
+<th>statut</th>
+<th>couleur</th>
+<th>date_creation</th>
+<th>Actions</th>
+</tr></thead>
+<tbody>
+<tr th:each='row : ${evenement_calendriers}'>
+<td th:text='${row.id}'></td>
+<td th:text='${row.calendrier_entreprise}'></td>
+<td th:text='${row.employee}'></td>
+<td th:text='${row.type_evenement}'></td>
+<td th:text='${row.titre}'></td>
+<td th:text='${row.description}'></td>
+<td th:text='${row.date_debut}'></td>
+<td th:text='${row.date_fin}'></td>
+<td th:text='${row.status_general}'></td>
+<td th:text='${row.couleur}'></td>
+<td th:text='${row.date_creation}'></td>
+<td>
+<a th:href='@{/evenement_calendrier/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/evenement_calendrier/delete/{id}(id=${row.id})}'>Delete</a>
+</td></tr>
+</tbody></table> </div> </body></html>

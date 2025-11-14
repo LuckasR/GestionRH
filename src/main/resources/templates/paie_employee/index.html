@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Liste de paie_employee</h2>
+<a th:href='@{/paie_employee/create}'>Créer</a>
+<table  class="table table-hover" >
+<thead><tr>
+<th>id</th>
+<th>employee_id</th>
+<th>periode_id</th>
+<th>salaire_base</th>
+<th>total_primes</th>
+<th>total_heures_sup</th>
+<th>total_absences</th>
+<th>total_deductions</th>
+<th>total_contributions</th>
+<th>net_a_payer</th>
+<th>date_calcul</th>
+<th>statut</th>
+<th>admin_id</th>
+<th>Actions</th>
+</tr></thead>
+<tbody>
+<tr th:each='row : ${paie_employees}'>
+<td th:text='${row.id}'></td>
+<td th:text='${row.employee}'></td>
+<td th:text='${row.periode_paie}'></td>
+<td th:text='${row.salaire_base}'></td>
+<td th:text='${row.total_primes}'></td>
+<td th:text='${row.total_heures_sup}'></td>
+<td th:text='${row.total_absences}'></td>
+<td th:text='${row.total_deductions}'></td>
+<td th:text='${row.total_contributions}'></td>
+<td th:text='${row.net_a_payer}'></td>
+<td th:text='${row.date_calcul}'></td>
+<td th:text='${row.status_general}'></td>
+<td th:text='${row.admin}'></td>
+<td>
+<a th:href='@{/paie_employee/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/paie_employee/delete/{id}(id=${row.id})}'>Delete</a>
+</td></tr>
+</tbody></table> </div> </body></html>

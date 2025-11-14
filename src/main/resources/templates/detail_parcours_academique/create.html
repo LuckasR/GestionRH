@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Detail_parcours_academique</h5>
+<div class="card-body">
+<form th:action='@{/detail_parcours_academique/save}' th:object='${detail_parcours_academique}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='parcours_id'>Parcours_id</label>
+    <select class='form-select' th:field='*{parcours_academique}'>
+      <option th:each='item : ${parcours_academiques}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='filiere_id'>Filiere_id</label>
+    <select class='form-select' th:field='*{filiere}'>
+      <option th:each='item : ${filieres}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='niveau_etude_id'>Niveau_etude_id</label>
+    <select class='form-select' th:field='*{niveau_etude}'>
+      <option th:each='item : ${niveau_etudes}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='etablissement'>Etablissement</label>
+    <input type='text' class='form-control' id='etablissement' th:field='*{etablissement}' placeholder='etablissement...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='mention'>Mention</label>
+    <input type='text' class='form-control' id='mention' th:field='*{mention}' placeholder='mention...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='document_diplome'>Document diplome</label>
+    <input type='text' class='form-control' id='document_diplome' th:field='*{document_diplome}' placeholder='document_diplome...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_obtention'>Date obtention</label>
+    <input type='date' class='form-control' id='date_obtention' th:field='*{date_obtention}' placeholder='date_obtention...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

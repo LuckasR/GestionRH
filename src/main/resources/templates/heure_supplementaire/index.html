@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Liste de heure_supplementaire</h2>
+<a th:href='@{/heure_supplementaire/create}'>Créer</a>
+<table  class="table table-hover" >
+<thead><tr>
+<th>id</th>
+<th>employee_id</th>
+<th>pointage_id</th>
+<th>config_id</th>
+<th>nb_heures</th>
+<th>type_compensation</th>
+<th>statut_id</th>
+<th>admin_id</th>
+<th>commentaire</th>
+<th>date_validation</th>
+<th>date_creation</th>
+<th>Actions</th>
+</tr></thead>
+<tbody>
+<tr th:each='row : ${heure_supplementaires}'>
+<td th:text='${row.id}'></td>
+<td th:text='${row.employee}'></td>
+<td th:text='${row.pointage}'></td>
+<td th:text='${row.config_heure_supplementaire}'></td>
+<td th:text='${row.nb_heures}'></td>
+<td th:text='${row.type_compensation}'></td>
+<td th:text='${row.status_general}'></td>
+<td th:text='${row.admin}'></td>
+<td th:text='${row.commentaire}'></td>
+<td th:text='${row.date_validation}'></td>
+<td th:text='${row.date_creation}'></td>
+<td>
+<a th:href='@{/heure_supplementaire/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/heure_supplementaire/delete/{id}(id=${row.id})}'>Delete</a>
+</td></tr>
+</tbody></table> </div> </body></html>

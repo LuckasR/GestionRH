@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Historique_poste_employee</h5>
+<div class="card-body">
+<form th:action='@{/historique_poste_employee/save}' th:object='${historique_poste_employee}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='admin_id'>Admin_id</label>
+    <select class='form-select' th:field='*{admin}'>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='employee_id'>Employee_id</label>
+    <select class='form-select' th:field='*{employee}'>
+      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='poste_id'>Poste_id</label>
+    <select class='form-select' th:field='*{poste}'>
+      <option th:each='item : ${postes}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='type_changement_id'>Type_changement_id</label>
+    <select class='form-select' th:field='*{type_changement}'>
+      <option th:each='item : ${type_changements}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_debut'>Date debut</label>
+    <input type='date' class='form-control' id='date_debut' th:field='*{date_debut}' placeholder='date_debut...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_fin'>Date fin</label>
+    <input type='date' class='form-control' id='date_fin' th:field='*{date_fin}' placeholder='date_fin...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='commentaire'>Commentaire</label>
+    <input type='text' class='form-control' id='commentaire' th:field='*{commentaire}' placeholder='commentaire...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_creation'>Date creation</label>
+    <input type='time' class='form-control' id='date_creation' th:field='*{date_creation}' placeholder='date_creation...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Paie_detail</h5>
+<div class="card-body">
+<form th:action='@{/paie_detail/save}' th:object='${paie_detail}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='paie_id'>Paie_id</label>
+    <select class='form-select' th:field='*{paie_employee}'>
+      <option th:each='item : ${paie_employees}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='type'>Type</label>
+    <input type='text' class='form-control' id='type' th:field='*{type}' placeholder='type...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='description'>Description</label>
+    <input type='text' class='form-control' id='description' th:field='*{description}' placeholder='description...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='montant'>Montant</label>
+    <input type='number' class='form-control' id='montant' th:field='*{montant}' placeholder='montant...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_creation'>Date creation</label>
+    <input type='time' class='form-control' id='date_creation' th:field='*{date_creation}' placeholder='date_creation...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

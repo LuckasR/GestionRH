@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Solde_conge</h5>
+<div class="card-body">
+<form th:action='@{/solde_conge/save}' th:object='${solde_conge}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='employee_id'>Employee_id</label>
+    <select class='form-select' th:field='*{employee}'>
+      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='type_conge_id'>Type_conge_id</label>
+    <select class='form-select' th:field='*{type_conge}'>
+      <option th:each='item : ${type_conges}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='annee'>Annee</label>
+    <input type='number' class='form-control' id='annee' th:field='*{annee}' placeholder='annee...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='jours_acquis'>Jours acquis</label>
+    <input type='number' class='form-control' id='jours_acquis' th:field='*{jours_acquis}' placeholder='jours_acquis...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='jours_pris'>Jours pris</label>
+    <input type='number' class='form-control' id='jours_pris' th:field='*{jours_pris}' placeholder='jours_pris...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='jours_restants'>Jours restants</label>
+    <input type='number' class='form-control' id='jours_restants' th:field='*{jours_restants}' placeholder='jours_restants...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_maj'>Date maj</label>
+    <input type='time' class='form-control' id='date_maj' th:field='*{date_maj}' placeholder='date_maj...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

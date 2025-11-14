@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Information_employee</h5>
+<div class="card-body">
+<form th:action='@{/information_employee/save}' th:object='${information_employee}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='employee_id'>Employee_id</label>
+    <select class='form-select' th:field='*{employee}'>
+      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='contrat_id'>Contrat_id</label>
+    <select class='form-select' th:field='*{contrat_employee}'>
+      <option th:each='item : ${contrat_employees}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='salaire'>Salaire</label>
+    <input type='number' class='form-control' id='salaire' th:field='*{salaire}' placeholder='salaire...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='first_name'>First name</label>
+    <input type='text' class='form-control' id='first_name' th:field='*{first_name}' placeholder='first_name...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='last_name'>Last name</label>
+    <input type='text' class='form-control' id='last_name' th:field='*{last_name}' placeholder='last_name...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='email'>Email</label>
+    <input type='text' class='form-control' id='email' th:field='*{email}' placeholder='email...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='phone'>Phone</label>
+    <input type='text' class='form-control' id='phone' th:field='*{phone}' placeholder='phone...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='address'>Address</label>
+    <input type='text' class='form-control' id='address' th:field='*{address}' placeholder='address...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='cv'>Cv</label>
+    <input type='text' class='form-control' id='cv' th:field='*{cv}' placeholder='cv...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='lm'>Lm</label>
+    <input type='text' class='form-control' id='lm' th:field='*{lm}' placeholder='lm...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='cin'>Cin</label>
+    <input type='text' class='form-control' id='cin' th:field='*{cin}' placeholder='cin...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='residence'>Residence</label>
+    <input type='text' class='form-control' id='residence' th:field='*{residence}' placeholder='residence...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_creation'>Date creation</label>
+    <input type='time' class='form-control' id='date_creation' th:field='*{date_creation}' placeholder='date_creation...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_naissance'>Date naissance</label>
+    <input type='date' class='form-control' id='date_naissance' th:field='*{date_naissance}' placeholder='date_naissance...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

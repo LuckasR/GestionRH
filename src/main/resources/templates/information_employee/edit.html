@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit information_employee</h2>
+<form th:action='@{/information_employee/update}' th:object='${information_employee}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+employee_id: <select th:field='*{employee_id}'>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${information_employee.employee_id.id}'></option>
+</select><br/>
+contrat_id: <select th:field='*{contrat_id}'>
+<option th:each='item : ${contrat_employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${information_employee.contrat_id.id}'></option>
+</select><br/>
+salaire: <input type='text' th:field='*{salaire}'/><br/>
+first_name: <input type='text' th:field='*{first_name}'/><br/>
+last_name: <input type='text' th:field='*{last_name}'/><br/>
+email: <input type='text' th:field='*{email}'/><br/>
+phone: <input type='text' th:field='*{phone}'/><br/>
+address: <input type='text' th:field='*{address}'/><br/>
+cv: <input type='text' th:field='*{cv}'/><br/>
+lm: <input type='text' th:field='*{lm}'/><br/>
+cin: <input type='text' th:field='*{cin}'/><br/>
+residence: <input type='text' th:field='*{residence}'/><br/>
+date_creation: <input type='text' th:field='*{date_creation}'/><br/>
+date_naissance: <input type='text' th:field='*{date_naissance}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

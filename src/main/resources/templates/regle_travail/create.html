@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Regle_travail</h5>
+<div class="card-body">
+<form th:action='@{/regle_travail/save}' th:object='${regle_travail}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='nom'>Nom</label>
+    <input type='text' class='form-control' id='nom' th:field='*{nom}' placeholder='nom...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='duree_normale'>Duree normale</label>
+    <input type='number' class='form-control' id='duree_normale' th:field='*{duree_normale}' placeholder='duree_normale...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='est_weekend'>Est weekend</label>
+    <input type='checkbox' class='form-check-input' id='est_weekend' th:field='*{est_weekend}'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='est_ferie'>Est ferie</label>
+    <input type='checkbox' class='form-check-input' id='est_ferie' th:field='*{est_ferie}'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='description'>Description</label>
+    <input type='text' class='form-control' id='description' th:field='*{description}' placeholder='description...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

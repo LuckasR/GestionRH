@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit config_heure_supplementaire</h2>
+<form th:action='@{/config_heure_supplementaire/update}' th:object='${config_heure_supplementaire}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+regle_id: <select th:field='*{regle_id}'>
+<option th:each='item : ${regle_travails}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${config_heure_supplementaire.regle_id.id}'></option>
+</select><br/>
+heure_max_jour: <input type='text' th:field='*{heure_max_jour}'/><br/>
+heure_max_semaine: <input type='text' th:field='*{heure_max_semaine}'/><br/>
+taux_multiplicateur_jour: <input type='text' th:field='*{taux_multiplicateur_jour}'/><br/>
+taux_multiplicateur_nuit: <input type='text' th:field='*{taux_multiplicateur_nuit}'/><br/>
+taux_multiplicateur_weekend: <input type='text' th:field='*{taux_multiplicateur_weekend}'/><br/>
+taux_multiplicateur_ferie: <input type='text' th:field='*{taux_multiplicateur_ferie}'/><br/>
+type_compensation: <select th:field='*{type_compensation}'>
+<option th:each='item : ${type_compensations}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${config_heure_supplementaire.type_compensation.id}'></option>
+</select><br/>
+besoin_validation_admin: <input type='text' th:field='*{besoin_validation_admin}'/><br/>
+status_id: <select th:field='*{status_id}'>
+<option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${config_heure_supplementaire.status_id.id}'></option>
+</select><br/>
+admin_id: <select th:field='*{admin_id}'>
+<option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${config_heure_supplementaire.admin_id.id}'></option>
+</select><br/>
+commentaire: <input type='text' th:field='*{commentaire}'/><br/>
+date_creation: <input type='text' th:field='*{date_creation}'/><br/>
+date_fin: <input type='text' th:field='*{date_fin}'/><br/>
+est_actif: <input type='text' th:field='*{est_actif}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

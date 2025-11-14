@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit solde_conge</h2>
+<form th:action='@{/solde_conge/update}' th:object='${solde_conge}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+employee_id: <select th:field='*{employee_id}'>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${solde_conge.employee_id.id}'></option>
+</select><br/>
+type_conge_id: <select th:field='*{type_conge_id}'>
+<option th:each='item : ${type_conges}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${solde_conge.type_conge_id.id}'></option>
+</select><br/>
+annee: <input type='text' th:field='*{annee}'/><br/>
+jours_acquis: <input type='text' th:field='*{jours_acquis}'/><br/>
+jours_pris: <input type='text' th:field='*{jours_pris}'/><br/>
+jours_restants: <input type='text' th:field='*{jours_restants}'/><br/>
+date_maj: <input type='text' th:field='*{date_maj}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

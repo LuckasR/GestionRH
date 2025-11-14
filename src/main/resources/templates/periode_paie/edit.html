@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit periode_paie</h2>
+<form th:action='@{/periode_paie/update}' th:object='${periode_paie}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+mois: <input type='text' th:field='*{mois}'/><br/>
+annee: <input type='text' th:field='*{annee}'/><br/>
+date_debut: <input type='text' th:field='*{date_debut}'/><br/>
+date_fin: <input type='text' th:field='*{date_fin}'/><br/>
+statut: <select th:field='*{statut}'>
+<option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${periode_paie.statut.id}'></option>
+</select><br/>
+admin_id: <select th:field='*{admin_id}'>
+<option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${periode_paie.admin_id.id}'></option>
+</select><br/>
+date_generation: <input type='text' th:field='*{date_generation}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

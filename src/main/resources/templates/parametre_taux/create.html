@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Parametre_taux</h5>
+<div class="card-body">
+<form th:action='@{/parametre_taux/save}' th:object='${parametre_taux}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='code'>Code</label>
+    <input type='text' class='form-control' id='code' th:field='*{code}' placeholder='code...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='description'>Description</label>
+    <input type='text' class='form-control' id='description' th:field='*{description}' placeholder='description...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='taux_employe'>Taux employe</label>
+    <input type='number' class='form-control' id='taux_employe' th:field='*{taux_employe}' placeholder='taux_employe...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='taux_employeur'>Taux employeur</label>
+    <input type='number' class='form-control' id='taux_employeur' th:field='*{taux_employeur}' placeholder='taux_employeur...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_application'>Date application</label>
+    <input type='date' class='form-control' id='date_application' th:field='*{date_application}' placeholder='date_application...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_fin'>Date fin</label>
+    <input type='date' class='form-control' id='date_fin' th:field='*{date_fin}' placeholder='date_fin...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='actif'>Actif</label>
+    <input type='checkbox' class='form-check-input' id='actif' th:field='*{actif}'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

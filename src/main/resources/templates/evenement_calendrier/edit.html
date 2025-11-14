@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit evenement_calendrier</h2>
+<form th:action='@{/evenement_calendrier/update}' th:object='${evenement_calendrier}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+calendrier_id: <select th:field='*{calendrier_id}'>
+<option th:each='item : ${calendrier_entreprises}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${evenement_calendrier.calendrier_id.id}'></option>
+</select><br/>
+employee_id: <select th:field='*{employee_id}'>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${evenement_calendrier.employee_id.id}'></option>
+</select><br/>
+type_evenement_id: <select th:field='*{type_evenement_id}'>
+<option th:each='item : ${type_evenements}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${evenement_calendrier.type_evenement_id.id}'></option>
+</select><br/>
+titre: <input type='text' th:field='*{titre}'/><br/>
+description: <input type='text' th:field='*{description}'/><br/>
+date_debut: <input type='text' th:field='*{date_debut}'/><br/>
+date_fin: <input type='text' th:field='*{date_fin}'/><br/>
+statut: <select th:field='*{statut}'>
+<option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${evenement_calendrier.statut.id}'></option>
+</select><br/>
+couleur: <input type='text' th:field='*{couleur}'/><br/>
+date_creation: <input type='text' th:field='*{date_creation}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

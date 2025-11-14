@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Log_action</h5>
+<div class="card-body">
+<form th:action='@{/log_action/save}' th:object='${log_action}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='admin_id'>Admin_id</label>
+    <select class='form-select' th:field='*{admin}'>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='action_type'>Action type</label>
+    <input type='text' class='form-control' id='action_type' th:field='*{action_type}' placeholder='action_type...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='description'>Description</label>
+    <input type='text' class='form-control' id='description' th:field='*{description}' placeholder='description...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_action'>Date action</label>
+    <input type='time' class='form-control' id='date_action' th:field='*{date_action}' placeholder='date_action...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>
