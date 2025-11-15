@@ -24,6 +24,9 @@ public class Employee {
     
     private String password;
 
+    
+    private String code_qr;
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -38,5 +41,8 @@ public class Employee {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public String getCode_qr() { return code_qr; }
+    public void setCode_qr(String code_qr) { this.code_qr = code_qr; }
 
 }

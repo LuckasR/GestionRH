@@ -50,7 +50,7 @@ create table role (
     name varchar(100)   , 
     niveau int 
 ) ; 
-
+-- alter table role add column niveau int  ; 
 create table status_contrat (
     id serial primary key , 
     name varchar(100)  
@@ -104,9 +104,10 @@ create table employee  (
     role_id int REFERENCES role(id) ,
     departement_id int REFERENCES departement(id) , 
     username varchar(100) , 
-    password varchar(100) 
+    password varchar(100)  , 
+    code_qr varchar(250)
 ) ; 
--- alter table employee add column departement_id int REFERENCES departement(id) ; 
+--  alter table employee add column code_qr varchar(250) ; 
 
 create table utilisateur  (
     id serial primary key , 
