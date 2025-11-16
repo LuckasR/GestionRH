@@ -6,10 +6,10 @@
 <form th:action='@{/employee/update}' th:object='${employee}' method='post'>
 id: <input type='text' th:field='*{id}'/><br/>
 role_id: <select th:field='*{role_id}'>
-<option th:each='item : ${roles}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${employee.role_id.id}'></option>
+<option th:each='item : ${roles}' th:value='${item.id}' th:text='${item.name}' th:selected='${item.id} == ${employee.role_id.id}'></option>
 </select><br/>
 departement_id: <select th:field='*{departement_id}'>
-<option th:each='item : ${departements}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${employee.departement_id.id}'></option>
+<option th:each='item : ${departements}' th:value='${item.id}' th:text='${item.name}' th:selected='${item.id} == ${employee.departement_id.id}'></option>
 </select><br/>
 username: <input type='text' th:field='*{username}'/><br/>
 password: <input type='text' th:field='*{password}'/><br/>

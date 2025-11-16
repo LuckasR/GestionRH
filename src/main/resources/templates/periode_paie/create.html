@@ -25,18 +25,18 @@
   <div class='mb-4'>
     <label class='form-label' for='statut'>Statut</label>
     <select class='form-select' th:field='*{status_general}'>
-      <option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item.name}'></option>
     </select>
   </div>
   <div class='mb-4'>
-    <label class='form-label' for='admin_id'>Admin_id</label>
+     <label class='form-label' for='admin_id'>Admin</label>
     <select class='form-select' th:field='*{admin}'>
-      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item.username}'></option>
     </select>
   </div>
   <div class='mb-4'>
     <label class='form-label' for='date_generation'>Date generation</label>
-    <input type='time' class='form-control' id='date_generation' th:field='*{date_generation}' placeholder='date_generation...'>
+    <input type='datetime-local' class='form-control' id='date_generation' th:field='*{date_generation}' placeholder='date_generation...'>
   </div>
   <div class='mt-3'>
     <button type='submit' class='btn btn-primary'>Enregistrer</button>

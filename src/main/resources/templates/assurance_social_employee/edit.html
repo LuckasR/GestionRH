@@ -6,10 +6,10 @@
 <form th:action='@{/assurance_social_employee/update}' th:object='${assurance_social_employee}' method='post'>
 id: <input type='text' th:field='*{id}'/><br/>
 employee_id: <select th:field='*{employee_id}'>
-<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${assurance_social_employee.employee_id.id}'></option>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item.username}' th:selected='${item.id} == ${assurance_social_employee.employee_id.id}'></option>
 </select><br/>
 organisme_id: <select th:field='*{organisme_id}'>
-<option th:each='item : ${organisme_socials}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${assurance_social_employee.organisme_id.id}'></option>
+<option th:each='item : ${organisme_socials}' th:value='${item.id}' th:text='${item.name}' th:selected='${item.id} == ${assurance_social_employee.organisme_id.id}'></option>
 </select><br/>
 date_attribution: <input type='text' th:field='*{date_attribution}'/><br/>
 <button type='submit'>Mettre à jour</button></form></div> </body></html>

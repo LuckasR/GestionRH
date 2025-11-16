@@ -1,0 +1,23 @@
+scenario : 
+    - scanne badge de employee
+    - checking de l'horaire de travail 
+    - comparaison de l'arrive du personnel au horaire mise en place 
+    - 2 pointage a efectuer 
+        enregistrement du pointage  
+          if heureEntre > heureEntreEntreprise :
+            sanction effectuer 
+          if heuresortie < heureSortieEntreprise :
+            sanction effectuer 
+        deduction heure de travail 
+
+
+
+
+
+Creation employee  :
+    - Generation code qr pour le badge employee automatique via le codeEmployee (ex : EMP-001)
+    - Generation badge employee exoprter pdf (facultatif)
+
+Mise en place de horaire de travail : 
+    - Horaire journalier (ex: lundi -> vendredi : 7h-18h )
+ 

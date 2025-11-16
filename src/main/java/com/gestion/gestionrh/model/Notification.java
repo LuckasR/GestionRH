@@ -25,7 +25,7 @@ public class Notification {
     private Boolean est_lu;
 
     
-    private String date_creation;
+    private LocalDateTime date_creation;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -42,7 +42,7 @@ public class Notification {
     public Boolean getEst_lu() { return est_lu; }
     public void setEst_lu(Boolean est_lu) { this.est_lu = est_lu; }
 
-    public String getDate_creation() { return date_creation; }
-    public void setDate_creation(String date_creation) { this.date_creation = date_creation; }
+    public LocalDateTime getDate_creation() { return date_creation; }
+    public void setDate_creation(LocalDateTime date_creation) { this.date_creation = date_creation; }
 
 }

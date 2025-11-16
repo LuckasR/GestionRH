@@ -7,24 +7,24 @@
 <table  class="table table-hover" >
 <thead><tr>
 <th>id</th>
-<th>employee_id</th>
+<th>Employee </th>
 <th>date_absence</th>
 <th>est_justifie</th>
 <th>commentaire</th>
-<th>statut_id</th>
-<th>admin_id</th>
+<th> Status </th>
+<th>Approved by Admin :  </th>
 <th>date_creation</th>
 <th>Actions</th>
 </tr></thead>
 <tbody>
 <tr th:each='row : ${absences}'>
 <td th:text='${row.id}'></td>
-<td th:text='${row.employee}'></td>
+<td th:text='${row.employee.username}'></td>
 <td th:text='${row.date_absence}'></td>
 <td th:text='${row.est_justifie}'></td>
 <td th:text='${row.commentaire}'></td>
-<td th:text='${row.status_general}'></td>
-<td th:text='${row.admin}'></td>
+<td th:text='${row.status_general.name}'></td>
+<td th:text='${row.admin.username}'></td>
 <td th:text='${row.date_creation}'></td>
 <td>
 <a th:href='@{/absence/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/absence/delete/{id}(id=${row.id})}'>Delete</a>

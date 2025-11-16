@@ -6,10 +6,10 @@
 <form th:action='@{/conge/update}' th:object='${conge}' method='post'>
 id: <input type='text' th:field='*{id}'/><br/>
 admin_id: <select th:field='*{admin_id}'>
-<option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${conge.admin_id.id}'></option>
+<option th:each='item : ${admins}' th:value='${item.id}' th:text='${item.username}' th:selected='${item.id} == ${conge.admin_id.id}'></option>
 </select><br/>
 employee_id: <select th:field='*{employee_id}'>
-<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${conge.employee_id.id}'></option>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item.username}' th:selected='${item.id} == ${conge.employee_id.id}'></option>
 </select><br/>
 type_conge_id: <select th:field='*{type_conge_id}'>
 <option th:each='item : ${type_conges}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${conge.type_conge_id.id}'></option>

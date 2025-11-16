@@ -17,7 +17,7 @@
 <th>type_compensation</th>
 <th>besoin_validation_admin</th>
 <th>status_id</th>
-<th>admin_id</th>
+<th>Approved by Admin :  </th>
 <th>commentaire</th>
 <th>date_creation</th>
 <th>date_fin</th>
@@ -36,8 +36,8 @@
 <td th:text='${row.taux_multiplicateur_ferie}'></td>
 <td th:text='${row.type_compensation}'></td>
 <td th:text='${row.besoin_validation_admin}'></td>
-<td th:text='${row.status_general}'></td>
-<td th:text='${row.admin}'></td>
+<td th:text='${row.status_general.name}'></td>
+<td th:text='${row.admin.username}'></td>
 <td th:text='${row.commentaire}'></td>
 <td th:text='${row.date_creation}'></td>
 <td th:text='${row.date_fin}'></td>

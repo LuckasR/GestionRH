@@ -6,7 +6,7 @@
 <form th:action='@{/poste/update}' th:object='${poste}' method='post'>
 id: <input type='text' th:field='*{id}'/><br/>
 departement_id: <select th:field='*{departement_id}'>
-<option th:each='item : ${departements}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${poste.departement_id.id}'></option>
+<option th:each='item : ${departements}' th:value='${item.id}' th:text='${item.name}' th:selected='${item.id} == ${poste.departement_id.id}'></option>
 </select><br/>
 name: <input type='text' th:field='*{name}'/><br/>
 salaire_base: <input type='text' th:field='*{salaire_base}'/><br/>

@@ -7,21 +7,21 @@
 <div class="card-body">
 <form th:action='@{/detail_contrat_employee/save}' th:object='${detail_contrat_employee}' method='post'>
   <div class='mb-4'>
-    <label class='form-label' for='admin_id'>Admin_id</label>
+     <label class='form-label' for='admin_id'>Admin</label>
     <select class='form-select' th:field='*{admin}'>
-      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item.username}'></option>
     </select>
   </div>
   <div class='mb-4'>
     <label class='form-label' for='contrat_employee_id'>Contrat_employee_id</label>
     <select class='form-select' th:field='*{contrat_employee}'>
-      <option th:each='item : ${contrat_employees}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${contrat_employees}' th:value='${item.id}' th:text='${item.username}'></option>
     </select>
   </div>
   <div class='mb-4'>
     <label class='form-label' for='type_contrat_id'>Type_contrat_id</label>
     <select class='form-select' th:field='*{type_contrat}'>
-      <option th:each='item : ${type_contrats}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${type_contrats}' th:value='${item.id}' th:text='${item.name}'></option>
     </select>
   </div>
   <div class='mb-4'>
@@ -47,7 +47,7 @@
   <div class='mb-4'>
     <label class='form-label' for='statut_id'>Statut_id</label>
     <select class='form-select' th:field='*{status_contrat}'>
-      <option th:each='item : ${status_contrats}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${status_contrats}' th:value='${item.id}' th:text='${item.name}'></option>
     </select>
   </div>
   <div class='mb-4'>

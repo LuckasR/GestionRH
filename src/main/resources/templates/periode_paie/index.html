@@ -12,7 +12,7 @@
 <th>date_debut</th>
 <th>date_fin</th>
 <th>statut</th>
-<th>admin_id</th>
+<th>Approved by Admin :  </th>
 <th>date_generation</th>
 <th>Actions</th>
 </tr></thead>
@@ -23,8 +23,8 @@
 <td th:text='${row.annee}'></td>
 <td th:text='${row.date_debut}'></td>
 <td th:text='${row.date_fin}'></td>
-<td th:text='${row.status_general}'></td>
-<td th:text='${row.admin}'></td>
+<td th:text='${row.status_general.name}'></td>
+<td th:text='${row.admin.username}'></td>
 <td th:text='${row.date_generation}'></td>
 <td>
 <a th:href='@{/periode_paie/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/periode_paie/delete/{id}(id=${row.id})}'>Delete</a>

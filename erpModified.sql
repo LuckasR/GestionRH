@@ -91,6 +91,25 @@ create table societe (
   pourcentage_passed int , 
   date_creation timestamp  default current_timestamp
 ) ; 
+
+
+
+-- TYPE D’OPÉRATION SUR LE SOLDE
+create table type_operation_conge (
+    id serial primary key,
+    nom varchar(100) not null unique, --Demande approuvée, Demande refusée, Ajustement manuel
+    description text
+);
+
+-- TYPES D'ÉVÉNEMENTS GÉNÉRAUX
+create table type_evenement (
+    id serial primary key,
+    nom varchar(100) not null unique, -- Congé approuvé , Jour férié  , reunion d'équipe
+    description text
+);
+
+
+
  
  -- Begin Gestion personnel
 create table admin  (
@@ -250,12 +269,7 @@ create table solde_conge (
     date_maj timestamp default current_timestamp
 );
 
--- TYPE D’OPÉRATION SUR LE SOLDE
-create table type_operation_conge (
-    id serial primary key,
-    nom varchar(100) not null unique, --Demande approuvée, Demande refusée, Ajustement manuel
-    description text
-);
+
 
 -- HISTORIQUE DES MODIFICATIONS DE SOLDE
 create table historique_solde_conge (
@@ -279,12 +293,6 @@ create table calendrier_entreprise (
     date_creation timestamp default current_timestamp
 );
 
--- TYPES D'ÉVÉNEMENTS GÉNÉRAUX
-create table type_evenement (
-    id serial primary key,
-    nom varchar(100) not null unique, -- Congé approuvé , Jour férié  , reunion d'équipe
-    description text
-);
 
 -- ÉVÉNEMENTS (hors congé)
 create table evenement_calendrier (
@@ -641,5 +649,165 @@ CREATE TABLE emploi_dt_entretient (
 );
 
 
+ INSERT INTO departement (name) VALUES
+('Informatique'),
+('Ressources Humaines'),
+('Finance'),
+('Marketing'),
+('Logistique');
+
+INSERT INTO genre (name) VALUES
+('Homme'),
+('Femme'),
+('Autre');
+
+INSERT INTO methode (name) VALUES
+('Presentiel'),
+('En ligne'),
+('Hybride');
+
+INSERT INTO niveau_etude (name) VALUES
+('Baccalaureat'),
+('Licence'),
+('Master'),
+('Doctorat');
+
+INSERT INTO filiere (name) VALUES
+('Informatique'),
+('Gestion'),
+('Communication'),
+('Genie Civil'),
+('Economie');
+
+INSERT INTO siege_entreprise (name) VALUES
+('Antananarivo'),
+('Toamasina'),
+('Mahajanga'),
+('Fianarantsoa');
+
+INSERT INTO type_contrat (name, recurrence_renouvelement) VALUES
+('CDD', 12),
+('CDI', NULL),
+('Stage', 3),
+('Consultant', 6);
+
+INSERT INTO status_general (name) VALUES
+('Actif'),
+('Inactif'),
+('Suspendu');
+
+INSERT INTO status_traitement (name) VALUES
+('En attente'),
+('En cours'),
+('Termine'),
+('Annule');
+
+INSERT INTO role (name, niveau) VALUES
+('Administrateur', 1),
+('Manager', 2),
+('Employe', 3),
+('Stagiaire', 4);
+
+INSERT INTO status_contrat (name) VALUES
+('Actif'),
+('Expire'),
+('En renouvellement');
+
+INSERT INTO type_changement (name) VALUES
+('Promotion'),
+('Mutation'),
+('Changement de salaire'),
+('Changement de poste');
+
+INSERT INTO type_compensation (name) VALUES
+('Bonus'),
+('Heures supplementaires'),
+('Prime de performance'),
+('Indemnite de transport');
+
+INSERT INTO poste (departement_id, name, salaire_base) VALUES
+(1, 'Developpeur Backend', 800000),
+(1, 'Developpeur Frontend', 750000),
+(2, 'Charge RH', 600000),
+(3, 'Comptable', 650000),
+(4, 'Responsable Marketing', 700000);
+
+INSERT INTO organisme_social (name, pourcentage, date_debut, date_fin) VALUES
+('Cnaps', 1.00, '2020-01-01', NULL),
+('Ostie', 1.50, '2020-01-01', NULL);
+
+INSERT INTO societe (name, nombre_qcm_test, durre_entretient, pourcentage_passed) VALUES
+('Tech Solutions', 2, 45.0, 70),
+('Smart Group', 1, 30.0, 60),
+('Vision Corp', 1, 25.0, 75);
+
+INSERT INTO type_operation_conge (nom, description) VALUES
+('Demande approuvee', 'Conge valide par la hierarchie'),
+('Demande refusee', 'Conge rejete'),
+('Ajustement manuel', 'Modification effectuee par un administrateur');
+
+INSERT INTO type_evenement (nom, description) VALUES
+('Conge approuve', 'Employe en conge valide'),
+('Jour ferie', 'Jour ferie officiel'),
+('Reunion equipe', 'Reunion planifiee avec le departement');
+
  
 
+
+
+
+ SET session_replication_role = 'replica';
+
+TRUNCATE TABLE 
+    departement,
+    genre,
+    methode,
+    niveau_etude,
+    filiere,
+    siege_entreprise,
+    type_contrat,
+    status_general,
+    status_traitement,
+    role,
+    status_contrat,
+    type_changement,
+    type_compensation,
+    poste,
+    organisme_social,
+    societe,
+    type_operation_conge,
+    type_evenement,
+    admin,
+    employee,
+    utilisateur,
+    contrat_employee,
+    detail_contrat_employee,
+    parcours_academique,
+    detail_parcours_academique,
+    information_employee,
+    historique_poste_employee,
+    assurance_social_employee,
+    historique_role,
+    type_conge,
+    conge,
+    solde_conge,
+    historique_solde_conge,
+    calendrier_entreprise,
+    evenement_calendrier,
+    type_notification,
+    notification,
+    pointage,
+    regle_travail,
+    config_heure_supplementaire,
+    heure_supplementaire,
+    retard,
+    absence,
+    parametre_taux,
+    salaire_employee,
+    periode_paie,
+    paie_employee,
+    paie_detail,
+    log_action
+RESTART IDENTITY CASCADE;
+
+SET session_replication_role = 'origin';

@@ -13,7 +13,7 @@
 <th>date_debut</th>
 <th>date_fin</th>
 <th>commentaire</th>
-<th>admin_id</th>
+<th>Approved by Admin :  </th>
 <th>date_action</th>
 <th>Actions</th>
 </tr></thead>
@@ -26,7 +26,7 @@
 <td th:text='${row.date_debut}'></td>
 <td th:text='${row.date_fin}'></td>
 <td th:text='${row.commentaire}'></td>
-<td th:text='${row.admin}'></td>
+<td th:text='${row.admin.username}'></td>
 <td th:text='${row.date_action}'></td>
 <td>
 <a th:href='@{/historique_solde_conge/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/historique_solde_conge/delete/{id}(id=${row.id})}'>Delete</a>

@@ -9,10 +9,10 @@ calendrier_id: <select th:field='*{calendrier_id}'>
 <option th:each='item : ${calendrier_entreprises}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${evenement_calendrier.calendrier_id.id}'></option>
 </select><br/>
 employee_id: <select th:field='*{employee_id}'>
-<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${evenement_calendrier.employee_id.id}'></option>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item.username}' th:selected='${item.id} == ${evenement_calendrier.employee_id.id}'></option>
 </select><br/>
 type_evenement_id: <select th:field='*{type_evenement_id}'>
-<option th:each='item : ${type_evenements}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${evenement_calendrier.type_evenement_id.id}'></option>
+<option th:each='item : ${type_evenements}' th:value='${item.id}' th:text='${item.nom}' th:selected='${item.id} == ${evenement_calendrier.type_evenement_id.id}'></option>
 </select><br/>
 titre: <input type='text' th:field='*{titre}'/><br/>
 description: <input type='text' th:field='*{description}'/><br/>

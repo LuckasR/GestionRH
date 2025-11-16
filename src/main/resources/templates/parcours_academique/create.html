@@ -9,7 +9,7 @@
   <div class='mb-4'>
     <label class='form-label' for='employee_id'>Employee_id</label>
     <select class='form-select' th:field='*{employee}'>
-      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item.username}'></option>
     </select>
   </div>
   <div class='mb-4'>

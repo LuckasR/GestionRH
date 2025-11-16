@@ -18,10 +18,10 @@ public class Pointage {
     private LocalDate date_pointage;
 
     
-    private String heure_arrivee;
+    private LocalTime heure_arrivee;
 
     
-    private String heure_depart;
+    private LocalTime heure_depart;
 
     @ManyToOne
     @JoinColumn(name = "methode_id")
@@ -31,7 +31,7 @@ public class Pointage {
     private String commentaire;
 
     
-    private String date_enregistrement;
+    private LocalDateTime date_enregistrement;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -42,11 +42,11 @@ public class Pointage {
     public LocalDate getDate_pointage() { return date_pointage; }
     public void setDate_pointage(LocalDate date_pointage) { this.date_pointage = date_pointage; }
 
-    public String getHeure_arrivee() { return heure_arrivee; }
-    public void setHeure_arrivee(String heure_arrivee) { this.heure_arrivee = heure_arrivee; }
+    public LocalTime getHeure_arrivee() { return heure_arrivee; }
+    public void setHeure_arrivee(LocalTime heure_arrivee) { this.heure_arrivee = heure_arrivee; }
 
-    public String getHeure_depart() { return heure_depart; }
-    public void setHeure_depart(String heure_depart) { this.heure_depart = heure_depart; }
+    public LocalTime getHeure_depart() { return heure_depart; }
+    public void setHeure_depart(LocalTime heure_depart) { this.heure_depart = heure_depart; }
 
     public Methode getMethode() { return methode; }
     public void setMethode(Methode methode) { this.methode = methode; }
@@ -54,7 +54,7 @@ public class Pointage {
     public String getCommentaire() { return commentaire; }
     public void setCommentaire(String commentaire) { this.commentaire = commentaire; }
 
-    public String getDate_enregistrement() { return date_enregistrement; }
-    public void setDate_enregistrement(String date_enregistrement) { this.date_enregistrement = date_enregistrement; }
+    public LocalDateTime getDate_enregistrement() { return date_enregistrement; }
+    public void setDate_enregistrement(LocalDateTime date_enregistrement) { this.date_enregistrement = date_enregistrement; }
 
 }

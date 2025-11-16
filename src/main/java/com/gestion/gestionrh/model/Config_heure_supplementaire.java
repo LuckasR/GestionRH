@@ -51,10 +51,10 @@ public class Config_heure_supplementaire {
     private String commentaire;
 
     
-    private String date_creation;
+    private LocalDateTime date_creation;
 
     
-    private String date_fin;
+    private LocalDateTime date_fin;
 
     
     private Boolean est_actif;
@@ -98,11 +98,11 @@ public class Config_heure_supplementaire {
     public String getCommentaire() { return commentaire; }
     public void setCommentaire(String commentaire) { this.commentaire = commentaire; }
 
-    public String getDate_creation() { return date_creation; }
-    public void setDate_creation(String date_creation) { this.date_creation = date_creation; }
+    public LocalDateTime getDate_creation() { return date_creation; }
+    public void setDate_creation(LocalDateTime date_creation) { this.date_creation = date_creation; }
 
-    public String getDate_fin() { return date_fin; }
-    public void setDate_fin(String date_fin) { this.date_fin = date_fin; }
+    public LocalDateTime getDate_fin() { return date_fin; }
+    public void setDate_fin(LocalDateTime date_fin) { this.date_fin = date_fin; }
 
     public Boolean getEst_actif() { return est_actif; }
     public void setEst_actif(Boolean est_actif) { this.est_actif = est_actif; }

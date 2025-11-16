@@ -26,7 +26,7 @@ public class Type_conge {
     private Boolean is_cumulable;
 
     
-    private String date_creation;
+    private LocalDateTime date_creation;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -46,7 +46,7 @@ public class Type_conge {
     public Boolean getIs_cumulable() { return is_cumulable; }
     public void setIs_cumulable(Boolean is_cumulable) { this.is_cumulable = is_cumulable; }
 
-    public String getDate_creation() { return date_creation; }
-    public void setDate_creation(String date_creation) { this.date_creation = date_creation; }
+    public LocalDateTime getDate_creation() { return date_creation; }
+    public void setDate_creation(LocalDateTime date_creation) { this.date_creation = date_creation; }
 
 }

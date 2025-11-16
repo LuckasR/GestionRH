@@ -7,15 +7,15 @@
 <div class="card-body">
 <form th:action='@{/salaire_employee/save}' th:object='${salaire_employee}' method='post'>
   <div class='mb-4'>
-    <label class='form-label' for='admin_id'>Admin_id</label>
+     <label class='form-label' for='admin_id'>Admin</label>
     <select class='form-select' th:field='*{admin}'>
-      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item.username}'></option>
     </select>
   </div>
   <div class='mb-4'>
     <label class='form-label' for='employee_id'>Employee_id</label>
     <select class='form-select' th:field='*{employee}'>
-      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item.username}'></option>
     </select>
   </div>
   <div class='mb-4'>

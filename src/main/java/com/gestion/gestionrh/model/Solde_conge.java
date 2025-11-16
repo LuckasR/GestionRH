@@ -31,7 +31,7 @@ public class Solde_conge {
     private Integer jours_restants;
 
     
-    private String date_maj;
+    private LocalDateTime date_maj;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -54,7 +54,7 @@ public class Solde_conge {
     public Integer getJours_restants() { return jours_restants; }
     public void setJours_restants(Integer jours_restants) { this.jours_restants = jours_restants; }
 
-    public String getDate_maj() { return date_maj; }
-    public void setDate_maj(String date_maj) { this.date_maj = date_maj; }
+    public LocalDateTime getDate_maj() { return date_maj; }
+    public void setDate_maj(LocalDateTime date_maj) { this.date_maj = date_maj; }
 
 }

@@ -11,8 +11,8 @@ employee_id: <select th:field='*{employee_id}'>
 date_pointage: <input type='text' th:field='*{date_pointage}'/><br/>
 heure_arrivee: <input type='text' th:field='*{heure_arrivee}'/><br/>
 heure_depart: <input type='text' th:field='*{heure_depart}'/><br/>
-methode_id: <select th:field='*{methode_id}'>
-<option th:each='item : ${methodes}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${pointage.methode_id.id}'></option>
+Methode de pointage: <select th:field='*{methode_id}'>
+<option th:each='item : ${methodes}' th:value='${item.id}' th:text='${item.name}' th:selected='${item.id} == ${pointage.methode_id.id}'></option>
 </select><br/>
 commentaire: <input type='text' th:field='*{commentaire}'/><br/>
 date_enregistrement: <input type='text' th:field='*{date_enregistrement}'/><br/>

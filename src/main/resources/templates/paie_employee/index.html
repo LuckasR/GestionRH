@@ -7,7 +7,7 @@
 <table  class="table table-hover" >
 <thead><tr>
 <th>id</th>
-<th>employee_id</th>
+<th>Employee </th>
 <th>periode_id</th>
 <th>salaire_base</th>
 <th>total_primes</th>
@@ -18,13 +18,13 @@
 <th>net_a_payer</th>
 <th>date_calcul</th>
 <th>statut</th>
-<th>admin_id</th>
+<th>Approved by Admin :  </th>
 <th>Actions</th>
 </tr></thead>
 <tbody>
 <tr th:each='row : ${paie_employees}'>
 <td th:text='${row.id}'></td>
-<td th:text='${row.employee}'></td>
+<td th:text='${row.employee.username}'></td>
 <td th:text='${row.periode_paie}'></td>
 <td th:text='${row.salaire_base}'></td>
 <td th:text='${row.total_primes}'></td>
@@ -34,8 +34,8 @@
 <td th:text='${row.total_contributions}'></td>
 <td th:text='${row.net_a_payer}'></td>
 <td th:text='${row.date_calcul}'></td>
-<td th:text='${row.status_general}'></td>
-<td th:text='${row.admin}'></td>
+<td th:text='${row.status_general.name}'></td>
+<td th:text='${row.admin.username}'></td>
 <td>
 <a th:href='@{/paie_employee/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/paie_employee/delete/{id}(id=${row.id})}'>Delete</a>
 </td></tr>

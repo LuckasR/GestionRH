@@ -15,7 +15,7 @@
 <tbody>
 <tr th:each='row : ${postes}'>
 <td th:text='${row.id}'></td>
-<td th:text='${row.departement}'></td>
+<td th:text='${row.departement.name}'></td>
 <td th:text='${row.name}'></td>
 <td th:text='${row.salaire_base}'></td>
 <td>

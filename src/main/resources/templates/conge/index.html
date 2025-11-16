@@ -7,15 +7,15 @@
 <table  class="table table-hover" >
 <thead><tr>
 <th>id</th>
-<th>admin_id</th>
-<th>employee_id</th>
+<th>Approved by Admin :  </th>
+<th>Employee </th>
 <th>type_conge_id</th>
 <th>nb_jours</th>
 <th>commentaire</th>
 <th>date_demande</th>
 <th>date_debut</th>
 <th>date_fin</th>
-<th>statut_id</th>
+<th> Status </th>
 <th>date_validation</th>
 <th>reference_demande</th>
 <th>Actions</th>
@@ -23,15 +23,15 @@
 <tbody>
 <tr th:each='row : ${conges}'>
 <td th:text='${row.id}'></td>
-<td th:text='${row.admin}'></td>
-<td th:text='${row.employee}'></td>
-<td th:text='${row.type_conge}'></td>
+<td th:text='${row.admin.username}'></td>
+<td th:text='${row.employee.username}'></td>
+<td th:text='${row.type_conge.name}'></td>
 <td th:text='${row.nb_jours}'></td>
 <td th:text='${row.commentaire}'></td>
 <td th:text='${row.date_demande}'></td>
 <td th:text='${row.date_debut}'></td>
 <td th:text='${row.date_fin}'></td>
-<td th:text='${row.status_general}'></td>
+<td th:text='${row.status_general.name}'></td>
 <td th:text='${row.date_validation}'></td>
 <td th:text='${row.reference_demande}'></td>
 <td>

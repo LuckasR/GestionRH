@@ -31,7 +31,7 @@ public class Periode_paie {
     private Admin admin;
 
     
-    private String date_generation;
+    private LocalDateTime date_generation;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -54,7 +54,7 @@ public class Periode_paie {
     public Admin getAdmin() { return admin; }
     public void setAdmin(Admin admin) { this.admin = admin; }
 
-    public String getDate_generation() { return date_generation; }
-    public void setDate_generation(String date_generation) { this.date_generation = date_generation; }
+    public LocalDateTime getDate_generation() { return date_generation; }
+    public void setDate_generation(LocalDateTime date_generation) { this.date_generation = date_generation; }
 
 }

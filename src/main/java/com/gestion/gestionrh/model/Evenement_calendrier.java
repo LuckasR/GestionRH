@@ -42,7 +42,7 @@ public class Evenement_calendrier {
     private String couleur;
 
     
-    private String date_creation;
+    private LocalDateTime date_creation;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -74,7 +74,7 @@ public class Evenement_calendrier {
     public String getCouleur() { return couleur; }
     public void setCouleur(String couleur) { this.couleur = couleur; }
 
-    public String getDate_creation() { return date_creation; }
-    public void setDate_creation(String date_creation) { this.date_creation = date_creation; }
+    public LocalDateTime getDate_creation() { return date_creation; }
+    public void setDate_creation(LocalDateTime date_creation) { this.date_creation = date_creation; }
 
 }

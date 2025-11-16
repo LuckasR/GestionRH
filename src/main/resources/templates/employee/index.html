@@ -16,8 +16,8 @@
 <tbody>
 <tr th:each='row : ${employees}'>
 <td th:text='${row.id}'></td>
-<td th:text='${row.role}'></td>
-<td th:text='${row.departement}'></td>
+<td th:text='${row.role.name}'></td>
+<td th:text='${row.departement.name}'></td>
 <td th:text='${row.username}'></td>
 <td th:text='${row.password}'></td>
 <td>

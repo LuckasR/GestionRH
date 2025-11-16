@@ -19,7 +19,7 @@ public class Historique_role {
     private Role role;
 
     
-    private String date_modification;
+    private LocalDateTime date_modification;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -30,7 +30,7 @@ public class Historique_role {
     public Role getRole() { return role; }
     public void setRole(Role role) { this.role = role; }
 
-    public String getDate_modification() { return date_modification; }
-    public void setDate_modification(String date_modification) { this.date_modification = date_modification; }
+    public LocalDateTime getDate_modification() { return date_modification; }
+    public void setDate_modification(LocalDateTime date_modification) { this.date_modification = date_modification; }
 
 }
