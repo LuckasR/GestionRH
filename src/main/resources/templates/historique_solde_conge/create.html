@@ -35,14 +35,14 @@
     <input type='text' class='form-control' id='commentaire' th:field='*{commentaire}' placeholder='commentaire...'>
   </div>
   <div class='mb-4'>
-    <label class='form-label' for='admin_id'>Admin_id</label>
+     <label class='form-label' for='admin_id'>Admin</label>
     <select class='form-select' th:field='*{admin}'>
-      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item.username}'></option>
     </select>
   </div>
   <div class='mb-4'>
     <label class='form-label' for='date_action'>Date action</label>
-    <input type='time' class='form-control' id='date_action' th:field='*{date_action}' placeholder='date_action...'>
+    <input type='datetime-local' class='form-control' id='date_action' th:field='*{date_action}' placeholder='date_action...'>
   </div>
   <div class='mt-3'>
     <button type='submit' class='btn btn-primary'>Enregistrer</button>

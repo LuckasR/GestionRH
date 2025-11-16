@@ -49,7 +49,7 @@ public class Information_employee {
     private String residence;
 
     
-    private String date_creation;
+    private LocalDateTime date_creation;
 
     
     private LocalDate date_naissance;
@@ -93,8 +93,8 @@ public class Information_employee {
     public String getResidence() { return residence; }
     public void setResidence(String residence) { this.residence = residence; }
 
-    public String getDate_creation() { return date_creation; }
-    public void setDate_creation(String date_creation) { this.date_creation = date_creation; }
+    public LocalDateTime getDate_creation() { return date_creation; }
+    public void setDate_creation(LocalDateTime date_creation) { this.date_creation = date_creation; }
 
     public LocalDate getDate_naissance() { return date_naissance; }
     public void setDate_naissance(LocalDate date_naissance) { this.date_naissance = date_naissance; }

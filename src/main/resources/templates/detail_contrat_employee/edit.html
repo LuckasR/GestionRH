@@ -6,13 +6,13 @@
 <form th:action='@{/detail_contrat_employee/update}' th:object='${detail_contrat_employee}' method='post'>
 id: <input type='text' th:field='*{id}'/><br/>
 admin_id: <select th:field='*{admin_id}'>
-<option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${detail_contrat_employee.admin_id.id}'></option>
+<option th:each='item : ${admins}' th:value='${item.id}' th:text='${item.username}' th:selected='${item.id} == ${detail_contrat_employee.admin_id.id}'></option>
 </select><br/>
 contrat_employee_id: <select th:field='*{contrat_employee_id}'>
-<option th:each='item : ${contrat_employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${detail_contrat_employee.contrat_employee_id.id}'></option>
+<option th:each='item : ${contrat_employees}' th:value='${item.id}' th:text='${item.username}' th:selected='${item.id} == ${detail_contrat_employee.contrat_employee_id.id}'></option>
 </select><br/>
 type_contrat_id: <select th:field='*{type_contrat_id}'>
-<option th:each='item : ${type_contrats}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${detail_contrat_employee.type_contrat_id.id}'></option>
+<option th:each='item : ${type_contrats}' th:value='${item.id}' th:text='${item.name}' th:selected='${item.id} == ${detail_contrat_employee.type_contrat_id.id}'></option>
 </select><br/>
 duree_contrat: <input type='text' th:field='*{duree_contrat}'/><br/>
 date_debut_contrat: <input type='text' th:field='*{date_debut_contrat}'/><br/>
@@ -20,7 +20,7 @@ date_fin_contrat: <input type='text' th:field='*{date_fin_contrat}'/><br/>
 periode_essai: <input type='text' th:field='*{periode_essai}'/><br/>
 duree_preavis: <input type='text' th:field='*{duree_preavis}'/><br/>
 statut_id: <select th:field='*{statut_id}'>
-<option th:each='item : ${status_contrats}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${detail_contrat_employee.statut_id.id}'></option>
+<option th:each='item : ${status_contrats}' th:value='${item.id}' th:text='${item.name}' th:selected='${item.id} == ${detail_contrat_employee.statut_id.id}'></option>
 </select><br/>
 renouvellement_auto: <input type='text' th:field='*{renouvellement_auto}'/><br/>
 commentaire: <input type='text' th:field='*{commentaire}'/><br/>

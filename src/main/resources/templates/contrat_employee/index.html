@@ -7,7 +7,7 @@
 <table  class="table table-hover" >
 <thead><tr>
 <th>id</th>
-<th>employee_id</th>
+<th>Employee </th>
 <th>date_debut</th>
 <th>date_fin</th>
 <th>renouvellement_auto</th>
@@ -17,7 +17,7 @@
 <tbody>
 <tr th:each='row : ${contrat_employees}'>
 <td th:text='${row.id}'></td>
-<td th:text='${row.employee}'></td>
+<td th:text='${row.employee.username}'></td>
 <td th:text='${row.date_debut}'></td>
 <td th:text='${row.date_fin}'></td>
 <td th:text='${row.renouvellement_auto}'></td>

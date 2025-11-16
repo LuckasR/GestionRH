@@ -19,7 +19,7 @@ public class Assurance_social_employee {
     private Organisme_social organisme_social;
 
     
-    private String date_attribution;
+    private LocalDateTime date_attribution;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -30,7 +30,7 @@ public class Assurance_social_employee {
     public Organisme_social getOrganisme_social() { return organisme_social; }
     public void setOrganisme_social(Organisme_social organisme_social) { this.organisme_social = organisme_social; }
 
-    public String getDate_attribution() { return date_attribution; }
-    public void setDate_attribution(String date_attribution) { this.date_attribution = date_attribution; }
+    public LocalDateTime getDate_attribution() { return date_attribution; }
+    public void setDate_attribution(LocalDateTime date_attribution) { this.date_attribution = date_attribution; }
 
 }

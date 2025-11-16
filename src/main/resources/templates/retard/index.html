@@ -7,24 +7,24 @@
 <table  class="table table-hover" >
 <thead><tr>
 <th>id</th>
-<th>employee_id</th>
-<th>pointage_id</th>
+<th>Employee </th>
+<th>pointage du : </th>
 <th>minutes_retard</th>
 <th>justification</th>
-<th>statut_id</th>
-<th>admin_id</th>
+<th> Status </th>
+<th>Approved by Admin :  </th>
 <th>date_creation</th>
 <th>Actions</th>
 </tr></thead>
 <tbody>
 <tr th:each='row : ${retards}'>
 <td th:text='${row.id}'></td>
-<td th:text='${row.employee}'></td>
-<td th:text='${row.pointage}'></td>
+<td th:text='${row.employee.username}'></td>
+<td th:text='${row.pointage.date_pointage}'></td>
 <td th:text='${row.minutes_retard}'></td>
 <td th:text='${row.justification}'></td>
-<td th:text='${row.status_general}'></td>
-<td th:text='${row.admin}'></td>
+<td th:text='${row.status_general.name}'></td>
+<td th:text='${row.admin.username}'></td>
 <td th:text='${row.date_creation}'></td>
 <td>
 <a th:href='@{/retard/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/retard/delete/{id}(id=${row.id})}'>Delete</a>

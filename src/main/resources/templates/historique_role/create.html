@@ -9,18 +9,18 @@
   <div class='mb-4'>
     <label class='form-label' for='employee_id'>Employee_id</label>
     <select class='form-select' th:field='*{employee}'>
-      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item.username}'></option>
     </select>
   </div>
   <div class='mb-4'>
     <label class='form-label' for='role_id'>Role_id</label>
     <select class='form-select' th:field='*{role}'>
-      <option th:each='item : ${roles}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${roles}' th:value='${item.id}' th:text='${item.name}'></option>
     </select>
   </div>
   <div class='mb-4'>
     <label class='form-label' for='date_modification'>Date modification</label>
-    <input type='time' class='form-control' id='date_modification' th:field='*{date_modification}' placeholder='date_modification...'>
+    <input type='datetime-local' class='form-control' id='date_modification' th:field='*{date_modification}' placeholder='date_modification...'>
   </div>
   <div class='mt-3'>
     <button type='submit' class='btn btn-primary'>Enregistrer</button>

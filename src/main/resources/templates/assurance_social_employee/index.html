@@ -7,7 +7,7 @@
 <table  class="table table-hover" >
 <thead><tr>
 <th>id</th>
-<th>employee_id</th>
+<th>Employee </th>
 <th>organisme_id</th>
 <th>date_attribution</th>
 <th>Actions</th>
@@ -15,7 +15,7 @@
 <tbody>
 <tr th:each='row : ${assurance_social_employees}'>
 <td th:text='${row.id}'></td>
-<td th:text='${row.employee}'></td>
+<td th:text='${row.employee.username}'></td>
 <td th:text='${row.organisme_social}'></td>
 <td th:text='${row.date_attribution}'></td>
 <td>

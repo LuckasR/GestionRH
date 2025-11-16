@@ -41,10 +41,10 @@ public class Heure_supplementaire {
     private String commentaire;
 
     
-    private String date_validation;
+    private LocalDateTime date_validation;
 
     
-    private String date_creation;
+    private LocalDateTime date_creation;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -73,10 +73,10 @@ public class Heure_supplementaire {
     public String getCommentaire() { return commentaire; }
     public void setCommentaire(String commentaire) { this.commentaire = commentaire; }
 
-    public String getDate_validation() { return date_validation; }
-    public void setDate_validation(String date_validation) { this.date_validation = date_validation; }
+    public LocalDateTime getDate_validation() { return date_validation; }
+    public void setDate_validation(LocalDateTime date_validation) { this.date_validation = date_validation; }
 
-    public String getDate_creation() { return date_creation; }
-    public void setDate_creation(String date_creation) { this.date_creation = date_creation; }
+    public LocalDateTime getDate_creation() { return date_creation; }
+    public void setDate_creation(LocalDateTime date_creation) { this.date_creation = date_creation; }
 
 }

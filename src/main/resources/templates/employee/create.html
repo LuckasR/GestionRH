@@ -9,13 +9,13 @@
   <div class='mb-4'>
     <label class='form-label' for='role_id'>Role_id</label>
     <select class='form-select' th:field='*{role}'>
-      <option th:each='item : ${roles}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${roles}' th:value='${item.id}' th:text='${item.name}'></option>
     </select>
   </div>
   <div class='mb-4'>
     <label class='form-label' for='departement_id'>Departement_id</label>
     <select class='form-select' th:field='*{departement}'>
-      <option th:each='item : ${departements}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${departements}' th:value='${item.id}' th:text='${item.name}'></option>
     </select>
   </div>
   <div class='mb-4'>

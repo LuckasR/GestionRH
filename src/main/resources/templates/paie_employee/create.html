@@ -9,7 +9,7 @@
   <div class='mb-4'>
     <label class='form-label' for='employee_id'>Employee_id</label>
     <select class='form-select' th:field='*{employee}'>
-      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item.username}'></option>
     </select>
   </div>
   <div class='mb-4'>
@@ -48,18 +48,18 @@
   </div>
   <div class='mb-4'>
     <label class='form-label' for='date_calcul'>Date calcul</label>
-    <input type='time' class='form-control' id='date_calcul' th:field='*{date_calcul}' placeholder='date_calcul...'>
+    <input type='datetime-local' class='form-control' id='date_calcul' th:field='*{date_calcul}' placeholder='date_calcul...'>
   </div>
   <div class='mb-4'>
     <label class='form-label' for='statut'>Statut</label>
     <select class='form-select' th:field='*{status_general}'>
-      <option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item.name}'></option>
     </select>
   </div>
   <div class='mb-4'>
-    <label class='form-label' for='admin_id'>Admin_id</label>
+     <label class='form-label' for='admin_id'>Admin</label>
     <select class='form-select' th:field='*{admin}'>
-      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item.username}'></option>
     </select>
   </div>
   <div class='mt-3'>

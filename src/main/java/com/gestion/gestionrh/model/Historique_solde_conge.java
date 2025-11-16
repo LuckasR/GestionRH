@@ -35,7 +35,7 @@ public class Historique_solde_conge {
     private Admin admin;
 
     
-    private String date_action;
+    private LocalDateTime date_action;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -61,7 +61,7 @@ public class Historique_solde_conge {
     public Admin getAdmin() { return admin; }
     public void setAdmin(Admin admin) { this.admin = admin; }
 
-    public String getDate_action() { return date_action; }
-    public void setDate_action(String date_action) { this.date_action = date_action; }
+    public LocalDateTime getDate_action() { return date_action; }
+    public void setDate_action(LocalDateTime date_action) { this.date_action = date_action; }
 
 }

@@ -32,7 +32,7 @@ public class Absence {
     private Admin admin;
 
     
-    private String date_creation;
+    private LocalDateTime date_creation;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -55,7 +55,7 @@ public class Absence {
     public Admin getAdmin() { return admin; }
     public void setAdmin(Admin admin) { this.admin = admin; }
 
-    public String getDate_creation() { return date_creation; }
-    public void setDate_creation(String date_creation) { this.date_creation = date_creation; }
+    public LocalDateTime getDate_creation() { return date_creation; }
+    public void setDate_creation(LocalDateTime date_creation) { this.date_creation = date_creation; }
 
 }

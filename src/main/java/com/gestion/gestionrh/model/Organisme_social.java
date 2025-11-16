@@ -17,10 +17,10 @@ public class Organisme_social {
     private BigDecimal pourcentage;
 
     
-    private String date_debut;
+    private LocalDateTime date_debut;
 
     
-    private String date_fin;
+    private LocalDateTime date_fin;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -31,10 +31,10 @@ public class Organisme_social {
     public BigDecimal getPourcentage() { return pourcentage; }
     public void setPourcentage(BigDecimal pourcentage) { this.pourcentage = pourcentage; }
 
-    public String getDate_debut() { return date_debut; }
-    public void setDate_debut(String date_debut) { this.date_debut = date_debut; }
+    public LocalDateTime getDate_debut() { return date_debut; }
+    public void setDate_debut(LocalDateTime date_debut) { this.date_debut = date_debut; }
 
-    public String getDate_fin() { return date_fin; }
-    public void setDate_fin(String date_fin) { this.date_fin = date_fin; }
+    public LocalDateTime getDate_fin() { return date_fin; }
+    public void setDate_fin(LocalDateTime date_fin) { this.date_fin = date_fin; }
 
 }

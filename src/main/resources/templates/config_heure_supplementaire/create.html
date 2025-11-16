@@ -49,13 +49,13 @@
   <div class='mb-4'>
     <label class='form-label' for='status_id'>Status_id</label>
     <select class='form-select' th:field='*{status_general}'>
-      <option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item.name}'></option>
     </select>
   </div>
   <div class='mb-4'>
-    <label class='form-label' for='admin_id'>Admin_id</label>
+     <label class='form-label' for='admin_id'>Admin</label>
     <select class='form-select' th:field='*{admin}'>
-      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}'></option>
+      <option th:each='item : ${admins}' th:value='${item.id}' th:text='${item.username}'></option>
     </select>
   </div>
   <div class='mb-4'>
@@ -64,11 +64,11 @@
   </div>
   <div class='mb-4'>
     <label class='form-label' for='date_creation'>Date creation</label>
-    <input type='time' class='form-control' id='date_creation' th:field='*{date_creation}' placeholder='date_creation...'>
+    <input type='datetime-local' class='form-control' id='date_creation' th:field='*{date_creation}' placeholder='date_creation...'>
   </div>
   <div class='mb-4'>
     <label class='form-label' for='date_fin'>Date fin</label>
-    <input type='time' class='form-control' id='date_fin' th:field='*{date_fin}' placeholder='date_fin...'>
+    <input type='datetime-local' class='form-control' id='date_fin' th:field='*{date_fin}' placeholder='date_fin...'>
   </div>
   <div class='mb-4'>
     <label class='form-label' for='est_actif'>Est actif</label>

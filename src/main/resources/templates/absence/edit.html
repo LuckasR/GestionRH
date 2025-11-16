@@ -6,7 +6,7 @@
 <form th:action='@{/absence/update}' th:object='${absence}' method='post'>
 id: <input type='text' th:field='*{id}'/><br/>
 employee_id: <select th:field='*{employee_id}'>
-<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${absence.employee_id.id}'></option>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${.username}' th:selected='${item.id} == ${absence.employee_id.id}'></option>
 </select><br/>
 date_absence: <input type='text' th:field='*{date_absence}'/><br/>
 est_justifie: <input type='text' th:field='*{est_justifie}'/><br/>

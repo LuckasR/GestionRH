@@ -8,8 +8,8 @@
 <thead><tr>
 <th>id</th>
 <th>calendrier_id</th>
-<th>employee_id</th>
-<th>type_evenement_id</th>
+<th>Employee </th>
+<th>Type evenement</th>
 <th>titre</th>
 <th>description</th>
 <th>date_debut</th>
@@ -22,14 +22,14 @@
 <tbody>
 <tr th:each='row : ${evenement_calendriers}'>
 <td th:text='${row.id}'></td>
-<td th:text='${row.calendrier_entreprise}'></td>
-<td th:text='${row.employee}'></td>
-<td th:text='${row.type_evenement}'></td>
+<td th:text='${row.calendrier_entreprise.titre}'></td>
+<td th:text='${row.employee.username}'></td>
+<td th:text='${row.type_evenement.nom}'></td>
 <td th:text='${row.titre}'></td>
 <td th:text='${row.description}'></td>
 <td th:text='${row.date_debut}'></td>
 <td th:text='${row.date_fin}'></td>
-<td th:text='${row.status_general}'></td>
+<td th:text='${row.status_general.name}'></td>
 <td th:text='${row.couleur}'></td>
 <td th:text='${row.date_creation}'></td>
 <td>

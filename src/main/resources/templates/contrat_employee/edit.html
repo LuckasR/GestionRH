@@ -6,7 +6,7 @@
 <form th:action='@{/contrat_employee/update}' th:object='${contrat_employee}' method='post'>
 id: <input type='text' th:field='*{id}'/><br/>
 employee_id: <select th:field='*{employee_id}'>
-<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${contrat_employee.employee_id.id}'></option>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item.username}' th:selected='${item.id} == ${contrat_employee.employee_id.id}'></option>
 </select><br/>
 date_debut: <input type='text' th:field='*{date_debut}'/><br/>
 date_fin: <input type='text' th:field='*{date_fin}'/><br/>

@@ -21,7 +21,7 @@ public class Log_action {
     private String description;
 
     
-    private String date_action;
+    private LocalDateTime date_action;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -35,7 +35,7 @@ public class Log_action {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public String getDate_action() { return date_action; }
-    public void setDate_action(String date_action) { this.date_action = date_action; }
+    public LocalDateTime getDate_action() { return date_action; }
+    public void setDate_action(LocalDateTime date_action) { this.date_action = date_action; }
 
 }

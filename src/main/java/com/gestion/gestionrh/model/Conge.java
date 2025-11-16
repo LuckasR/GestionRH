@@ -29,7 +29,7 @@ public class Conge {
     private String commentaire;
 
     
-    private String date_demande;
+    private LocalDateTime date_demande;
 
     
     private LocalDate date_debut;
@@ -42,7 +42,7 @@ public class Conge {
     private Status_general status_general;
 
     
-    private String date_validation;
+    private LocalDateTime date_validation;
 
     
     private String reference_demande;
@@ -65,8 +65,8 @@ public class Conge {
     public String getCommentaire() { return commentaire; }
     public void setCommentaire(String commentaire) { this.commentaire = commentaire; }
 
-    public String getDate_demande() { return date_demande; }
-    public void setDate_demande(String date_demande) { this.date_demande = date_demande; }
+    public LocalDateTime getDate_demande() { return date_demande; }
+    public void setDate_demande(LocalDateTime date_demande) { this.date_demande = date_demande; }
 
     public LocalDate getDate_debut() { return date_debut; }
     public void setDate_debut(LocalDate date_debut) { this.date_debut = date_debut; }
@@ -77,8 +77,8 @@ public class Conge {
     public Status_general getStatus_general() { return status_general; }
     public void setStatus_general(Status_general status_general) { this.status_general = status_general; }
 
-    public String getDate_validation() { return date_validation; }
-    public void setDate_validation(String date_validation) { this.date_validation = date_validation; }
+    public LocalDateTime getDate_validation() { return date_validation; }
+    public void setDate_validation(LocalDateTime date_validation) { this.date_validation = date_validation; }
 
     public String getReference_demande() { return reference_demande; }
     public void setReference_demande(String reference_demande) { this.reference_demande = reference_demande; }

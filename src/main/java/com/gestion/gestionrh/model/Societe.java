@@ -23,7 +23,7 @@ public class Societe {
     private Integer pourcentage_passed;
 
     
-    private String date_creation;
+    private LocalDateTime date_creation;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -40,7 +40,7 @@ public class Societe {
     public Integer getPourcentage_passed() { return pourcentage_passed; }
     public void setPourcentage_passed(Integer pourcentage_passed) { this.pourcentage_passed = pourcentage_passed; }
 
-    public String getDate_creation() { return date_creation; }
-    public void setDate_creation(String date_creation) { this.date_creation = date_creation; }
+    public LocalDateTime getDate_creation() { return date_creation; }
+    public void setDate_creation(LocalDateTime date_creation) { this.date_creation = date_creation; }
 
 }

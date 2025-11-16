@@ -40,7 +40,7 @@ public class Paie_employee {
     private BigDecimal net_a_payer;
 
     
-    private String date_calcul;
+    private LocalDateTime date_calcul;
 
     @ManyToOne
     @JoinColumn(name = "statut")
@@ -80,8 +80,8 @@ public class Paie_employee {
     public BigDecimal getNet_a_payer() { return net_a_payer; }
     public void setNet_a_payer(BigDecimal net_a_payer) { this.net_a_payer = net_a_payer; }
 
-    public String getDate_calcul() { return date_calcul; }
-    public void setDate_calcul(String date_calcul) { this.date_calcul = date_calcul; }
+    public LocalDateTime getDate_calcul() { return date_calcul; }
+    public void setDate_calcul(LocalDateTime date_calcul) { this.date_calcul = date_calcul; }
 
     public Status_general getStatus_general() { return status_general; }
     public void setStatus_general(Status_general status_general) { this.status_general = status_general; }

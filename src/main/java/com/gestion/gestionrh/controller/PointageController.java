@@ -2,6 +2,9 @@ package com.gestion.gestionrh.controller;
 
 import  com.gestion.gestionrh.model.*;
 import  com.gestion.gestionrh.service.*;
+
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +40,7 @@ public class PointageController {
 
     @PostMapping("/save")
     public String save(@ModelAttribute Pointage obj) {
+        obj.setDate_enregistrement(LocalDateTime.now()) ; 
         service.save(obj);
         return "redirect:/pointage";
     }
