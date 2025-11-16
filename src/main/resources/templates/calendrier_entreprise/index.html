@@ -21,6 +21,8 @@
 <td th:text='${row.annee}'></td>
 <td th:text='${row.date_creation}'></td>
 <td>
-<a th:href='@{/calendrier_entreprise/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/calendrier_entreprise/delete/{id}(id=${row.id})}'>Delete</a>
+<a th:href='@{/calendrier_entreprise/calendar/{annee}(annee=${row.annee})}' class="btn btn-info btn-sm">Voir calendrier</a> |
+<a th:href='@{/calendrier_entreprise/edit/{id}(id=${row.id})}'>Edit</a> |
+<a th:href='@{/calendrier_entreprise/delete/{id}(id=${row.id})}'>Delete</a>
 </td></tr>
 </tbody></table> </div> </body></html>
