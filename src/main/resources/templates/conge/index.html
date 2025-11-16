@@ -7,34 +7,39 @@
 <table  class="table table-hover" >
 <thead><tr>
 <th>id</th>
-<th>Approved by Admin :  </th>
 <th>Employee </th>
-<th>type_conge_id</th>
-<th>nb_jours</th>
-<th>commentaire</th>
-<th>date_demande</th>
-<th>date_debut</th>
-<th>date_fin</th>
-<th> Status </th>
-<th>date_validation</th>
-<th>reference_demande</th>
+<th>Type de congé</th>
+<th>Nb jours</th>
+<th>Date début</th>
+<th>Date fin</th>
+<th>Statut validation superviseur</th>
+<th>Date validation superviseur</th>
+<th>Statut final (RH)</th>
+<th>Date validation RH</th>
+<th>Référence</th>
 <th>Actions</th>
 </tr></thead>
 <tbody>
 <tr th:each='row : ${conges}'>
 <td th:text='${row.id}'></td>
-<td th:text='${row.admin.username}'></td>
 <td th:text='${row.employee.username}'></td>
-<td th:text='${row.type_conge.name}'></td>
+<td th:text='${row.type_conge != null ? row.type_conge.libelle : "N/A"}'></td>
 <td th:text='${row.nb_jours}'></td>
-<td th:text='${row.commentaire}'></td>
-<td th:text='${row.date_demande}'></td>
 <td th:text='${row.date_debut}'></td>
 <td th:text='${row.date_fin}'></td>
-<td th:text='${row.status_general.name}'></td>
+<td th:text='${row.statut_validation_superviseur != null ? row.statut_validation_superviseur.name : "En attente"}'></td>
+<td th:text='${row.date_validation_superviseur}'></td>
+<td th:text='${row.status_general != null ? row.status_general.name : "N/A"}'></td>
 <td th:text='${row.date_validation}'></td>
 <td th:text='${row.reference_demande}'></td>
 <td>
-<a th:href='@{/conge/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/conge/delete/{id}(id=${row.id})}'>Delete</a>
+<a th:href='@{/conge/edit/{id}(id=${row.id})}'>Edit</a> | 
+<a th:href='@{/conge/delete/{id}(id=${row.id})}'>Delete</a>
+<span th:if='${row.statut_validation_superviseur == null || row.statut_validation_superviseur.name == "En attente"}'>
+| <a th:href='@{/conge/valider-superviseur/{id}(id=${row.id})}'>Valider (Superviseur)</a>
+</span>
+<span th:if='${row.statut_validation_superviseur != null && row.statut_validation_superviseur.name == "Approuvé" && (row.status_general == null || row.status_general.name == "En attente")}'>
+| <a th:href='@{/conge/valider-rh/{id}(id=${row.id})}'>Valider (RH)</a>
+</span>
 </td></tr>
 </tbody></table> </div> </body></html>

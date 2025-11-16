@@ -19,6 +19,10 @@ public class Conge {
     private Employee employee;
 
     @ManyToOne
+    @JoinColumn(name = "superviseur_id")
+    private Employee superviseur;
+
+    @ManyToOne
     @JoinColumn(name = "type_conge_id")
     private Type_conge type_conge;
 
@@ -44,6 +48,13 @@ public class Conge {
     
     private LocalDateTime date_validation;
 
+    @ManyToOne
+    @JoinColumn(name = "statut_validation_superviseur_id")
+    private Status_general statut_validation_superviseur;
+
+    
+    private LocalDateTime date_validation_superviseur;
+
     
     private String reference_demande;
 
@@ -55,6 +66,9 @@ public class Conge {
 
     public Employee getEmployee() { return employee; }
     public void setEmployee(Employee employee) { this.employee = employee; }
+
+    public Employee getSuperviseur() { return superviseur; }
+    public void setSuperviseur(Employee superviseur) { this.superviseur = superviseur; }
 
     public Type_conge getType_conge() { return type_conge; }
     public void setType_conge(Type_conge type_conge) { this.type_conge = type_conge; }
@@ -79,6 +93,12 @@ public class Conge {
 
     public LocalDateTime getDate_validation() { return date_validation; }
     public void setDate_validation(LocalDateTime date_validation) { this.date_validation = date_validation; }
+
+    public Status_general getStatut_validation_superviseur() { return statut_validation_superviseur; }
+    public void setStatut_validation_superviseur(Status_general statut_validation_superviseur) { this.statut_validation_superviseur = statut_validation_superviseur; }
+
+    public LocalDateTime getDate_validation_superviseur() { return date_validation_superviseur; }
+    public void setDate_validation_superviseur(LocalDateTime date_validation_superviseur) { this.date_validation_superviseur = date_validation_superviseur; }
 
     public String getReference_demande() { return reference_demande; }
     public void setReference_demande(String reference_demande) { this.reference_demande = reference_demande; }

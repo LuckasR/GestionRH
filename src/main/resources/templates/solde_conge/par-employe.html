@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Soldes de congés - <span th:text='${employee.username}'></span></h5>
+<div class="card-body">
+<div class="mb-3">
+    <a th:href='@{/solde_conge}' class='btn btn-secondary'>← Retour à la liste</a>
+    <a th:href='@{/solde_conge/recalculer/{id}(id=${employee.id})}' class='btn btn-success ms-2'>Recalculer les soldes</a>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="alert alert-info">
+            <strong>Information :</strong> Les soldes sont calculés automatiquement selon les droits de chaque type de congé.
+            Les jours acquis sont basés sur les paramètres du type de congé (congés payés, maladie, maternité, exceptionnels).
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover table-striped">
+<thead class="table-dark">
+<tr>
+<th>Type de congé</th>
+<th>Description</th>
+<th>Année</th>
+<th>Jours acquis</th>
+<th>Jours pris</th>
+<th>Jours restants</th>
+<th>Dernière mise à jour</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each='solde : ${solde_conges}'>
+<td>
+    <strong th:text='${solde.type_conge != null ? solde.type_conge.libelle : "N/A"}'></strong>
+</td>
+<td>
+    <small class="text-muted" th:text='${solde.type_conge != null ? solde.type_conge.description : ""}'></small>
+</td>
+<td th:text='${solde.annee}'></td>
+<td>
+    <span class="badge bg-info" th:text='${solde.jours_acquis}'></span>
+</td>
+<td>
+    <span class="badge bg-warning" th:text='${solde.jours_pris}'></span>
+</td>
+<td>
+    <span class="badge" 
+          th:classappend='${solde.jours_restants < 5 ? "bg-danger" : (solde.jours_restants < 10 ? "bg-warning" : "bg-success")}'
+          th:text='${solde.jours_restants}'></span>
+</td>
+<td>
+    <small th:text='${solde.date_maj != null ? #temporals.format(solde.date_maj, "dd/MM/yyyy HH:mm") : "N/A"}'></small>
+</td>
+</tr>
+<tr th:if='${#lists.isEmpty(solde_conges)}'>
+<td colspan="7" class="text-center text-muted">Aucun solde de congé enregistré pour cet employé</td>
+</tr>
+</tbody>
+</table>
+
+<div class="mt-4">
+    <h6>Types de congés disponibles :</h6>
+    <ul class="list-group">
+        <li class="list-group-item" th:each='type : ${type_conges}'>
+            <strong th:text='${type.libelle}'></strong> - 
+            <span th:text='${type.description}'></span>
+            <br>
+            <small class="text-muted">
+                Jours attribués annuels : <span th:text='${type.jours_attribues_annuels}'></span> | 
+                Payable : <span th:text='${type.is_payable ? "Oui" : "Non"}'></span> | 
+                Cumulable : <span th:text='${type.is_cumulable ? "Oui" : "Non"}'></span>
+            </small>
+        </li>
+    </ul>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+

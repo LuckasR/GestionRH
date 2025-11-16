@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<head>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Calendrier des congés - <span th:text="${annee}"></span></h4>
+                    <div class="card-tools">
+                        <a th:href="@{/calendrier_entreprise}" class="btn btn-secondary btn-sm">Retour à la liste</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id='calendar'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'fr',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        buttonText: {
+            today: 'Aujourd\'hui',
+            month: 'Mois',
+            week: 'Semaine',
+            day: 'Jour'
+        },
+        events: [
+            /*[# th:each="event : ${evenements}"]*/
+            {
+                title: '[[${event.titre}]]',
+                start: '[[${event.date_debut}]]',
+                end: '[[${event.date_fin}]]',
+                backgroundColor: '[[${event.couleur}]]',
+                borderColor: '[[${event.couleur}]]',
+                textColor: '#ffffff',
+                extendedProps: {
+                    description: '[[${event.description}]]',
+                    employee: '[[${event.employee.username}]]',
+                    status: '[[${event.status_general.name}]]'
+                }
+            }/*[# th:if="${!evenements.isEmpty()} && ${!eventStat.last}"],/*[/]*/,
+            /*[/]*/
+        ],
+        eventClick: function(info) {
+            alert('Congé: ' + info.event.title + '\n' +
+                  'Employé: ' + info.event.extendedProps.employee + '\n' +
+                  'Description: ' + info.event.extendedProps.description + '\n' +
+                  'Statut: ' + info.event.extendedProps.status);
+        },
+        eventMouseEnter: function(info) {
+            info.el.style.cursor = 'pointer';
+        }
+    });
+    calendar.render();
+});
+</script>
+</body>
+</html>
