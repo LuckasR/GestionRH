@@ -1,7 +1,7 @@
 package com.gestion.gestionrh.model;
+import java.time.Duration;
+
 import jakarta.persistence.*;
-import java.math.*;
-import java.time.*;
 
 @Entity
 @Table(name = "regle_travail")
@@ -15,7 +15,7 @@ public class Regle_travail {
 
     @Column(columnDefinition = "INTERVAL")
     private  Duration duree_normale;
-
+ 
     
     private Boolean est_weekend;
 

@@ -3,9 +3,10 @@
 <body>
 <div layout:fragment="content">
 <div class="card">
-<h5 class='card-header'>Créer Parametre_taux</h5>
+<h5 class='card-header'>Créer le parametre d'un Taux</h5>
 <div class="card-body">
 <form th:action='@{/parametre_taux/save}' th:object='${parametre_taux}' method='post'>
+
   <div class='mb-4'>
     <label class='form-label' for='code'>Code</label>
     <input type='text' class='form-control' id='code' th:field='*{code}' placeholder='code...'>

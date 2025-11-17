@@ -14,19 +14,77 @@
 <th>jours_pris</th>
 <th>jours_restants</th>
 <th>date_maj</th>
+<div class="card">
+<h5 class='card-header'>Suivi des Soldes de Congés</h5>
+<div class="card-body">
+<div class="mb-3">
+    <a th:href='@{/solde_conge/create}' class='btn btn-primary'>Créer un solde</a>
+    <a th:href='@{/solde_conge/recalculer-tous}' class='btn btn-success'>Recalculer tous les soldes (année actuelle)</a>
+    <span class="text-muted ms-3">Les soldes sont calculés automatiquement lors de l'approbation d'un congé</span>
+</div>
+
+<table class="table table-hover table-striped">
+<thead class="table-dark">
+<tr>
+<th>Employé</th>
+<th>Type de congé</th>
+<th>Année</th>
+<th>Jours acquis</th>
+<th>Jours pris</th>
+<th>Jours restants</th>
+<th>Dernière mise à jour</th>
 <th>Actions</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr th:each='row : ${solde_conges}'>
-<td th:text='${row.id}'></td>
-<td th:text='${row.employee.username}'></td>
-<td th:text='${row.type_conge}'></td>
-<td th:text='${row.annee}'></td>
-<td th:text='${row.jours_acquis}'></td>
-<td th:text='${row.jours_pris}'></td>
-<td th:text='${row.jours_restants}'></td>
-<td th:text='${row.date_maj}'></td>
 <td>
 <a  class="btn btn-warning" th:href='@{/solde_conge/edit/{id}(id=${row.id})}'>Edit</a> | <a  class="btn btn-danger" th:href='@{/solde_conge/delete/{id}(id=${row.id})}'>Delete</a>
 </td></tr>
 </tbody></table> </div> </body></html>
+    <strong th:text='${row.employee.username}'></strong>
+    <br>
+    <small>
+        <a th:href='@{/solde_conge/par-employe/{id}(id=${row.employee.id})}' class="text-decoration-none">
+            Voir tous les soldes
+        </a>
+    </small>
+</td>
+<td>
+    <span th:text='${row.type_conge != null ? row.type_conge.libelle : "N/A"}'></span>
+    <br>
+    <small class="text-muted" th:text='${row.type_conge != null ? row.type_conge.description : ""}'></small>
+</td>
+<td th:text='${row.annee}'></td>
+<td>
+    <span class="badge bg-info" th:text='${row.jours_acquis}'></span>
+</td>
+<td>
+    <span class="badge bg-warning" th:text='${row.jours_pris}'></span>
+</td>
+<td>
+    <span class="badge" 
+          th:classappend='${row.jours_restants < 5 ? "bg-danger" : (row.jours_restants < 10 ? "bg-warning" : "bg-success")}'
+          th:text='${row.jours_restants}'></span>
+</td>
+<td>
+    <small th:text='${row.date_maj != null ? #temporals.format(row.date_maj, "dd/MM/yyyy HH:mm") : "N/A"}'></small>
+</td>
+<td>
+    <a th:href='@{/solde_conge/recalculer/{id}(id=${row.employee.id}, annee=${row.annee})}' 
+       class='btn btn-sm btn-outline-primary' 
+       title="Recalculer le solde">🔄</a>
+    <a th:href='@{/solde_conge/edit/{id}(id=${row.id})}' class='btn btn-sm btn-outline-secondary'>✏️</a>
+</td>
+</tr>
+</tbody>
+</table>
+
+<div class="alert alert-info mt-3">
+    <strong>ℹ️ Calcul automatique :</strong> Les soldes sont recalculés automatiquement selon les droits de chaque type de congé (congés payés, maladie, maternité, exceptionnels) lors de l'approbation d'une demande de congé.
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

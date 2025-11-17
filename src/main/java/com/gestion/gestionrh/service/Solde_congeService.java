@@ -8,4 +8,7 @@ public interface Solde_congeService {
     Solde_conge getById(Integer id);
     void save(Solde_conge obj);
     void delete(Integer id);
+    void calculerSoldeConge(Employee employee, Integer annee);
+    void mettreAJourSoldeConge(Conge conge);
+    List<Solde_conge> getSoldesByEmployee(Employee employee);
 }

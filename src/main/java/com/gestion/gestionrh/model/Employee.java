@@ -18,6 +18,10 @@ public class Employee {
     @JoinColumn(name = "departement_id")
     private Departement departement;
 
+    @ManyToOne
+    @JoinColumn(name = "superviseur_id")
+    private Employee superviseur;
+
     
     private String username;
 
@@ -41,6 +45,9 @@ public class Employee {
 
     public Departement getDepartement() { return departement; }
     public void setDepartement(Departement departement) { this.departement = departement; }
+
+    public Employee getSuperviseur() { return superviseur; }
+    public void setSuperviseur(Employee superviseur) { this.superviseur = superviseur; }
 
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }

@@ -15,10 +15,37 @@ public class Calendrier_entrepriseController {
     @Autowired
     private Calendrier_entrepriseService service;
 
+    @Autowired
+    private Evenement_calendrierService evenementCalendrierService;
+
     @GetMapping
     public String index(Model model) {
         model.addAttribute("calendrier_entreprises", service.getAll());
         return "calendrier_entreprise/index";
+    }
+
+    @GetMapping("/calendar/{annee}")
+    public String calendarView(@PathVariable Integer annee, Model model) {
+        model.addAttribute("annee", annee);
+        Calendrier_entreprise calendrier = service.getAll().stream()
+            .filter(c -> c.getAnnee() != null && c.getAnnee().equals(annee))
+            .findFirst()
+            .orElse(null);
+
+        model.addAttribute("calendrier", calendrier);
+
+        // Préparer les événements pour FullCalendar
+        if (calendrier != null) {
+            var evenements = evenementCalendrierService.getAll().stream()
+                .filter(e -> e.getCalendrier_entreprise() != null &&
+                           e.getCalendrier_entreprise().getId().equals(calendrier.getId()))
+                .toList();
+            model.addAttribute("evenements", evenements);
+        } else {
+            model.addAttribute("evenements", java.util.List.of());
+        }
+
+        return "calendrier_entreprise/calendar";
     }
 
     @GetMapping("/create")
