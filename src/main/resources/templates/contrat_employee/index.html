@@ -3,7 +3,7 @@
 <body>
 <div layout:fragment="content">
 <h2>Liste de contrat_employee</h2>
-<a th:href='@{/contrat_employee/create}'>Créer</a>
+<a  class="btn btn-primary" th:href='@{/contrat_employee/create}'>Créer</a>
 <table  class="table table-hover" >
 <thead><tr>
 <th>id</th>
@@ -23,6 +23,6 @@
 <td th:text='${row.renouvellement_auto}'></td>
 <td th:text='${row.has_active}'></td>
 <td>
-<a th:href='@{/contrat_employee/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/contrat_employee/delete/{id}(id=${row.id})}'>Delete</a>
+<a  class="btn btn-warning" th:href='@{/contrat_employee/edit/{id}(id=${row.id})}'>Edit</a> | <a  class="btn btn-danger" th:href='@{/contrat_employee/delete/{id}(id=${row.id})}'>Delete</a>
 </td></tr>
 </tbody></table> </div> </body></html>

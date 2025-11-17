@@ -13,8 +13,8 @@ public class Regle_travail {
     
     private String nom;
 
-    
-    private Integer duree_normale;
+    @Column(columnDefinition = "INTERVAL")
+    private  Duration duree_normale;
 
     
     private Boolean est_weekend;
@@ -31,8 +31,8 @@ public class Regle_travail {
     public String getNom() { return nom; }
     public void setNom(String nom) { this.nom = nom; }
 
-    public Integer getDuree_normale() { return duree_normale; }
-    public void setDuree_normale(Integer duree_normale) { this.duree_normale = duree_normale; }
+    public  Duration getDuree_normale() { return duree_normale; }
+    public void setDuree_normale( Duration duree_normale) { this.duree_normale = duree_normale; }
 
     public Boolean getEst_weekend() { return est_weekend; }
     public void setEst_weekend(Boolean est_weekend) { this.est_weekend = est_weekend; }

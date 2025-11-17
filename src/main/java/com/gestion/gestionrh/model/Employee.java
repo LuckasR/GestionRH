@@ -24,9 +24,15 @@ public class Employee {
     
     private String password;
 
-    
-    private String code_qr;
+    @Column(name = "code_qr")
+    private String codeQr;
 
+    public String getCodeQr() {
+        return codeQr;
+    }
+    public void setCodeQr(String codeQr) {
+        this.codeQr = codeQr;
+    }
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -42,7 +48,5 @@ public class Employee {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public String getCode_qr() { return code_qr; }
-    public void setCode_qr(String code_qr) { this.code_qr = code_qr; }
-
+   
 }

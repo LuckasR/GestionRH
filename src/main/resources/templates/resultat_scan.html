@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Scanner QR</title>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <style>
+        #reader {
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body onload="startScanner()">
+
+<h2 style="text-align:center">Scanner un QR Code</h2>
+
+<div id="reader"></div>
+
+<form id="scanForm" method="post" action="/pointage/scan">
+    <input type="hidden" name="qr" id="qrValue">
+</form>
+
+<script>
+function startScanner() {
+    const html5QrCode = new Html5Qrcode("reader");
+    const config = { fps: 10, qrbox: 250 };
+
+    html5QrCode.start(
+        { facingMode: "environment" },  // 📷 caméra arrière
+        config,
+        qrCodeMessage => {
+            // 🔥 le QR est détecté automatiquement !
+            document.getElementById("qrValue").value = qrCodeMessage;
+            document.getElementById("scanForm").submit();
+            html5QrCode.stop();
+        },
+        errorMessage => {
+            // on ignore les erreurs
+        }
+    ).catch(err => {
+        console.error("Erreur : ", err);
+    });
+}
+</script>
+
+</body>
+</html>
+ 

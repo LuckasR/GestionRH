@@ -1,3 +1,24 @@
+<a th:href="@{/pointage/create}" class="btn btn-primary">Primary</a>
+<a class="btn btn-secondary">Secondary</a>
+<a class="btn btn-success">Success</a>
+<a class="btn btn-danger">Danger</a>
+<a class="btn btn-warning">Warning</a>
+<a class="btn btn-info">Info</a>
+<a class="btn btn-light">Light</a>
+<a class="btn btn-dark">Dark</a>
+<a class="btn btn-link">Link</a>
+
+keytool -genkeypair ^
+ -alias spring ^
+ -keyalg RSA ^
+ -keysize 2048 ^
+ -keystore keystore.p12 ^
+ -storepass password ^
+ -validity 3650 ^
+ -dname "CN=localhost, OU=Dev, O=Dev, L=Tana, ST=Analamanga, C=MG" ^
+ -storetype PKCS12
+
+ 
 scenario : 
     - scanne badge de employee
     - checking de l'horaire de travail 
