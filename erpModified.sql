@@ -349,7 +349,7 @@ create table regle_travail (
     est_ferie boolean default false,
     description text
 );
-alter table regle_travail se
+-- alter table regle_travail se
 CREATE TABLE config_heure_supplementaire (
     id SERIAL PRIMARY KEY,
     regle_id INT REFERENCES regle_travail(id) ON DELETE CASCADE,
