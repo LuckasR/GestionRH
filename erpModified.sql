@@ -1,60 +1,60 @@
 create table departement (
     id serial primary key , 
     name varchar(100) 
-) ;
+);
 
 create table genre (
     id serial primary key , 
     name varchar(100) 
-) ;
+);
 
 create table methode(
     id serial primary key , 
     name varchar(100) 
-) ;
+);
 
 create table niveau_etude (
     id serial primary key , 
     name varchar(100) 
-) ;
+);
 
 
 create table filiere (
     id serial primary key , 
     name varchar(100) 
-) ;
+);
 
 create table siege_entreprise (
     id serial primary key , 
     name varchar(100) 
-) ;
+);
  
 create table type_contrat (
     id serial primary key , 
     name varchar(100) , 
     recurrence_renouvelement int 
-) ;
+);
 
 create table status_general( 
     id serial primary key , 
     name varchar(100) 
-) ; 
+); 
 
 create table status_traitement( 
     id serial primary key , 
     name varchar(100) 
-) ; 
+); 
 
 create table role (
     id serial primary key , 
     name varchar(100)   , 
     niveau int 
-) ; 
+); 
 -- alter table role add column niveau int  ; 
 create table status_contrat (
     id serial primary key , 
     name varchar(100)  
-) ; 
+); 
 
 create table type_changement(
     id serial primary key , 
