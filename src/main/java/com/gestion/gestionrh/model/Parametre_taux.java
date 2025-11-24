@@ -1,7 +1,18 @@
 package com.gestion.gestionrh.model;
-import jakarta.persistence.*;
-import java.math.*;
-import java.time.*;
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
+import java.util.List;
+import java.util.ArrayList;
+import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
+
 
 @Entity
 @Table(name = "parametre_taux")
@@ -10,17 +21,10 @@ public class Parametre_taux {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    
     private String code;
 
     
     private String description;
-
-    
-    private BigDecimal taux_employe;
-
-    
-    private BigDecimal taux_employeur;
 
     
     private LocalDate date_application;
@@ -30,6 +34,17 @@ public class Parametre_taux {
 
     
     private Boolean actif;
+    @OneToMany(mappedBy = "parametre_taux", fetch = FetchType.LAZY,cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Parametre_detail> details = new ArrayList<>();
+
+    // GETTER AND SETTER FOR THE LIST
+    public List<Parametre_detail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<Parametre_detail> details) {
+        this.details = details;
+    }
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -39,12 +54,6 @@ public class Parametre_taux {
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
-
-    public BigDecimal getTaux_employe() { return taux_employe; }
-    public void setTaux_employe(BigDecimal taux_employe) { this.taux_employe = taux_employe; }
-
-    public BigDecimal getTaux_employeur() { return taux_employeur; }
-    public void setTaux_employeur(BigDecimal taux_employeur) { this.taux_employeur = taux_employeur; }
 
     public LocalDate getDate_application() { return date_application; }
     public void setDate_application(LocalDate date_application) { this.date_application = date_application; }

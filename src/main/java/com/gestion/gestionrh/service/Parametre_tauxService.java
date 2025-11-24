@@ -10,11 +10,12 @@ public interface Parametre_tauxService {
     List<Parametre_taux> getAll();
     Parametre_taux getById(Integer id);
     void save(Parametre_taux obj);
+    Parametre_taux saveAndGet(Parametre_taux obj);
     void delete(Integer id);
-    void validateFilterRanges(BigDecimal tauxEmpMin, BigDecimal tauxEmpMax,
+      void validateFilterRanges(BigDecimal tauxEmpMin, BigDecimal tauxEmpMax,
                                      BigDecimal tauxEmployeurMin, BigDecimal tauxEmployeurMax,
                                      LocalDate dateDebut, LocalDate dateFin);
-    List<Parametre_taux> filter(
+   List<Parametre_taux> filter(
     String code,
     BigDecimal tauxEmpMin,
     BigDecimal tauxEmpMax,
@@ -23,5 +24,5 @@ public interface Parametre_tauxService {
     LocalDate dateDebut,
     LocalDate dateFin,
     Boolean actif
-    );
+    );    
 }

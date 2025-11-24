@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class Parametre_tauxServiceImpl implements Parametre_tauxService {
@@ -23,9 +24,9 @@ public class Parametre_tauxServiceImpl implements Parametre_tauxService {
     private EntityManager entityManager;
 
     public void validateFilterRanges(BigDecimal tauxEmpMin, BigDecimal tauxEmpMax,
-                                     BigDecimal tauxEmployeurMin, BigDecimal tauxEmployeurMax,
-                                     LocalDate dateDebut, LocalDate dateFin) {
-        
+            BigDecimal tauxEmployeurMin, BigDecimal tauxEmployeurMax,
+            LocalDate dateDebut, LocalDate dateFin) {
+
         // Validation des plages de taux employé
         if (tauxEmpMin != null && tauxEmpMax != null) {
             if (tauxEmpMin.compareTo(tauxEmpMax) > 0) {
@@ -68,103 +69,120 @@ public class Parametre_tauxServiceImpl implements Parametre_tauxService {
         }
     }
 
-    public List<Parametre_taux> getAll() { return repo.findAll(); }
-    public Parametre_taux getById(Integer id) { return repo.findById(id).orElse(null); }
-    public void save(Parametre_taux obj) { repo.save(obj); }
-    public void delete(Integer id) { repo.deleteById(id); }
-    public List<Parametre_taux> filter(String code, BigDecimal tauxEmpMin, BigDecimal tauxEmpMax, 
-                                  BigDecimal tauxEmployeurMin, BigDecimal tauxEmployeurMax, 
-                                  LocalDate dateDebut, LocalDate dateFin, Boolean actif) {
-    
-    System.out.println("=== DÉBUT FILTRE SERVICE ===");
-    System.out.println("Paramètres reçus dans service:");
-    System.out.println("  code: " + code);
-    System.out.println("  tauxEmployeurMin: " + tauxEmployeurMin);
-    System.out.println("  tauxEmployeurMax: " + tauxEmployeurMax);
-    System.out.println("  actif: " + actif);
-    
-    String jpql = "SELECT p FROM Parametre_taux p WHERE 1=1";
-    
-    this.validateFilterRanges(tauxEmpMin, tauxEmpMax, tauxEmployeurMin, tauxEmployeurMax, dateDebut, dateFin);
-    
-    // Construction de la requête
-    if (code != null && !code.trim().isEmpty()) {
-        jpql += " AND p.code LIKE :code";
-        System.out.println("  → Ajout filtre code");
-    }
-    if (dateDebut != null) {
-        jpql += " AND p.date_application >= :dateDebut";
-        System.out.println("  → Ajout filtre dateDebut");
-    }
-    if (dateFin != null) {
-        jpql += " AND p.date_application <= :dateFin";
-        System.out.println("  → Ajout filtre dateFin");
-    }
-    if (tauxEmpMin != null) {
-        jpql += " AND p.taux_employe >= :tauxEmpMin";
-        System.out.println("  → Ajout filtre tauxEmpMin: " + tauxEmpMin);
-    }
-    if (tauxEmpMax != null) {
-        jpql += " AND p.taux_employe <= :tauxEmpMax";
-        System.out.println("  → Ajout filtre tauxEmpMax: " + tauxEmpMax);
-    }
-    if (tauxEmployeurMin != null) {
-        jpql += " AND p.taux_employeur >= :tauxEmployeurMin";
-        System.out.println("  → Ajout filtre tauxEmployeurMin: " + tauxEmployeurMin);
-    }
-    if (tauxEmployeurMax != null) {
-        jpql += " AND p.taux_employeur <= :tauxEmployeurMax";
-        System.out.println("  → Ajout filtre tauxEmployeurMax: " + tauxEmployeurMax);
-    }
-    if (actif != null) {
-        jpql += " AND p.actif = :actif";
-        System.out.println("  → Ajout filtre actif: " + actif);
+    @Transactional // Keeps the connection open so Thymeleaf can load the details
+    public List<Parametre_taux> getAll() {
+        return repo.findAll();
     }
 
-    System.out.println("Requête JPQL générée: " + jpql);
-
-    Query query = entityManager.createQuery(jpql, Parametre_taux.class);
-
-    // Définition des paramètres
-    if (code != null && !code.trim().isEmpty()) {
-        String codeValue = "%" + code.trim() + "%";
-        query.setParameter("code", codeValue);
-        System.out.println("  → Paramètre code: " + codeValue);
-    }
-    if (dateDebut != null) {
-        query.setParameter("dateDebut", dateDebut);
-        System.out.println("  → Paramètre dateDebut: " + dateDebut);
-    }
-    if (dateFin != null) {
-        query.setParameter("dateFin", dateFin);
-        System.out.println("  → Paramètre dateFin: " + dateFin);
-    }
-    if (tauxEmpMin != null) {
-        query.setParameter("tauxEmpMin", tauxEmpMin);
-        System.out.println("  → Paramètre tauxEmpMin: " + tauxEmpMin);
-    }
-    if (tauxEmpMax != null) {
-        query.setParameter("tauxEmpMax", tauxEmpMax);
-        System.out.println("  → Paramètre tauxEmpMax: " + tauxEmpMax);
-    }
-    if (tauxEmployeurMin != null) {
-        query.setParameter("tauxEmployeurMin", tauxEmployeurMin);
-        System.out.println("  → Paramètre tauxEmployeurMin: " + tauxEmployeurMin);
-    }
-    if (tauxEmployeurMax != null) {
-        query.setParameter("tauxEmployeurMax", tauxEmployeurMax);
-        System.out.println("  → Paramètre tauxEmployeurMax: " + tauxEmployeurMax);
-    }
-    if (actif != null) {
-        query.setParameter("actif", actif);
-        System.out.println("  → Paramètre actif: " + actif);
+    public Parametre_taux getById(Integer id) {
+        return repo.findById(id).orElse(null);
     }
 
-    List<Parametre_taux> result = query.getResultList();
-    System.out.println("Nombre de résultats trouvés: " + result.size());
-    System.out.println("=== FIN FILTRE SERVICE ===");
-    
-    return result;
-}
+    public void save(Parametre_taux obj) {
+        repo.save(obj);
+    }
 
+    public Parametre_taux saveAndGet(Parametre_taux obj) {
+        return repo.save(obj);
+    }
+
+    public void delete(Integer id) {
+        repo.deleteById(id);
+    }
+
+    public List<Parametre_taux> filter(String code, BigDecimal tauxEmpMin, BigDecimal tauxEmpMax,
+            BigDecimal tauxEmployeurMin, BigDecimal tauxEmployeurMax,
+            LocalDate dateDebut, LocalDate dateFin, Boolean actif) {
+
+        System.out.println("=== DÉBUT FILTRE SERVICE (RELATIONAL) ===");
+
+        // 1. Validate Inputs
+        this.validateFilterRanges(tauxEmpMin, tauxEmpMax, tauxEmployeurMin, tauxEmployeurMax, dateDebut, dateFin);
+
+        // 2. Start building the Query
+        StringBuilder jpql = new StringBuilder();
+
+        // CORRECTION 1: Start FROM the Parent (Parametre_taux), aliased as 'p'
+        jpql.append("SELECT DISTINCT p FROM Parametre_taux p ");
+
+        // CORRECTION 2: Join the List<ParametreDetail> named 'details' (Check your Entity!)
+        jpql.append("LEFT JOIN p.details pd ");
+
+        // CORRECTION 3: Join the Taux from the Detail
+        jpql.append("LEFT JOIN pd.taux t ");
+
+        jpql.append("WHERE 1=1 ");
+
+        // --- ADD FILTERS ---
+        // Filter by CODE
+        if (code != null && !code.trim().isEmpty()) {
+            jpql.append(" AND LOWER(p.code) LIKE LOWER(:code)");
+        }
+
+        // CORRECTION 4: Use 'date_application' (Matches your Parametre_taux entity)
+        if (dateDebut != null) {
+            jpql.append(" AND p.date_application >= :dateDebut");
+        }
+        if (dateFin != null) {
+            jpql.append(" AND p.date_application <= :dateFin"); // Assuming logic is on start date, or check p.date_fin
+        }
+
+        // Filter by ACTIF
+        if (actif != null) {
+            jpql.append(" AND p.actif = :actif");
+        }
+
+        // Filter by RATES (on Taux - Using alias 't')
+        if (tauxEmpMin != null) {
+            jpql.append(" AND t.tauxEmploye >= :tauxEmpMin");
+        }
+        if (tauxEmpMax != null) {
+            jpql.append(" AND t.tauxEmploye <= :tauxEmpMax");
+        }
+        if (tauxEmployeurMin != null) {
+            jpql.append(" AND t.tauxEmployeur >= :tauxEmployeurMin");
+        }
+        if (tauxEmployeurMax != null) {
+            jpql.append(" AND t.tauxEmployeur <= :tauxEmployeurMax");
+        }
+
+        System.out.println("Requête JPQL générée: " + jpql.toString());
+
+        // 3. Create Query
+        TypedQuery<Parametre_taux> query = entityManager.createQuery(jpql.toString(), Parametre_taux.class);
+
+        // --- SET PARAMETERS ---
+        if (code != null && !code.trim().isEmpty()) {
+            query.setParameter("code", "%" + code.trim() + "%");
+        }
+        if (dateDebut != null) {
+            query.setParameter("dateDebut", dateDebut);
+        }
+        if (dateFin != null) {
+            query.setParameter("dateFin", dateFin);
+        }
+        if (actif != null) {
+            query.setParameter("actif", actif);
+        }
+        if (tauxEmpMin != null) {
+            query.setParameter("tauxEmpMin", tauxEmpMin);
+        }
+        if (tauxEmpMax != null) {
+            query.setParameter("tauxEmpMax", tauxEmpMax);
+        }
+        if (tauxEmployeurMin != null) {
+            query.setParameter("tauxEmployeurMin", tauxEmployeurMin);
+        }
+        if (tauxEmployeurMax != null) {
+            query.setParameter("tauxEmployeurMax", tauxEmployeurMax);
+        }
+
+        // 4. Execute
+        List<Parametre_taux> result = query.getResultList();
+
+        System.out.println("Nombre de résultats trouvés: " + result.size());
+        System.out.println("=== FIN FILTRE SERVICE ===");
+
+        return result;
+    }
 }
