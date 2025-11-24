@@ -13,9 +13,9 @@
     </thead>
     <tbody>
         <tr
-            th:if="${parametre_tauxs == null or #lists.isEmpty(parametre_tauxs)}">
+            th:if="${parametre_tauxs == null or #lists.isEmpty(parametre_tauxs) or row.details[0].montant_min != null}">
             <td colspan="10" style="text-align:center;">Aucun
-                paramètre de taux trouvé</td>
+                paramètre de taux forfaitaires (Globaux) trouvé</td>
         </tr>
         <!-- CHECK: List not empty AND First Element Min is NULL -->
         <tr th:each='row : ${parametre_tauxs}'
