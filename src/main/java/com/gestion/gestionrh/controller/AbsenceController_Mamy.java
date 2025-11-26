@@ -27,6 +27,7 @@ public class AbsenceController_Mamy {
     @GetMapping
     public String index(Model model) {
         model.addAttribute("employees",employeeService.getAll());
+        //System.out.println(employeeService.getAll().size());
         model.addAttribute("absences", service.getAll());
         return "absence/index";
     }

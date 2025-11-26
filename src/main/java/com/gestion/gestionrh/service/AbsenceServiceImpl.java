@@ -12,7 +12,7 @@ public class AbsenceServiceImpl implements AbsenceService {
     @Autowired
     private AbsenceRepository repo;
 
-    public List<Absence> getAll() { return repo.findAll(); }
+    public List<Absence> getAll() { return repo.findTop5ByOrderByIdAsc(); }
     public Absence getById(Integer id) { return repo.findById(id).orElse(null); }
     public void save(Absence obj) { repo.save(obj); }
     public void delete(Integer id) { repo.deleteById(id); }
