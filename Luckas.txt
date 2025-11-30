@@ -42,3 +42,25 @@ Creation employee  :
 Mise en place de horaire de travail : 
     - Horaire journalier (ex: lundi -> vendredi : 7h-18h )
  
+
+ 
+ Heures supplémentaires, 
+ Le système calcule automatiquement les heures supplémentaires 
+ Calcule par rapport au horaire habituel 
+ Ex : Entre 7h -> 13h  et 14h -> 18h
+ Jerena alora hoe lundi sa mardi sa inona dia ensuite alaina n horaire mifanaraka aminy 
+ Creation fonction :
+     ValeurHoraire <- getSumHoraire( ex:Jeudi )  dia mamerina n heure de travail normal amininy jour anah semaine anah entreprise iny 
+     ValeurHoraireTravailEmployee <- getSumHoraire( date ,  employee  ) retourne la somme de la difference des pointage check IN /OUT 
+
+     ValeurHoraire <- getSumHeureSUP( date , employee )
+     ValeurHoraire <- getSumHeureSUP( dateDebut  , dateFin ,  employee  )
+     tauxHoraire <- geTauxHoraire( employee ) salaire 
+
+ retards, pauses
+et signale les retards ou
+absences injustifiées.
+➡️ But : automatiser la gestion du temps de travail.
+
+
+Raha mbola empty n ao am pointage aminah employee 1 aminah date 1 dia  checkena n sanction date n-1 

@@ -57,4 +57,8 @@ public class Salaire_employee {
     public Boolean getEst_actif() { return est_actif; }
     public void setEst_actif(Boolean est_actif) { this.est_actif = est_actif; }
 
+
+    public BigDecimal getTauxHoraire() {
+        return salaire.divide(new BigDecimal(173), RoundingMode.HALF_UP);
+    }
 }

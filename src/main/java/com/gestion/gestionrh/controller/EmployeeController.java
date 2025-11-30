@@ -44,7 +44,7 @@ public class EmployeeController {
 
         // 1. Generate EMP code
         String generatedCode = service.generateEmployeeCode();
-        obj.setCode_qr(generatedCode);
+        obj.setCodeQr(generatedCode);
 
         // 2. Generate QR Code PNG
         QrCodeGenerator generator = new QrCodeGenerator();

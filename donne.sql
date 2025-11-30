@@ -1,3 +1,8 @@
+\c postgres 
+drop database gest_rh ; 
+create database gest_rh ; 
+\c gest_rh ;  
+
 -- Full SQL Script: CREATE TABLES followed by INSERT statements with professional and extensive data
 
 -- =====================================
@@ -10,6 +15,11 @@ CREATE TABLE departement (
 );
 
 CREATE TABLE genre (
+    id serial PRIMARY KEY, 
+    name VARCHAR(100) 
+);
+
+CREATE TABLE type_check  (
     id serial PRIMARY KEY, 
     name VARCHAR(100) 
 );
@@ -300,15 +310,53 @@ CREATE TABLE notification (
     date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE horaire_travail (
+    id SERIAL PRIMARY KEY,
+    jour_semaine VARCHAR(20) NOT NULL  
+);
+ 
+create table detail_horaire(
+    id SERIAL PRIMARY KEY,
+    id_horaire int REFERENCES horaire_travail(id) ,
+    heure_debut TIME ,
+    heure_fin TIME , 
+    date_debut date  , 
+    date_fin date DEFAULT null
+) ;     
+
+
+
+CREATE TABLE parametre_pointage (
+    id SERIAL PRIMARY KEY,
+    pause_non_payee BOOLEAN DEFAULT TRUE,        -- pause midi
+    -- retard
+    retard_rattrapable BOOLEAN DEFAULT TRUE,          -- le retard peut-il être compensé ?
+    seuil_retard DECIMAL(5,2) DEFAULT 0.25,           -- après 15min = retard comptable
+    -- diverses règles
+    travail_weekend BOOLEAN DEFAULT FALSE,
+    validation_automatique BOOLEAN DEFAULT TRUE,
+    date_modification TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE pointage (
     id serial PRIMARY KEY,
     employee_id INT REFERENCES employee(id),
     date_pointage DATE NOT NULL,
+    id_horaire int REFERENCES detail_horaire(id) , 
+    heure_normal decimal(5,2) DEFAULT 0,  -- heures normales travaillees
+    heure_supplementaire decimal(5,2) DEFAULT 0,  -- heures supplementaires
+    heure_retard decimal(5,2) DEFAULT 0 ,
+    date_enregistrement TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE detail_pointage (
+    id serial PRIMARY KEY,
+    pointage_id INT REFERENCES pointage(id),
+    date_pointage DATE NOT NULL,
     heure_arrivee TIME,
     heure_depart TIME DEFAULT NULL,
     methode_id INT REFERENCES methode(id),  -- manuel, badge, qr, mobile
-    commentaire TEXT,
-    date_enregistrement TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    commentaire TEXT
 );
 
 CREATE TABLE regle_travail (
@@ -316,7 +364,7 @@ CREATE TABLE regle_travail (
     nom VARCHAR(100) NOT NULL,        -- Ex: "Jour ouvre", "Samedi", "Dimanche"
     duree_normale INTERVAL NOT NULL DEFAULT INTERVAL '08:00',
     est_weekend BOOLEAN DEFAULT FALSE,
-    est_ferie BOOLEAN DEFAULT FALSE,
+    est_ferie BOOLEAN DEFAULT FALSE,    
     description TEXT
 );
 
@@ -444,9 +492,35 @@ CREATE TABLE log_action (
     date_action TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- CREATE TABLE horaire_travail (
+--     id SERIAL PRIMARY KEY,
+--     jour_semaine VARCHAR(20) NOT NULL  
+-- );
+ 
+-- create table detail_horaire(
+--     id SERIAL PRIMARY KEY,
+--     id_horaire int REFERENCES horaire_travail(id) ,
+--     heure_debut TIME ,
+--     heure_fin TIME , 
+--     date_debut date  , 
+--     date_fin date DEFAULT null
+-- ) ;     
+
+
+
 CREATE UNIQUE INDEX unique_salaire_actif
 ON salaire_employee(employee_id)
 WHERE (est_actif IS TRUE);
+create or replace view emploie_temps_travail as (
+        SELECT 
+            h.jour_semaine,
+            d.heure_debut  ,  d.heure_fin  
+        FROM horaire_travail h
+        JOIN detail_horaire d ON h.id = d.id_horaire
+        GROUP BY h.jour_semaine ,  d.heure_debut  ,  d.heure_fin  , h.id
+        ORDER BY h.id
+) ; 
+
 
 -- =====================================
 -- INSERT DATA SECTION
@@ -853,18 +927,12 @@ INSERT INTO notification (employee_id, type_id, message) VALUES
 (9, 3, 'Nouvel evenement ajoute'), 
 (10, 4, 'Retard enregistre, justification requise');
 
--- pointage (10 rows, referencing employee, methode)
-INSERT INTO pointage (employee_id, date_pointage, heure_arrivee, heure_depart, methode_id, commentaire) VALUES 
-(1, '2024-01-02', '08:00:00', '17:00:00', 1, 'Journee normale'), 
-(2, '2024-01-03', '08:15:00', '17:30:00', 2, 'Leger retard'), 
-(3, '2024-01-04', '07:45:00', '16:45:00', 3, 'Depart tôt'), 
-(4, '2024-01-05', '09:00:00', '18:00:00', 4, 'Heures sup'), 
-(5, '2024-01-06', '08:30:00', '17:00:00', 5, 'Teletravail'), 
-(6, '2024-01-07', '08:00:00', NULL, 1, 'En cours'), 
-(7, '2024-01-08', '08:05:00', '17:10:00', 2, 'Normal'), 
-(8, '2024-01-09', '07:55:00', '16:55:00', 3, 'Precoce'), 
-(9, '2024-01-10', '08:20:00', '17:20:00', 4, 'Retard justifie'), 
-(10, '2024-01-11', '08:00:00', '17:00:00', 5, 'Standard');
+
+
+
+
+
+
 
 -- config_heure_supplementaire (7 rows, referencing regle_travail, type_compensation, status_general, admin)
 INSERT INTO config_heure_supplementaire (regle_id, heure_max_jour, heure_max_semaine, taux_multiplicateur_jour, taux_multiplicateur_nuit, taux_multiplicateur_weekend, taux_multiplicateur_ferie, type_compensation, besoin_validation_admin, status_id, admin_id, commentaire) VALUES 
@@ -991,3 +1059,54 @@ INSERT INTO log_action (admin_id, action_type, description) VALUES
 (2, 'Config Heures Sup', 'Mise a jour config'), 
 (3, 'Absence Justifiee', 'Validation absence'), 
 (1, 'Log Admin', 'Action generale admin');
+
+
+
+
+
+INSERT INTO horaire_travail (jour_semaine) VALUES
+('Lundi'),
+('Mardi'),
+('Mercredi'),
+('Jeudi'),
+('Vendredi'),
+('Samedi'),
+('Dimanche');
+
+
+
+-- Lundi (id = 1)
+INSERT INTO detail_horaire (id_horaire, heure_debut, heure_fin) VALUES
+(1, '07:00', '12:00'),
+(1, '13:00', '18:00');
+
+-- Mardi (id = 2)
+INSERT INTO detail_horaire (id_horaire, heure_debut, heure_fin) VALUES
+(2, '07:00', '12:00'),
+(2, '13:00', '18:00');
+
+-- Mercredi (id = 3)
+INSERT INTO detail_horaire (id_horaire, heure_debut, heure_fin) VALUES
+(3, '07:00', '12:00'),
+(3, '13:00', '18:00');
+
+-- Jeudi (id = 4)
+INSERT INTO detail_horaire (id_horaire, heure_debut, heure_fin) VALUES
+(4, '07:00', '12:00'),
+(4, '13:00', '18:00');
+
+-- Vendredi (id = 5)
+INSERT INTO detail_horaire (id_horaire, heure_debut, heure_fin) VALUES
+(5, '07:00', '12:00'),
+(5, '13:00', '18:00');
+
+-- Samedi (id = 6)
+INSERT INTO detail_horaire (id_horaire, heure_debut, heure_fin) VALUES
+(6, '07:00', '12:00'),
+(6, '13:00', '18:00');
+
+-- Dimanche (id = 7)
+INSERT INTO detail_horaire (id_horaire, heure_debut, heure_fin) VALUES
+(7, '07:00', '12:00') ;
+
+INSERT INTO type_check ( name ) VALUES ('CHECK IN') , ('CHECK OUT'); 

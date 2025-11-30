@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Parametre_pointage</h5>
+<div class="card-body">
+<form th:action='@{/parametre_pointage/save}' th:object='${parametre_pointage}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='pause_non_payee'>Pause non payee</label>
+    <input type='checkbox' class='form-check-input' id='pause_non_payee' th:field='*{pause_non_payee}'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='retard_rattrapable'>Retard rattrapable</label>
+    <input type='checkbox' class='form-check-input' id='retard_rattrapable' th:field='*{retard_rattrapable}'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='seuil_retard'>Seuil retard</label>
+    <input type='number' class='form-control' id='seuil_retard' th:field='*{seuil_retard}' placeholder='seuil_retard...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='travail_weekend'>Travail weekend</label>
+    <input type='checkbox' class='form-check-input' id='travail_weekend' th:field='*{travail_weekend}'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='validation_automatique'>Validation automatique</label>
+    <input type='checkbox' class='form-check-input' id='validation_automatique' th:field='*{validation_automatique}'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_modification'>Date modification</label>
+    <input type='time' class='form-control' id='date_modification' th:field='*{date_modification}' placeholder='date_modification...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -384,7 +384,6 @@ CREATE TABLE heure_supplementaire (
     date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
 CREATE TABLE retard (
     id SERIAL PRIMARY KEY,
     employee_id INT REFERENCES employee(id),
