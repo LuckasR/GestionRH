@@ -175,19 +175,20 @@
                                         </div>
                                         <div class="small">
                                             Validé par:
-                                            <i
-                                                th:if="${row.besoin_validation_admin}"
+                                            <span
+                                                th:text="${row.admin.username}"></span>
+                                        </div>
+                                        <div class="small">
+                                            Besoin de validation : 
+                                            <i th:if="${row.besoin_validation_admin}"
                                                 class="fas fa-check-circle text-success"></i>
                                             <i
                                                 th:unless="${row.besoin_validation_admin}"
                                                 class="fas fa-times-circle text-muted"></i>
-                                            <span th:text="${row.admin.username}"></span>
                                         </div>
                                         <div class="small text-muted"
                                             th:text='${row.status_general.name}'></div>
                                     </td>
-
-                                  
 
                                     <!-- Commentaire -->
                                     <td class="small text-muted"
@@ -254,6 +255,7 @@
                 </div>
 
             </div>
+            <script th:src="@{/assets/js/fetchConfig.js}"></script>
         </div>
     </body>
 </html>
