@@ -1,28 +1,201 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<head>
+    <title>Liste des Contrats Employés</title>
+</head>
 <body>
 <div layout:fragment="content">
-<h2>Liste de contrat_employee</h2>
-<a  class="btn btn-primary" th:href='@{/contrat_employee/create}'>Créer</a>
-<table  class="table table-hover" >
-<thead><tr>
-<th>id</th>
-<th>Employee </th>
-<th>date_debut</th>
-<th>date_fin</th>
-<th>renouvellement_auto</th>
-<th>has_active</th>
-<th>Actions</th>
-</tr></thead>
-<tbody>
-<tr th:each='row : ${contrat_employees}'>
-<td th:text='${row.id}'></td>
-<td th:text='${row.employee.username}'></td>
-<td th:text='${row.date_debut}'></td>
-<td th:text='${row.date_fin}'></td>
-<td th:text='${row.renouvellement_auto}'></td>
-<td th:text='${row.has_active}'></td>
-<td>
-<a  class="btn btn-warning" th:href='@{/contrat_employee/edit/{id}(id=${row.id})}'>Edit</a> | <a  class="btn btn-danger" th:href='@{/contrat_employee/delete/{id}(id=${row.id})}'>Delete</a>
-</td></tr>
-</tbody></table> </div> </body></html>
+
+    <!-- ALERTE pour contrats TERMINÉS -->
+    <div th:if="${contratsTermines != null and !contratsTermines.empty}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle me-2"></i>
+        <strong>Attention!</strong> 
+        <span th:text="${#lists.size(contratsTermines)} + ' contrat(s) arrivé(s) à terme'"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn btn-sm btn-outline-dark ms-3" data-bs-toggle="modal" data-bs-target="#alertModalTermines">
+            Voir les détails
+        </button>
+    </div>
+
+    <!-- ALERTE pour contrats finissant AUJOURD'HUI -->
+    <div th:if="${contratsAujourdhui != null and !contratsAujourdhui.empty}" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        <strong>Alerte du jour!</strong> 
+        <span th:text="${#lists.size(contratsAujourdhui)} + ' contrat(s) arrive(nt) à terme aujourdhui'"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn btn-sm btn-outline-danger ms-3" data-bs-toggle="modal" data-bs-target="#alertModalAujourdhui">
+            Voir les détails
+        </button>
+    </div>
+
+    <h2>Liste de contrat_employee</h2>
+    <a class="btn btn-primary" th:href="@{/contrat_employee/create}">Créer</a>
+    
+    <table class="table table-hover mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Employé</th>
+                <th>Date Début</th>
+                <th>Date Fin</th>
+                <th>Renouvellement Auto</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="row : ${contrat_employees}" 
+                th:classappend="${row.date_fin != null and row.date_fin.isBefore(#temporals.createToday())} ? 'table-danger' : 
+                               (${row.date_fin != null and row.date_fin.isEqual(#temporals.createToday())} ? 'table-warning' : '')">
+                <td th:text="${row.id}"></td>
+                <td th:text="${row.employee.username}"></td>
+                <td th:text="${#temporals.format(row.date_debut, 'dd/MM/yyyy')}"></td>
+                <td>
+                    <span th:if="${row.date_fin != null}" th:text="${#temporals.format(row.date_fin, 'dd/MM/yyyy')}"></span>
+                    <span th:if="${row.date_fin == null}" class="text-muted">-</span>
+                </td>
+                <td>
+                    <span th:if="${row.renouvellement_auto}" class="badge bg-success">Oui</span>
+                    <span th:if="${!row.renouvellement_auto}" class="badge bg-secondary">Non</span>
+                </td>
+                <td>
+                    <!-- Statut avec indication de retard -->
+                    <span th:if="${row.has_active and row.date_fin != null and row.date_fin.isBefore(#temporals.createToday())}" 
+                          class="badge bg-danger">
+                        <i class="fas fa-exclamation-triangle me-1"></i>En retard
+                    </span>
+                    <span th:if="${row.has_active and row.date_fin != null and row.date_fin.isEqual(#temporals.createToday())}" 
+                          class="badge bg-warning text-dark">
+                        <i class="fas fa-clock me-1"></i>Termine aujourd'hui
+                    </span>
+                    <span th:if="${row.has_active and (row.date_fin == null or row.date_fin.isAfter(#temporals.createToday()))}" 
+                          class="badge bg-success">Actif</span>
+                    <span th:if="${!row.has_active}" class="badge bg-secondary">Inactif</span>
+                </td>
+                <td>
+                    <a class="btn btn-warning btn-sm" th:href="@{/contrat_employee/edit/{id}(id=${row.id})}">Edit</a>
+                    <a class="btn btn-danger btn-sm ms-1" th:href="@{/contrat_employee/delete/{id}(id=${row.id})}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- MODAL pour contrats TERMINÉS -->
+    <div th:if="${contratsTermines != null and !contratsTermines.empty}" class="modal fade" id="alertModalTermines" tabindex="-1" aria-labelledby="alertModalTerminesLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="alertModalTerminesLabel">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        Contrats Arrivés à Terme
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Ces contrats ont une date de fin dépassée
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped">
+                            <thead class="table-danger">
+                                <tr>
+                                    <th>ID Contrat</th>
+                                    <th>Employé</th>
+                                    <th>Date Début</th>
+                                    <th>Date Fin</th>
+                                    <th>Jours de retard</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="contrat : ${contratsTermines}">
+                                    <td th:text="${contrat.id}"></td>
+                                    <td th:text="${contrat.employee.username}"></td>
+                                    <td th:text="${#temporals.format(contrat.date_debut, 'dd/MM/yyyy')}"></td>
+                                    <td>
+                                        <span class="badge bg-danger" th:text="${#temporals.format(contrat.date_fin, 'dd/MM/yyyy')}"></span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-dark" th:text="${T(java.time.temporal.ChronoUnit).DAYS.between(contrat.date_fin, #temporals.createToday())} + ' jours'"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL pour contrats AUJOURD'HUI -->
+    <div th:if="${contratsAujourdhui != null and !contratsAujourdhui.empty}" class="modal fade" id="alertModalAujourdhui" tabindex="-1" aria-labelledby="alertModalAujourdhuiLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title" id="alertModalAujourdhuiLabel">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Contrats Finissant Aujourd'hui
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Ces contrats arrivent à terme aujourd'hui (<span th:text="${#temporals.format(#temporals.createToday(), 'dd/MM/yyyy')}"></span>)
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped">
+                            <thead class="table-warning">
+                                <tr>
+                                    <th>ID Contrat</th>
+                                    <th>Employé</th>
+                                    <th>Date Début</th>
+                                    <th>Renouvellement Auto</th>
+                                    <th>Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="contrat : ${contratsAujourdhui}">
+                                    <td th:text="${contrat.id}"></td>
+                                    <td th:text="${contrat.employee.username}"></td>
+                                    <td th:text="${#temporals.format(contrat.date_debut, 'dd/MM/yyyy')}"></td>
+                                    <td>
+                                        <span th:if="${contrat.renouvellement_auto}" class="badge bg-success">Oui</span>
+                                        <span th:if="${!contrat.renouvellement_auto}" class="badge bg-secondary">Non</span>
+                                    </td>
+                                    <td>
+                                        <span th:if="${contrat.has_active}" class="badge bg-success">Actif</span>
+                                        <span th:if="${!contrat.has_active}" class="badge bg-danger">Inactif</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Script pour ouvrir automatiquement la modal si alerte -->
+<script th:if="${contratsTermines != null and !contratsTermines.empty}">
+document.addEventListener('DOMContentLoaded', function() {
+    // Ouvrir automatiquement la modal contrats terminés après 1 seconde
+    setTimeout(function() {
+        var alertModal = new bootstrap.Modal(document.getElementById('alertModalTermines'));
+        alertModal.show();
+    }, 1000);
+});
+</script>
+
+</body>
+</html>

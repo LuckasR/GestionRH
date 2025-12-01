@@ -1,9 +1,3 @@
--- Full SQL Script: CREATE TABLES followed by INSERT statements with professional and extensive data
-
--- =====================================
--- CREATE TABLES SECTION
--- =====================================
-
 CREATE TABLE departement (
     id serial PRIMARY KEY, 
     name VARCHAR(100) 
@@ -122,6 +116,8 @@ CREATE TABLE employee (
     code_qr VARCHAR(250)
 );
 
+ALTER TABLE employee 
+ADD COLUMN photo VARCHAR(255);
 
 
 CREATE TABLE utilisateur (
@@ -671,17 +667,18 @@ INSERT INTO poste (departement_id, name, salaire_base) VALUES
 (10, 'Operateur Production', 3000.00);
 
 -- employee (10 rows, referencing role and departement)
-INSERT INTO employee (role_id, departement_id, username, password, code_qr) VALUES 
-(1, 1, 'emp1', 'pass123', 'qr_emp1.png'), 
-(2, 1, 'emp2', 'pass456', 'qr_emp2.png'), 
-(3, 2, 'emp3', 'pass789', 'qr_emp3.png'), 
-(4, 3, 'emp4', 'pass101', 'qr_emp4.png'), 
-(5, 3, 'emp5', 'pass202', 'qr_emp5.png'), 
-(6, 6, 'emp6', 'pass303', 'qr_emp6.png'), 
-(7, 4, 'emp7', 'pass404', 'qr_emp7.png'), 
-(8, 8, 'emp8', 'pass505', 'qr_emp8.png'), 
-(1, 1, 'emp9', 'pass606', 'qr_emp9.png'), 
-(2, 1, 'emp10', 'pass707', 'qr_emp10.png');
+INSERT INTO employee (role_id, departement_id, username, password, code_qr, photo) VALUES 
+(1, 1, 'emp1', 'pass123', 'qr_emp1.png',  '1758184676288Yamaha_XMAX,_2020.jpg'), 
+(2, 1, 'emp2', 'pass456', 'qr_emp2.png',  '1758184676288Yamaha_XMAX,_2020.jpg'), 
+(3, 2, 'emp3', 'pass789', 'qr_emp3.png',  '1758184676288Yamaha_XMAX,_2020.jpg'), 
+(4, 3, 'emp4', 'pass101', 'qr_emp4.png',  '1758184676288Yamaha_XMAX,_2020.jpg'), 
+(5, 3, 'emp5', 'pass202', 'qr_emp5.png',  '1758184676288Yamaha_XMAX,_2020.jpg'), 
+(6, 6, 'emp6', 'pass303', 'qr_emp6.png',  '1758184676288Yamaha_XMAX,_2020.jpg'), 
+(7, 4, 'emp7', 'pass404', 'qr_emp7.png',  '1758184676288Yamaha_XMAX,_2020.jpg'), 
+(8, 8, 'emp8', 'pass505', 'qr_emp8.png',  '1758184676288Yamaha_XMAX,_2020.jpg'), 
+(1, 1, 'emp9', 'pass606', 'qr_emp9.png',  '1758184676288Yamaha_XMAX,_2020.jpg'), 
+(2, 1, 'emp10', 'pass707', 'qr_emp10.png', '1758184676288Yamaha_XMAX,_2020.jpg');
+
 
 -- utilisateur (10 rows)
 INSERT INTO utilisateur (username, password, email) VALUES 
@@ -719,7 +716,7 @@ INSERT INTO detail_contrat_employee (admin_id, contrat_employee_id, type_contrat
 (3, 6, 2, 12, '2023-06-01', '2024-06-01', 30, 15, 1, 'Contrat temporaire'), 
 (1, 7, 1, 0, '2023-07-15', '9999-12-31', 90, 30, 1, 'Contrat permanent'), 
 (2, 8, 4, 3, '2023-08-10', '2023-11-10', 0, 0, 1, 'Freelance'), 
-(3, 9, 1, 0, '2023-09-20', '9999-12-31', 90, 30, 1, 'Contrat permanent'), 
+(3, 9, 1, 0, '2023-09-20', '9999-12-31', 90, 30, 1, 'Contrat permanent'),
 (1, 10, 2, 12, '2023-10-05', '2024-10-05', 30, 15, 1, 'Contrat temporaire');
 
 -- parcours_academique (10 rows, referencing employee)

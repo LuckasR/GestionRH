@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Informations Complètes</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <script>
+        function showPdf(path) {
+            document.getElementById("pdfViewer").src = path;
+            document.getElementById("pdfContainer").style.display = "block";
+        }
+    </script>
+</head>
+<body>
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Informations détaillées de l’employé</h2>
+
+    <a class="btn btn-secondary mb-3" href="/information_employee">← Retour</a>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Salaire</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Adresse</th>
+            <th>CV</th>
+            <th>LM</th>
+            <th>CIN</th>
+            <th>Residence</th>
+            <th>Date Naissance</th>
+            <th>Date Creation</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="row : ${information_employees}">
+            <td th:text="${row.id}"></td>
+            <td th:text="${row.first_name}"></td>
+            <td th:text="${row.last_name}"></td>
+            <td th:text="${row.salaire}"></td>
+            <td th:text="${row.email}"></td>
+            <td th:text="${row.phone}"></td>
+            <td th:text="${row.address}"></td>
+
+            <!-- CV -->
+            <td>
+                <button th:if="${row.cv != null}"
+                        class="btn btn-outline-primary btn-sm"
+                        th:attr="data-pdf='/uploads/cv/' + ${row.cv}"
+                        onclick="showPdf(this.getAttribute('data-pdf'))">
+                    Voir PDF
+                </button>
+                <span th:if="${row.cv == null}">Aucun</span>
+            </td>
+
+            <!-- LM -->
+            <td>
+                <button th:if="${row.lm != null}"
+                        class="btn btn-outline-success btn-sm"
+                        th:attr="data-pdf='/uploads/lm/' + ${row.lm}"
+                        onclick="showPdf(this.getAttribute('data-pdf'))">
+                    Voir PDF
+                </button>
+                <span th:if="${row.lm == null}">Aucun</span>
+            </td>
+
+            <td th:text="${row.cin}"></td>
+            <td th:text="${row.residence}"></td>
+            <td th:text="${row.date_naissance}"></td>
+            <td th:text="${row.date_creation}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Zone d'affichage PDF -->
+    <div id="pdfContainer" style="display:none; margin-top:20px;">
+        <h5>Prévisualisation PDF :</h5>
+        <iframe id="pdfViewer"
+                width="100%" height="600px"
+                style="border:1px solid #ccc;">
+        </iframe>
+    </div>
+
+</div>
+
+</body>
+</html>

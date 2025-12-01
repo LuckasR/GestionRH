@@ -11,7 +11,8 @@
 <th>departement_id</th>
 <th>username</th>
 <th>password</th>
-<th>QR Code </th>
+<!-- <th>QR Code </th> -->
+<th>Image </th>
 <th>Actions</th>
 </tr></thead>
 <tbody>
@@ -21,8 +22,16 @@
 <td th:text='${row.departement.name}'></td>
 <td th:text='${row.username}'></td>
 <td th:text='${row.password}'></td>
-<td th:text='${row.code_qr}'></td>
+<!-- <td th:text='${row.code_qr}'></td> -->
+<td>
+    <img th:if="${row.photo != null}"
+         th:src="@{/uploads/images/{photo}(photo=${row.photo})}" 
+         alt="Photo de [[${row.username}]]"
+          style="width: 150px; height: 150px; object-fit: cover; border-radius: 5px;">
+    <span th:if="${row.photo == null}">Pas d'image</span>
+</td>
+
 <td>
 <a  class="btn btn-warning" th:href='@{/employee/edit/{id}(id=${row.id})}'>Edit</a> | <a  class="btn btn-danger" th:href='@{/employee/delete/{id}(id=${row.id})}'>Delete</a>
-</td></tr>
+</td></tr> 
 </tbody></table> </div> </body></html>

@@ -1,11 +1,18 @@
 package com.gestion.gestionrh.controller;
 
-import  com.gestion.gestionrh.model.*;
-import  com.gestion.gestionrh.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import  org.springframework.beans.factory.annotation.Autowired;
+import  org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.gestion.gestionrh.model.Information_employee;
+import com.gestion.gestionrh.service.Contrat_employeeService;
+import com.gestion.gestionrh.service.EmployeeService;
+import com.gestion.gestionrh.service.Information_employeeService;
 
 
 @Controller
@@ -20,12 +27,20 @@ public class Information_employeeController {
 
     @Autowired
     private Contrat_employeeService contrat_employeeService;
+    
+    @GetMapping("/moreInformation/{idemployee}")
+    public String moreInformationForm(Model model, @PathVariable Integer idemployee) {
+        model.addAttribute("information_employees", service.findAllByEmployeeId(idemployee));
+        return "information_employee/moreInformation";
+    }
 
     @GetMapping
     public String index(Model model) {
         model.addAttribute("information_employees", service.getAll());
         return "information_employee/index";
     }
+
+
 
     @GetMapping("/create")
     public String createForm(Model model) {

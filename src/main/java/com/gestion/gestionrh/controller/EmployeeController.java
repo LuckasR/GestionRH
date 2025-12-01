@@ -39,26 +39,26 @@ public class EmployeeController {
         return "employee/create";
     }
 
-    @PostMapping("/save")
-    public String save(@ModelAttribute Employee obj) {
+    // @PostMapping("/save")
+    // public String save(@ModelAttribute Employee obj) {
 
-        // 1. Generate EMP code
-        String generatedCode = service.generateEmployeeCode();
-        obj.setCode_qr(generatedCode);
+    //     // 1. Generate EMP code
+    //     String generatedCode = service.generateEmployeeCode();
+    //     obj.setCode_qr(generatedCode);
 
-        // 2. Generate QR Code PNG
-        QrCodeGenerator generator = new QrCodeGenerator();
-        try {
-            generator.generateQrCode(generatedCode);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    //     // 2. Generate QR Code PNG
+    //     QrCodeGenerator generator = new QrCodeGenerator();
+    //     try {
+    //         generator.generateQrCode(generatedCode);
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
 
-        // 3. Save employee in DB
-        service.save(obj);
+    //     // 3. Save employee in DB
+    //     service.save(obj);
 
-        return "redirect:/employee";
-    }
+    //     return "redirect:/employee";
+    // }
 
 
     @GetMapping("/edit/{id}")

@@ -15,7 +15,7 @@
   <div class='mb-4'>
     <label class='form-label' for='contrat_employee_id'>Contrat_employee_id</label>
     <select class='form-select' th:field='*{contrat_employee}'>
-      <option th:each='item : ${contrat_employees}' th:value='${item.id}' th:text='${item.username}'></option>
+      <option th:each='item : ${contrat_employees}' th:value='${item.id}' th:text='|Contrat ${item.id}|'></option>
     </select>
   </div>
   <div class='mb-4'>
@@ -60,7 +60,7 @@
   </div>
   <div class='mt-3'>
     <button type='submit' class='btn btn-primary'>Enregistrer</button>
-  </div>
+  </div> 
 </form>
 </div>
 </div>

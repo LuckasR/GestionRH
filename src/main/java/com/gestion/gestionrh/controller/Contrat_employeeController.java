@@ -1,11 +1,17 @@
 package com.gestion.gestionrh.controller;
 
-import  com.gestion.gestionrh.model.*;
-import  com.gestion.gestionrh.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import  org.springframework.beans.factory.annotation.Autowired;
+import  org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.gestion.gestionrh.model.Contrat_employee;
+import com.gestion.gestionrh.service.Contrat_employeeService;
+import com.gestion.gestionrh.service.EmployeeService;
 
 
 @Controller
@@ -20,7 +26,13 @@ public class Contrat_employeeController {
 
     @GetMapping
     public String index(Model model) {
+        // Liste normale des contrats
         model.addAttribute("contrat_employees", service.getAll());
+        
+        // DONNÉES POUR LES ALERTES
+        model.addAttribute("contratsAujourdhui", service.getContratsFinissantAujourdhui());
+        model.addAttribute("contratsTermines", service.getContratsTermines());
+        
         return "contrat_employee/index";
     }
 
