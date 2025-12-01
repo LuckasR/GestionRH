@@ -1,0 +1,52 @@
+<div class="card-body p-0 valiny" th:fragment="pointages">
+    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+        <table class="table table-bordered table-hover mb-0" id="pointageTable">
+            <thead class="bg-light text-dark sticky-top">
+                <tr>
+                    <th style="width: 50px;">ID</th>
+                    <th>Date</th>
+                    <th>ID Employé</th>
+                    <th>Employé</th>
+                    <th class="text-center">Arrivée</th>
+                    <th class="text-center">Départ</th>
+                    <th class="text-center">Méthode</th>
+                    <th class="text-center" style="width: 120px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${pointages}">
+                    <td th:text="${p.id}"></td>
+                    <td class="text-nowrap"
+                        th:text="${#temporals.format(p.date_pointage, 'dd/MM/yyyy')}"></td>
+                         <td class="font-weight-bold text-primary"
+                        th:text="${p.employee.id}"></td>
+                    <td class="font-weight-bold text-primary"
+                        th:text="${p.employee.username}"></td>
+                    <td class="text-center" th:text="${p.heure_arrivee}"></td>
+                    <td class="text-center">
+                        <span th:if="${p.heure_depart != null}"
+                            th:text="${p.heure_depart}"></span>
+                        <span th:if="${p.heure_depart == null}"
+                            class="badge badge-warning text-dark">En
+                            cours</span>
+                    </td>
+                    <td class="text-center small text-muted">
+                        <span th:text="${p.methode.name}"></span>
+                    </td>
+                    <td class="text-center">
+                        <a
+                            th:href="@{/heure_supplementaire/create(pointage_id=${p.id}, employee_id=${p.employee.id})}"
+                            class="btn btn-success btn-sm font-weight-bold shadow-sm">
+                            <i class="fas fa-plus"></i> Choisir
+                        </a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(pointages)}">
+                    <td colspan="7" class="text-center py-3 text-muted">
+                        Aucun pointage trouvé.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

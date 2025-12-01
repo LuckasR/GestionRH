@@ -1,30 +1,144 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      layout:decorate="~{fragment/template1}">
 <body>
 <div layout:fragment="content">
-<h2>Edit heure_supplementaire</h2>
-<form th:action='@{/heure_supplementaire/update}' th:object='${heure_supplementaire}' method='post'>
-id: <input type='text' th:field='*{id}'/><br/>
-employee_id: <select th:field='*{employee_id}'>
-<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${heure_supplementaire.employee_id.id}'></option>
-</select><br/>
-pointage_id: <select th:field='*{pointage_id}'>
-<option th:each='item : ${pointages}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${heure_supplementaire.pointage_id.id}'></option>
-</select><br/>
-config_id: <select th:field='*{config_id}'>
-<option th:each='item : ${config_heure_supplementaires}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${heure_supplementaire.config_id.id}'></option>
-</select><br/>
-nb_heures: <input type='text' th:field='*{nb_heures}'/><br/>
-type_compensation: <select th:field='*{type_compensation}'>
-<option th:each='item : ${type_compensations}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${heure_supplementaire.type_compensation.id}'></option>
-</select><br/>
-statut_id: <select th:field='*{statut_id}'>
-<option th:each='item : ${status_generals}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${heure_supplementaire.statut_id.id}'></option>
-</select><br/>
-admin_id: <select th:field='*{admin_id}'>
-<option th:each='item : ${admins}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${heure_supplementaire.admin_id.id}'></option>
-</select><br/>
-commentaire: <input type='text' th:field='*{commentaire}'/><br/>
-date_validation: <input type='text' th:field='*{date_validation}'/><br/>
-date_creation: <input type='text' th:field='*{date_creation}'/><br/>
-<button type='submit'>Mettre à jour</button></form></div> </body></html>
+    <div class="container-fluid mt-4">
+        
+        <div class="card shadow border-left-warning">
+            <!-- Changed header color to Warning (Yellow/Orange) to indicate EDIT mode -->
+            <h5 class='card-header bg-white text-warning font-weight-bold'>
+                <i class="fas fa-edit"></i> Modification Demande HS #<span th:text="${heure_supplementaire.id}"></span>
+            </h5>
+            
+            <div class="card-body">
+                
+                <!-- Action points to UPDATE -->
+                <form th:action='@{/heure_supplementaire/update}' th:object='${heure_supplementaire}' method='post'>
+                    
+                    <!-- CRITICAL: ID must be hidden so the backend knows which record to update -->
+                    <input type="hidden" th:field="*{id}" />
+
+                    <!-- ============================================= -->
+                    <!-- SECTION 1: CONTEXT (READ ONLY)                -->
+                    <!-- usually you don't change the employee/pointage in edit -->
+                    <!-- ============================================= -->
+                    <h6 class="text-primary mb-3"><i class="fas fa-info-circle"></i> Informations Fixes</h6>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label class="fw-bold small text-muted">Employé</label>
+                            <input type="text" class="form-control bg-light" 
+                                   th:value="${heure_supplementaire.employee.username}" readonly>
+                            <!-- Hidden bind to keep the relationship -->
+                            <input type="hidden" th:field="*{employee}"> 
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="fw-bold small text-muted">Date du Pointage</label>
+                            <input type="text" class="form-control bg-light" 
+                                   th:value="${#temporals.format(heure_supplementaire.pointage.date_pointage, 'dd/MM/yyyy')}" readonly>
+                            <!-- Hidden bind to keep the relationship -->
+                            <input type="hidden" th:field="*{pointage}">
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- ============================================= -->
+                    <!-- SECTION 2: EDITABLE FIELDS                    -->
+                    <!-- ============================================= -->
+                    <h6 class="text-primary mb-3"><i class="fas fa-pen"></i> Détails Modifiables</h6>
+
+                    <div class='row mb-3'>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Configuration (Type)</label>
+                            <select class='form-select' th:field='*{config_heure_supplementaire}' required>
+                                <option th:each='c : ${config_heure_supplementaires}' 
+                                        th:value='${c.id}' 
+                                        th:text='${c.commentaire + " (Coeff: " + c.taux_multiplicateur_jour + ")"}'>
+                                </option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Nombre d'heures</label>
+                            <input type='number' step="0.25" class='form-control' 
+                                   th:field='*{nb_heures}' required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Type de Compensation</label>
+                            <select class='form-select' th:field='*{type_compensation}' required>
+                                <option th:each='t : ${type_compensations}' 
+                                        th:value='${t.id}' 
+                                        th:text='${t.name}'>
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Statut</label>
+                            <select class='form-select' th:field='*{status_general}' required>
+                                <option th:each='s : ${status_generals}' 
+                                        th:value='${s.id}' 
+                                        th:text='${s.name}'>
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- ADMIN & VALIDATION DATE -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Validé par (Admin)</label>
+                            <select class='form-select' th:field='*{admin}'>
+                                <option th:each='a : ${admins}' 
+                                        th:value='${a.id}' 
+                                        th:text='${a.username}'>
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Date de Validation</label>
+                            <input type="datetime-local" class="form-control" th:field="*{date_validation}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Commentaire</label>
+                        <textarea class="form-control" rows="3" th:field="*{commentaire}"></textarea>
+                    </div>
+
+                    <!-- CREATION DATE (READ ONLY IN EDIT) -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small text-muted">Date de Création (Origine)</label>
+                            <input type="datetime-local" class="form-control bg-light" 
+                                   th:field="*{date_creation}" readonly>
+                        </div>
+                    </div>
+
+                    <!-- ============================================= -->
+                    <!-- BUTTONS                                       -->
+                    <!-- ============================================= -->
+                    <div class="d-flex justify-content-end gap-2 mt-4">
+                        <a th:href="@{/heure_supplementaire}" class="btn btn-secondary">
+                          Annuler
+                        </a>
+                        <button type='submit' class='btn btn-warning text-white px-4'>
+                            <i class="fas fa-save"></i> Mettre à jour
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.gestion.gestionrh.model;
 import jakarta.persistence.*;
 import java.math.*;
 import java.time.*;
+import java.lang.Integer;
 
 @Entity
 @Table(name = "config_heure_supplementaire")
