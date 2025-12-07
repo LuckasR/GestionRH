@@ -1,7 +1,7 @@
 package com.gestion.gestionrh.model;
+import java.time.Duration;
+
 import jakarta.persistence.*;
-import java.math.*;
-import java.time.*;
 
 @Entity
 @Table(name = "regle_travail")
@@ -31,8 +31,8 @@ public class Regle_travail {
     public String getNom() { return nom; }
     public void setNom(String nom) { this.nom = nom; }
 
-    public String getDuree_normale() { return duree_normale; }
-    public void setDuree_normale(String duree_normale) { this.duree_normale = duree_normale; }
+    public Integer getDuree_normale() { return duree_normale; }
+    public void setDuree_normale(Integer duree_normale) { this.duree_normale = duree_normale; }
 
     public Boolean getEst_weekend() { return est_weekend; }
     public void setEst_weekend(Boolean est_weekend) { this.est_weekend = est_weekend; }

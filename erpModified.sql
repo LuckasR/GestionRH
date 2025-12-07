@@ -126,6 +126,9 @@ create table employee  (
     password varchar(100)  , 
     code_qr varchar(250)
 ) ; 
+CREATE SEQUENCE employee_code_qr_seq START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE ;
+-- ALTER SEQUENCE employee_code_qr_seq RESTART WITH 1;
+
 --  alter table employee add column code_qr varchar(250) ; 
 
 create table utilisateur  (
@@ -346,6 +349,7 @@ create table regle_travail (
     est_ferie boolean default false,
     description text
 );
+-- alter table regle_travail se
 CREATE TABLE config_heure_supplementaire (
     id SERIAL PRIMARY KEY,
     regle_id INT REFERENCES regle_travail(id) ON DELETE CASCADE,
@@ -379,7 +383,6 @@ CREATE TABLE heure_supplementaire (
     date_validation TIMESTAMP DEFAULT NULL,
     date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
 
 CREATE TABLE retard (
     id SERIAL PRIMARY KEY,

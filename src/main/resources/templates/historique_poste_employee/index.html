@@ -3,7 +3,7 @@
 <body>
 <div layout:fragment="content">
 <h2>Liste de historique_poste_employee</h2>
-<a th:href='@{/historique_poste_employee/create}'>Créer</a>
+<a  class="btn btn-primary" th:href='@{/historique_poste_employee/create}'>Créer</a>
 <table  class="table table-hover" >
 <thead><tr>
 <th>id</th>
@@ -29,6 +29,6 @@
 <td th:text='${row.commentaire}'></td>
 <td th:text='${row.date_creation}'></td>
 <td>
-<a th:href='@{/historique_poste_employee/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/historique_poste_employee/delete/{id}(id=${row.id})}'>Delete</a>
+<a  class="btn btn-warning" th:href='@{/historique_poste_employee/edit/{id}(id=${row.id})}'>Edit</a> | <a  class="btn btn-danger" th:href='@{/historique_poste_employee/delete/{id}(id=${row.id})}'>Delete</a>
 </td></tr>
 </tbody></table> </div> </body></html>

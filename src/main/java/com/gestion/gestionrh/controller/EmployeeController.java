@@ -2,6 +2,8 @@ package com.gestion.gestionrh.controller;
 
 import  com.gestion.gestionrh.model.*;
 import  com.gestion.gestionrh.service.*;
+import com.google.zxing.qrcode.encoder.QRCode;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ public class EmployeeController {
     @Autowired
     private DepartementService departementService;
 
+    
+
     @GetMapping
     public String index(Model model) {
         model.addAttribute("employees", service.getAll());
@@ -37,9 +41,25 @@ public class EmployeeController {
 
     @PostMapping("/save")
     public String save(@ModelAttribute Employee obj) {
+
+        // 1. Generate EMP code
+        String generatedCode = service.generateEmployeeCode();
+        obj.setCodeQr(generatedCode);
+
+        // 2. Generate QR Code PNG
+        QrCodeGenerator generator = new QrCodeGenerator();
+        try {
+            generator.generateQrCode(generatedCode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 3. Save employee in DB
         service.save(obj);
+
         return "redirect:/employee";
     }
+
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {

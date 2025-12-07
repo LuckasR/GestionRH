@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Edit pointage</h2>
+<form th:action='@{/pointage/update}' th:object='${pointage}' method='post'>
+id: <input type='text' th:field='*{id}'/><br/>
+employee_id: <select th:field='*{employee_id}'>
+<option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${pointage.employee_id.id}'></option>
+</select><br/>
+date_pointage: <input type='text' th:field='*{date_pointage}'/><br/>
+heure_arrivee: <input type='text' th:field='*{heure_arrivee}'/><br/>
+heure_depart: <input type='text' th:field='*{heure_depart}'/><br/>
+Methode de pointage: <select th:field='*{methode_id}'>
+<option th:each='item : ${methodes}' th:value='${item.id}' th:text='${item.name}' th:selected='${item.id} == ${pointage.methode_id.id}'></option>
+</select><br/>
+commentaire: <input type='text' th:field='*{commentaire}'/><br/>
+date_enregistrement: <input type='text' th:field='*{date_enregistrement}'/><br/>
+<button type='submit'>Mettre à jour</button></form></div> </body></html>

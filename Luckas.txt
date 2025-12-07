@@ -1,3 +1,24 @@
+<a th:href="@{/pointage/create}" class="btn btn-primary">Primary</a>
+<a class="btn btn-secondary">Secondary</a>
+<a class="btn btn-success">Success</a>
+<a class="btn btn-danger">Danger</a>
+<a class="btn btn-warning">Warning</a>
+<a class="btn btn-info">Info</a>
+<a class="btn btn-light">Light</a>
+<a class="btn btn-dark">Dark</a>
+<a class="btn btn-link">Link</a>
+
+keytool -genkeypair ^
+ -alias spring ^
+ -keyalg RSA ^
+ -keysize 2048 ^
+ -keystore keystore.p12 ^
+ -storepass password ^
+ -validity 3650 ^
+ -dname "CN=localhost, OU=Dev, O=Dev, L=Tana, ST=Analamanga, C=MG" ^
+ -storetype PKCS12
+
+ 
 scenario : 
     - scanne badge de employee
     - checking de l'horaire de travail 
@@ -21,3 +42,25 @@ Creation employee  :
 Mise en place de horaire de travail : 
     - Horaire journalier (ex: lundi -> vendredi : 7h-18h )
  
+
+ 
+ Heures supplémentaires, 
+ Le système calcule automatiquement les heures supplémentaires 
+ Calcule par rapport au horaire habituel 
+ Ex : Entre 7h -> 13h  et 14h -> 18h
+ Jerena alora hoe lundi sa mardi sa inona dia ensuite alaina n horaire mifanaraka aminy 
+ Creation fonction :
+     ValeurHoraire <- getSumHoraire( ex:Jeudi )  dia mamerina n heure de travail normal amininy jour anah semaine anah entreprise iny 
+     ValeurHoraireTravailEmployee <- getSumHoraire( date ,  employee  ) retourne la somme de la difference des pointage check IN /OUT 
+
+     ValeurHoraire <- getSumHeureSUP( date , employee )
+     ValeurHoraire <- getSumHeureSUP( dateDebut  , dateFin ,  employee  )
+     tauxHoraire <- geTauxHoraire( employee ) salaire 
+
+ retards, pauses
+et signale les retards ou
+absences injustifiées.
+➡️ But : automatiser la gestion du temps de travail.
+
+
+Raha mbola empty n ao am pointage aminah employee 1 aminah date 1 dia  checkena n sanction date n-1 

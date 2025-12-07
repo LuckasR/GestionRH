@@ -7,24 +7,24 @@
 <table  class="table table-hover" >
 <thead><tr>
 <th>id</th>
-<th>Employee </th>
+<th>employee_id</th>
 <th>date_pointage</th>
-<th>heure_arrivee</th>
-<th>heure_depart</th>
-<th>Methode de pointage</th>
-<th>commentaire</th>
+<th>id_horaire</th>
+<th>heure_normal</th>
+<th>heure_supplementaire</th>
+<th>heure_retard</th>
 <th>date_enregistrement</th>
 <th>Actions</th>
 </tr></thead>
 <tbody>
 <tr th:each='row : ${pointages}'>
 <td th:text='${row.id}'></td>
-<td th:text='${row.employee.username}'></td>
+<td th:text='${row.employee}'></td>
 <td th:text='${row.date_pointage}'></td>
-<td th:text='${row.heure_arrivee}'></td>
-<td th:text='${row.heure_depart}'></td>
-<td th:text='${row.methode.name}'></td>
-<td th:text='${row.commentaire}'></td>
+<td th:text='${row.detail_horaire}'></td>
+<td th:text='${row.heure_normal}'></td>
+<td th:text='${row.heure_supplementaire}'></td>
+<td th:text='${row.heure_retard}'></td>
 <td th:text='${row.date_enregistrement}'></td>
 <td>
 <a th:href='@{/pointage/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/pointage/delete/{id}(id=${row.id})}'>Delete</a>

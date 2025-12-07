@@ -9,11 +9,11 @@ employee_id: <select th:field='*{employee_id}'>
 <option th:each='item : ${employees}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${pointage.employee_id.id}'></option>
 </select><br/>
 date_pointage: <input type='text' th:field='*{date_pointage}'/><br/>
-heure_arrivee: <input type='text' th:field='*{heure_arrivee}'/><br/>
-heure_depart: <input type='text' th:field='*{heure_depart}'/><br/>
-Methode de pointage: <select th:field='*{methode_id}'>
-<option th:each='item : ${methodes}' th:value='${item.id}' th:text='${item.name}' th:selected='${item.id} == ${pointage.methode_id.id}'></option>
+id_horaire: <select th:field='*{id_horaire}'>
+<option th:each='item : ${detail_horaires}' th:value='${item.id}' th:text='${item}' th:selected='${item.id} == ${pointage.id_horaire.id}'></option>
 </select><br/>
-commentaire: <input type='text' th:field='*{commentaire}'/><br/>
+heure_normal: <input type='text' th:field='*{heure_normal}'/><br/>
+heure_supplementaire: <input type='text' th:field='*{heure_supplementaire}'/><br/>
+heure_retard: <input type='text' th:field='*{heure_retard}'/><br/>
 date_enregistrement: <input type='text' th:field='*{date_enregistrement}'/><br/>
 <button type='submit'>Mettre à jour</button></form></div> </body></html>

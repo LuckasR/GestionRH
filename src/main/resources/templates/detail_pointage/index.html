@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<h2>Liste de detail_pointage</h2>
+<a th:href='@{/detail_pointage/create}'>Créer</a>
+<table  class="table table-hover" >
+<thead><tr>
+<th>id</th>
+<th>pointage_id</th>
+<th>date_pointage</th>
+<th>heure_arrivee</th>
+<th>heure_depart</th>
+<th>methode_id</th>
+<th>commentaire</th>
+<th>Actions</th>
+</tr></thead>
+<tbody>
+<tr th:each='row : ${detail_pointages}'>
+<td th:text='${row.id}'></td>
+<td th:text='${row.pointage}'></td>
+<td th:text='${row.date_pointage}'></td>
+<td th:text='${row.heure_arrivee}'></td>
+<td th:text='${row.heure_depart}'></td>
+<td th:text='${row.methode}'></td>
+<td th:text='${row.commentaire}'></td>
+<td>
+<a th:href='@{/detail_pointage/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/detail_pointage/delete/{id}(id=${row.id})}'>Delete</a>
+</td></tr>
+</tbody></table> </div> </body></html>

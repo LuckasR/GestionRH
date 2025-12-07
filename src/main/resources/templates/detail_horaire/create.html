@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Detail_horaire</h5>
+<div class="card-body">
+<form th:action='@{/detail_horaire/save}' th:object='${detail_horaire}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='id_horaire'>Id_horaire</label>
+    <select class='form-select' th:field='*{horaire_travail}'>
+      <option th:each='item : ${horaire_travails}' th:value='${item.id}' th:text='${item.jour_semaine}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='heure_debut'>Heure debut</label>
+    <input type='time' class='form-control' id='heure_debut' th:field='*{heure_debut}' placeholder='heure_debut...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='heure_fin'>Heure fin</label>
+    <input type='time' class='form-control' id='heure_fin' th:field='*{heure_fin}' placeholder='heure_fin...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

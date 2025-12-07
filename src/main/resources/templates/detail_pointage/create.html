@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Detail_pointage</h5>
+<div class="card-body">
+<form th:action='@{/detail_pointage/save}' th:object='${detail_pointage}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='pointage_id'>Pointage_id</label>
+    <select class='form-select' th:field='*{pointage}'>
+      <option th:each='item : ${pointages}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='date_pointage'>Date pointage</label>
+    <input type='date' class='form-control' id='date_pointage' th:field='*{date_pointage}' placeholder='date_pointage...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='heure_arrivee'>Heure arrivee</label>
+    <input type='time' class='form-control' id='heure_arrivee' th:field='*{heure_arrivee}' placeholder='heure_arrivee...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='heure_depart'>Heure depart</label>
+    <input type='time' class='form-control' id='heure_depart' th:field='*{heure_depart}' placeholder='heure_depart...'>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='methode_id'>Methode_id</label>
+    <select class='form-select' th:field='*{methode}'>
+      <option th:each='item : ${methodes}' th:value='${item.id}' th:text='${item}'></option>
+    </select>
+  </div>
+  <div class='mb-4'>
+    <label class='form-label' for='commentaire'>Commentaire</label>
+    <input type='text' class='form-control' id='commentaire' th:field='*{commentaire}' placeholder='commentaire...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

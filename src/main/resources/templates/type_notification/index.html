@@ -3,7 +3,7 @@
 <body>
 <div layout:fragment="content">
 <h2>Liste de type_notification</h2>
-<a th:href='@{/type_notification/create}'>Créer</a>
+<a  class="btn btn-primary" th:href='@{/type_notification/create}'>Créer</a>
 <table  class="table table-hover" >
 <thead><tr>
 <th>id</th>
@@ -17,6 +17,6 @@
 <td th:text='${row.nom}'></td>
 <td th:text='${row.description}'></td>
 <td>
-<a th:href='@{/type_notification/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/type_notification/delete/{id}(id=${row.id})}'>Delete</a>
+<a  class="btn btn-warning" th:href='@{/type_notification/edit/{id}(id=${row.id})}'>Edit</a> | <a  class="btn btn-danger" th:href='@{/type_notification/delete/{id}(id=${row.id})}'>Delete</a>
 </td></tr>
 </tbody></table> </div> </body></html>

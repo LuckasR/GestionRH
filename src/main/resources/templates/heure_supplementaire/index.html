@@ -3,255 +3,38 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragment/template1}">
 <body>
-    <div layout:fragment="content">
-
-        <div class="container-fluid mt-4">
-
-            <!-- ======================================================= -->
-            <!-- SECTION 1: SELECT POINTAGE (FIXED STRUCTURE)            -->
-            <!-- ======================================================= -->
-            <!-- REMOVED THE DUPLICATE DIV HERE -->
-            <div class="card shadow mb-5 border-left-primary">
-
-                <!-- 1. HEADER -->
-                <div class="card-header bg-white py-3">
-                    <h5 class="m-0 font-weight-bold text-primary">
-                        <i class="fas fa-user-clock"></i> Sélectionner un Pointage
-                    </h5>
-                </div>
-
-                <!-- 2. FILTERS (Search Form) -->
-                <div class="card-body bg-white border-bottom">
-                    <form id="filterForm">
-                        <div class="row align-items-end">
-
-                            <!-- Employee Name -->
-                            <div class="col-md-3 mb-2">
-                                <label class="form-label fw-bold small">Employé</label>
-                                <input type="text" class="form-control" name="employee" placeholder="Nom...">
-                            </div>
-
-                            <!-- Date Start -->
-                            <div class="col-md-3 mb-2">
-                                <label class="form-label fw-bold small">Date Début</label>
-                                <input type="date" class="form-control" name="date_debut">
-                            </div>
-
-                            <!-- Date End -->
-                            <div class="col-md-3 mb-2">
-                                <label class="form-label fw-bold small">Date Fin</label>
-                                <input type="date" class="form-control" name="date_fin">
-                            </div>
-
-                            <!-- Method -->
-                            <div class="col-md-3 mb-2">
-                                <label class="form-label fw-bold small text-primary">Méthode</label>
-                                <select class="form-control" name="methode_id">
-                                    <option value="">-- Tous --</option>
-                                    <option th:each="m : ${methodes}" th:value="${m.id}" th:text="${m.name}"></option>
-                                </select>
-                            </div>
-
-
-                            <!-- Date Start -->
-                            <div class="col-md-3 mb-2">
-                                <label class="form-label fw-bold small">Heure Arrivée</label>
-                                <input type="time" class="form-control" name="heure_arrivee">
-                            </div>
-
-                            <!-- Date End -->
-                            <div class="col-md-3 mb-2">
-                                <label class="form-label fw-bold small">Heure Départ</label>
-                                <input type="time" class="form-control" name="heure_depart">
-                            </div>
-                        </div>
-
-                        <!-- Search Button -->
-                        <div class="row mt-2">
-                            <div class="col-12 text-end">
-                                <button type="button" class="btn btn-primary btn-sm" id="rechercher">
-                                    Rechercher
-                                </button>
-                                <a th:href="@{/heure_supplementaire}"
-                                        class="btn btn-secondary btn-sm">Réinitialiser</a>
-                            </div>
-
-                        </div>
-                    </form>
-                </div>
-
-                <!-- 3. TABLE RESULTS -->
-                <div class="card-body p-0 valiny">
-                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                        <table class="table table-bordered table-hover mb-0" id="pointageTable">
-                            <thead class="bg-light text-dark sticky-top">
-                                <tr>
-                                    <th style="width: 50px;">ID</th>
-                                    <th>Date</th>
-                                    <th>ID Employé</th>
-                                    <th>Employé</th>
-                                    <th class="text-center">Arrivée</th>
-                                    <th class="text-center">Départ</th>
-                                    <th class="text-center">Méthode</th>
-                                    <th class="text-center" style="width: 120px;">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="p : ${pointages}">
-                                    <td th:text="${p.id}"></td>
-                                    <td class="text-nowrap" th:text="${#temporals.format(p.date_pointage, 'dd/MM/yyyy')}"></td>
-                                    <td class="font-weight-bold text-primary" th:text="${p.employee.id}"></td>
-                                    <td class="font-weight-bold text-primary" th:text="${p.employee.username}"></td>
-                                    <td class="text-center" th:text="${p.heure_arrivee}"></td>
-                                    <td class="text-center">
-                                        <span th:if="${p.heure_depart != null}" th:text="${p.heure_depart}"></span>
-                                        <span th:if="${p.heure_depart == null}" class="badge badge-warning text-dark">En cours</span>
-                                    </td>
-                                    <td class="text-center small text-muted">
-                                        <span th:text="${p.methode.name}"></span>
-                                    </td>
-                                    <td class="text-center">
-                                        <a th:href="@{/heure_supplementaire/create(pointage_id=${p.id}, employee_id=${p.employee.id})}"
-                                           class="btn btn-success btn-sm font-weight-bold shadow-sm">
-                                            <i class="fas fa-plus"></i> Choisir
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr th:if="${#lists.isEmpty(pointages)}">
-                                    <td colspan="7" class="text-center py-3 text-muted">
-                                        Aucun pointage trouvé.
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div> <!-- End of Single Card -->
-
-            <!-- ======================================================= -->
-            <!-- HEADER SECTION (HISTORY)                                -->
-            <!-- ======================================================= -->
-            <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
-                <h2 class="text-primary">
-                    <i class="fas fa-clock"></i> Liste des Heures Supplémentaires
-                </h2>
-            </div>
-
-            <!-- ======================================================= -->
-            <!-- SECTION 2: SEARCH FILTER FORM (HISTORY)                 -->
-            <!-- ======================================================= -->
-            <div class="card mb-4 border-secondary shadow-sm">
-                <div class="card-header bg-white">
-                    <h5 class="mb-0 text-secondary"><i class="fas fa-search"></i> Filtres de recherche</h5>
-                </div>
-                <div class="card-body">
-                    <!-- Your Form Logic Here -->
-                    <div class="row mb-3">
-                        <div class="col-md-4">
-                            <label class="form-label fw-bold">Employé</label>
-                            <input type="text" class="form-control" name="employee2" placeholder="Nom de l'employé...">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label fw-bold">Date Début</label>
-                            <input type="datetime-local" class="form-control" name="date_debut2">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label fw-bold">Date Fin</label>
-                            <input type="datetime-local" class="form-control" name="date_fin2">
-                        </div>
-                    </div>
-                    <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold text-primary">Statut</label>
-                            <select class="form-select" name="status_id">
-                                <option value="">-- Tous --</option>
-                                <option th:each="s : ${status_generals}" th:value="${s.id}" th:text="${s.name}"></option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold text-primary">Admin</label>
-                            <select class="form-select" name="admin_id">
-                                <option value="">-- Tous --</option>
-                                <option th:each="s : ${admins}" th:value="${s.id}" th:text="${s.username}"></option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold text-primary">Type compensation</label>
-                            <select class="form-select" name="type_compensation_id">
-                                <option value="">-- Tous --</option>
-                                <option th:each="s : ${type_compensations}" th:value="${s.id}" th:text="${s.name}"></option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 text-end mt-4">
-                            <a th:href="@{/heure_supplementaire}" class="btn btn-secondary me-2">Réinitialiser</a>
-                            <button type="submit" class="btn btn-primary px-4" id="rechercher2">Filtrer</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ======================================================= -->
-            <!-- SECTION 3: RESULTS TABLE (HISTORY)                      -->
-            <!-- ======================================================= -->
-            <div class="card mb-4 border-primary shadow-sm">
-                <!-- FIXED COLOR: changed bg-white text-white to bg-primary text-white so text is visible -->
-                <div class="card-header bg-white text-white">
-                    <h5 class="mb-0"><i class="fas fa-list"></i> Historique des demandes</h5>
-                </div>
-
-                <div class="card-body p-0 table-responsive valiny2">
-                    <table class="table table-striped table-hover mb-0 align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th>ID Employé</th>
-                                <th>Employé</th>
-                                <th class="text-center">Config ID</th>
-                                <th class="text-center">Heures</th>
-                                <th>Compensation</th>
-                                <th>Statut</th>
-                                <th>Validé par</th>
-                                <th style="width: 25%;">Commentaire</th>
-                                <th>Dates</th>
-                                <th class="text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each='row : ${heure_supplementaires}'>
-                                <td class="fw-bold text-primary" th:text='${row.employee.id}'></td>                                
-                                <td class="fw-bold text-primary" th:text='${row.employee.username}'></td>
-                                <td class="text-center" th:text='${row.config_heure_supplementaire.id}'></td>
-                                <td class="text-center">
-                                    <span class="badge bg-white text-dark border" style="font-size: 0.9em;" th:text='${row.nb_heures}'></span>
-                                </td>
-                                <td>
-                                    <span class="badge bg-light text-dark border" th:text='${row.type_compensation.name}'></span>
-                                </td>
-                                <td th:switch="${row.status_general.name}">
-                                    <span th:case="'Approuve'" class="badge bg-success"><i class="fas fa-check-circle"></i> Approuvé</span>
-                                    <span th:case="'Rejete'" class="badge bg-danger"><i class="fas fa-times-circle"></i> Rejeté</span>
-                                    <span th:case="'En attente'" class="badge bg-warning text-dark"><i class="fas fa-hourglass-half"></i> En attente</span>
-                                    <span th:case="*" class="badge bg-secondary" th:text="${row.status_general.name}"></span>
-                                </td>
-                                <td class="small text-muted" th:text='${row.admin != null ? row.admin.username : "---"}'></td>
-                                <td class="small text-muted" th:text='${row.commentaire}'></td>
-                                <td>
-                                    <div class="small fw-bold">Créé <span th:text="${#temporals.format(row.date_creation, 'dd/MM/yyyy')}"></span></div>
-                                </td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <a th:href='@{/heure_supplementaire/edit/{id}(id=${row.id})}' class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></a>
-                                        <a th:href='@{/heure_supplementaire/delete/{id}(id=${row.id})}' class="btn btn-sm btn-outline-danger" onclick="return confirm('Confirmer ?')"><i class="fas fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
-        <script th:src="@{/assets/js/fetchHeureSup.js}"></script>
-        <script th:src="@{/assets/js/fetchPointage.js}"></script>
-    </div>
-</body>
-</html>
+<div layout:fragment="content">
+<h2>Liste de heure_supplementaire</h2>
+<a th:href='@{/heure_supplementaire/create}'>Créer</a>
+<table  class="table table-hover" >
+<thead><tr>
+<th>id</th>
+<th>Employee </th>
+<th>pointage_id</th>
+<th>config_id</th>
+<th>nb_heures</th>
+<th>type_compensation</th>
+<th> Status </th>
+<th>Approved by Admin :  </th>
+<th>commentaire</th>
+<th>date_validation</th>
+<th>date_creation</th>
+<th>Actions</th>
+</tr></thead>
+<tbody>
+<tr th:each='row : ${heure_supplementaires}'>
+<td th:text='${row.id}'></td>
+<td th:text='${row.employee.username}'></td>
+<td th:text='${row.pointage}'></td>
+<td th:text='${row.config_heure_supplementaire}'></td>
+<td th:text='${row.nb_heures}'></td>
+<td th:text='${row.type_compensation}'></td>
+<td th:text='${row.status_general.name}'></td>
+<td th:text='${row.admin.username}'></td>
+<td th:text='${row.commentaire}'></td>
+<td th:text='${row.date_validation}'></td>
+<td th:text='${row.date_creation}'></td>
+<td>
+<a th:href='@{/heure_supplementaire/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/heure_supplementaire/delete/{id}(id=${row.id})}'>Delete</a>
+</td></tr>
+</tbody></table> </div> </body></html>

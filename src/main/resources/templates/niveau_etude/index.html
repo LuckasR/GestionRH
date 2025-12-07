@@ -3,7 +3,7 @@
 <body>
 <div layout:fragment="content">
 <h2>Liste de niveau_etude</h2>
-<a th:href='@{/niveau_etude/create}'>Créer</a>
+<a  class="btn btn-primary" th:href='@{/niveau_etude/create}'>Créer</a>
 <table  class="table table-hover" >
 <thead><tr>
 <th>id</th>
@@ -15,6 +15,6 @@
 <td th:text='${row.id}'></td>
 <td th:text='${row.name}'></td>
 <td>
-<a th:href='@{/niveau_etude/edit/{id}(id=${row.id})}'>Edit</a> | <a th:href='@{/niveau_etude/delete/{id}(id=${row.id})}'>Delete</a>
+<a  class="btn btn-warning" th:href='@{/niveau_etude/edit/{id}(id=${row.id})}'>Edit</a> | <a  class="btn btn-danger" th:href='@{/niveau_etude/delete/{id}(id=${row.id})}'>Delete</a>
 </td></tr>
 </tbody></table> </div> </body></html>

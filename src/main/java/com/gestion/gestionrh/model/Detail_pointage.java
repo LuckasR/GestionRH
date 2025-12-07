@@ -4,15 +4,15 @@ import java.math.*;
 import java.time.*;
 
 @Entity
-@Table(name = "pointage")
-public class Pointage {
+@Table(name = "detail_pointage")
+public class Detail_pointage {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+    @JoinColumn(name = "pointage_id")
+    private Pointage pointage;
 
     
     private LocalDate date_pointage;
@@ -30,14 +30,11 @@ public class Pointage {
     
     private String commentaire;
 
-    
-    private LocalDateTime date_enregistrement;
-
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
-    public Employee getEmployee() { return employee; }
-    public void setEmployee(Employee employee) { this.employee = employee; }
+    public Pointage getPointage() { return pointage; }
+    public void setPointage(Pointage pointage) { this.pointage = pointage; }
 
     public LocalDate getDate_pointage() { return date_pointage; }
     public void setDate_pointage(LocalDate date_pointage) { this.date_pointage = date_pointage; }
@@ -53,8 +50,5 @@ public class Pointage {
 
     public String getCommentaire() { return commentaire; }
     public void setCommentaire(String commentaire) { this.commentaire = commentaire; }
-
-    public LocalDateTime getDate_enregistrement() { return date_enregistrement; }
-    public void setDate_enregistrement(LocalDateTime date_enregistrement) { this.date_enregistrement = date_enregistrement; }
 
 }

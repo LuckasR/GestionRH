@@ -8,4 +8,6 @@ public interface EmployeeService {
     Employee getById(Integer id);
     void save(Employee obj);
     void delete(Integer id);
+    String generateEmployeeCode(); 
+        Employee getByCodeQr(String qr) ; 
 }

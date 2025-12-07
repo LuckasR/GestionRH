@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/template1}">
+<body>
+<div layout:fragment="content">
+<div class="card">
+<h5 class='card-header'>Créer Horaire_travail</h5>
+<div class="card-body">
+<form th:action='@{/horaire_travail/save}' th:object='${horaire_travail}' method='post'>
+  <div class='mb-4'>
+    <label class='form-label' for='jour_semaine'>Jour semaine</label>
+    <input type='text' class='form-control' id='jour_semaine' th:field='*{jour_semaine}' placeholder='jour_semaine...'>
+  </div>
+  <div class='mt-3'>
+    <button type='submit' class='btn btn-primary'>Enregistrer</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>
