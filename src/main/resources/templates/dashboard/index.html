@@ -2,274 +2,451 @@
 <html xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/themeleaf/layout"
   layout:decorate="~{fragment/template1}">
-<body>
-  <div layout:fragment="content">
-    <div class="content-wrapper">
-      <div class="container-xxl flex-grow-1 container-p-y">
-        
-        <!-- ============================================= -->
-        <!-- ROW 1: KPI CARDS (Global Stats)               -->
-        <!-- ============================================= -->
-        <div class="row">
-          
-          <!-- 1. Global Turnover Rate -->
-          <div class="col-lg-3 col-md-6 col-12 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                  <div class="avatar flex-shrink-0">
-                    <span class="avatar-initial rounded bg-label-danger"><i class="bx bx-line-chart-down"></i></span>
+  <head>
+    <!-- Include ApexCharts Library in Head or at the bottom -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  </head>
+  <body>
+
+    <!-- START OF CONTENT FRAGMENT -->
+    <div layout:fragment="content">
+      <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+
+          <!-- ============================================= -->
+          <!-- ROW 1: KPI CARDS (Displayed via Thymeleaf)    -->
+          <!-- ============================================= -->
+          <div class="row">
+
+            <!-- 1. Turnover Rate -->
+            <div class="col-lg-3 col-md-6 col-12 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <span class="avatar-initial rounded bg-label-danger"><i
+                          class="bx bx-line-chart-down"></i></span>
+                    </div>
                   </div>
+                  <span class="fw-semibold d-block mb-1">Taux Turnover</span>
+                  <!-- THYMELEAF DIRECT DISPLAY -->
+                  <h3 class="card-title mb-2"
+                    th:text="${turnoverRate != null ? turnoverRate : '0'} + '%'">12.5%</h3>
+                  <small class="text-danger fw-semibold">Global</small>
                 </div>
-                <span class="fw-semibold d-block mb-1">Taux Turnover</span>
-                <!-- Backend Variable: turnoverRate -->
-                <h3 class="card-title mb-2" th:text="${turnoverRate != null ? turnoverRate : '0'} + '%'">12.5%</h3>
-                <small class="text-danger fw-semibold">Global</small>
+              </div>
+            </div>
+
+            <!-- 2. Absence Rate -->
+            <div class="col-lg-3 col-md-6 col-12 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <span class="avatar-initial rounded bg-label-warning"><i
+                          class="bx bx-user-x"></i></span>
+                    </div>
+                  </div>
+                  <span class="fw-semibold d-block mb-1">Taux Absentéisme</span>
+                  <!-- THYMELEAF DIRECT DISPLAY -->
+                  <h3 class="card-title text-nowrap mb-1"
+                    th:text="${absenceRate != null ? absenceRate : '0'} + '%'">4.2%</h3>
+                  <small class="text-muted">Moyenne annuelle</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Seniority -->
+            <div class="col-lg-3 col-md-6 col-12 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <span class="avatar-initial rounded bg-label-primary"><i
+                          class="bx bx-time-five"></i></span>
+                    </div>
+                  </div>
+                  <span class="fw-semibold d-block mb-1">Ancienneté Moy.</span>
+                  <!-- THYMELEAF DIRECT DISPLAY -->
+                  <h3 class="card-title text-nowrap mb-1"
+                    th:text="${avgSeniority != null ? avgSeniority : '0'} + ' Ans'">3.5
+                    Ans</h3>
+                  <small class="text-muted">Fidélité</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Total Employees -->
+            <div class="col-lg-3 col-md-6 col-12 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <span class="avatar-initial rounded bg-label-success"><i
+                          class="bx bx-group"></i></span>
+                    </div>
+                  </div>
+                  <span class="fw-semibold d-block mb-1">Effectif Total</span>
+                  <!-- THYMELEAF DIRECT DISPLAY -->
+                  <h3 class="card-title text-nowrap mb-1"
+                    th:text="${totalEmployees}">142</h3>
+                  <small class="text-success fw-semibold">Actifs</small>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- 2. Absence Rate -->
-          <div class="col-lg-3 col-md-6 col-12 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                  <div class="avatar flex-shrink-0">
-                    <span class="avatar-initial rounded bg-label-warning"><i class="bx bx-user-x"></i></span>
-                  </div>
-                </div>
-                <span class="fw-semibold d-block mb-1">Taux Absentéisme</span>
-                <h3 class="card-title text-nowrap mb-1" th:text="${absenceRate != null ? absenceRate : '0'} + '%'">4.2%</h3>
-                <small class="text-muted">Moyenne annuelle</small>
-              </div>
-            </div>
-          </div>
+          <!-- ============================================= -->
+          <!-- ROW 2: CHARTS (Data passed via Attributes)    -->
+          <!-- ============================================= -->
+          <div class="row">
 
-          <!-- 3. Seniority (Ancienneté) -->
-          <div class="col-lg-3 col-md-6 col-12 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                  <div class="avatar flex-shrink-0">
-                    <span class="avatar-initial rounded bg-label-primary"><i class="bx bx-time-five"></i></span>
-                  </div>
-                </div>
-                <span class="fw-semibold d-block mb-1">Ancienneté Moy.</span>
-                <h3 class="card-title text-nowrap mb-1" th:text="${avgSeniority != null ? avgSeniority : '0'} + ' Ans'">3.5 Ans</h3>
-                <small class="text-muted">Fidélité</small>
-              </div>
-            </div>
-          </div>
+            <!-- ============================================= -->
+            <!-- ROW 2: ALERTS (Left) & SERVICE CHART (Right)  -->
+            <!-- ============================================= -->
+            <div class="row">
 
-          <!-- 4. Total Employees -->
-          <div class="col-lg-3 col-md-6 col-12 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                  <div class="avatar flex-shrink-0">
-                    <span class="avatar-initial rounded bg-label-success"><i class="bx bx-group"></i></span>
-                  </div>
-                </div>
-                <span class="fw-semibold d-block mb-1">Effectif Total</span>
-                <h3 class="card-title text-nowrap mb-1" th:text="${totalEmployees}">142</h3>
-                <small class="text-success fw-semibold">Actifs</small>
-              </div>
-            </div>
-          </div>
-        </div>
+              <!-- LEFT COLUMN: Alerts (Contracts, Leaves, Budget) -->
+              <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+                <div class="card h-100">
 
-        <!-- ============================================= -->
-        <!-- ROW 2: TURNOVER DETAILS & SERVICE CHART       -->
-        <!-- ============================================= -->
-        <div class="row">
-          
-          <!-- LEFT: Turnover List -->
-          <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
-            <div class="card h-100">
-              <div class="card-header d-flex align-items-center justify-content-between">
-                <h5 class="card-title m-0 me-2">Turnover par Poste</h5>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive text-nowrap">
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th>Poste</th>
-                        <th>Départs</th>
-                        <th>Impact</th>
-                        <th>Tendance</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!-- THYMELEAF LOOP START -->
-                      <!-- <tr th:each="item : ${turnoverList}"> -->
-                      
-                      <!-- Demo Row 1 -->
-                      <tr>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Dev Junior</strong></td>
-                        <td>5</td>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <span class="me-2">High</span>
-                            <div class="progress w-100" style="height: 8px;">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 80%"></div>
+                  <!-- Header with Tabs -->
+                  <div
+                    class="card-header p-0 mx-3 mt-3 position-relative zindex-1">
+                    <ul class="nav nav-tabs nav-fill" role="tablist">
+                      <!-- Tab 1: Contracts -->
+                      <li class="nav-item" role="presentation">
+                        <button type="button" class="nav-link active" role="tab"
+                          data-bs-toggle="tab" data-bs-target="#tab-contracts"
+                          aria-controls="tab-contracts" aria-selected="true">
+                          <i class="bx bx-file me-1"></i> Fin de Contrat
+                          <span
+                            class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1"
+                            th:text="${expiringContracts != null ? expiringContracts.size() : '3'}">3</span>
+                        </button>
+                      </li>
+                      <!-- Tab 2: Leaves -->
+                      <li class="nav-item" role="presentation">
+                        <button type="button" class="nav-link" role="tab"
+                          data-bs-toggle="tab" data-bs-target="#tab-leaves"
+                          aria-controls="tab-leaves" aria-selected="false">
+                          <i class="bx bx-sun me-1"></i> Congés
+                        </button>
+                      </li>
+                      <!-- Tab 3: Budget -->
+                      <li class="nav-item" role="presentation">
+                        <button type="button" class="nav-link" role="tab"
+                          data-bs-toggle="tab" data-bs-target="#tab-budget"
+                          aria-controls="tab-budget" aria-selected="false">
+                          <i class="bx bx-wallet me-1"></i> Budget
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Body with Tab Content -->
+                  <div class="card-body">
+                    <div class="tab-content p-0">
+
+                      <!-- Content 1: Contracts -->
+                      <div class="tab-pane fade show active" id="tab-contracts"
+                        role="tabpanel">
+                        <div class="table-responsive text-nowrap">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>Employé</th>
+                                <th>Date Fin</th>
+                                <th>Status</th>
+                                <!-- Changed "Type" to Status for better utility -->
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+
+                              <!-- THYMELEAF LOOP -->
+                              <!-- row[0]=First, row[1]=Last, row[2]=DateFin, row[3]=DaysLeft -->
+                              <tr th:each="contract : ${expiringContracts}">
+
+                                <!-- Name -->
+                                <td>
+                                  <div class="d-flex align-items-center">
+                                    <div class="avatar avatar-xs me-2">
+                                      <span
+                                        class="avatar-initial rounded-circle bg-label-primary">
+                                        <span
+                                          th:text="${#strings.substring(contract[0],0,1) + #strings.substring(contract[1],0,1)}">JD</span>
+                                      </span>
+                                    </div>
+                                    <strong
+                                      th:text="${contract[0] + ' ' + contract[1]}">John
+                                      Doe</strong>
+                                  </div>
+                                </td>
+
+                                <!-- Date -->
+                                <td
+                                  th:classappend="${contract[3] <= 0} ? 'text-danger fw-bold' : (${contract[3] < 30} ? 'text-warning fw-bold' : '')">
+                                  <i class="bx bx-calendar me-1"></i>
+                                  <span
+                                    th:text="${#dates.format(contract[2], 'dd/MM/yyyy')}">15
+                                    Oct 2025</span>
+                                </td>
+
+                                <!-- Status Badge -->
+                                <td>
+                                  <!-- Expired -->
+                                  <span th:if="${contract[3] < 0}"
+                                    class="badge bg-label-danger">Expiré</span>
+                                  <!-- Expires Today -->
+                                  <span th:if="${contract[3] == 0}"
+                                    class="badge bg-label-danger">Aujourd'hui</span>
+                                  <!-- Coming Soon (<30 days) -->
+                                  <span
+                                    th:if="${contract[3] > 0 and contract[3] <= 30}"
+                                    class="badge bg-label-warning"
+                                    th:text="'J-' + ${contract[3]}">J-15</span>
+                                  <!-- Safe (>30 days) -->
+                                  <span th:if="${contract[3] > 30}"
+                                    class="badge bg-label-info"
+                                    th:text="'J-' + ${contract[3]}">J-60</span>
+                                </td>
+
+                                <!-- Actions -->
+                                <td>
+                                  <button type="button"
+                                    class="btn btn-sm btn-icon btn-outline-primary"
+                                    title="Renouveler">
+                                    <i class="bx bx-refresh"></i>
+                                  </button>
+                                </td>
+                              </tr>
+
+                              <!-- Empty State -->
+                              <tr th:if="${expiringContracts.empty}">
+                                <td colspan="4"
+                                  class="text-center text-muted">Aucune alerte
+                                  contrat pour les 3 prochains mois.</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <!-- Content 2: Leaves -->
+                      <!-- TAB 2 CONTENT: Leaves (Congés Non Pris) -->
+                      <div class="tab-pane fade" id="tab-leaves"
+                        role="tabpanel">
+                        <div class="table-responsive text-nowrap">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Employé</th>
+                                <th>Solde Restant</th>
+                                <th>Utilisation</th>
+                                <!-- Progress bar column -->
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <!-- THYMELEAF LOOP -->
+                              <!-- row[0]=First, row[1]=Last, row[2]=Restant, row[3]=Acquis -->
+                              <tr th:each="row : ${leaveAlerts}">
+
+                                <!-- Column 1: Name -->
+                                <td>
+                                  <strong
+                                    th:text="${row[0] + ' ' + row[1]}">John
+                                    Doe</strong>
+                                </td>
+
+                                <!-- Column 2: Remaining Days -->
+                                <td>
+                                  <span class="badge bg-label-primary"
+                                    th:text="${row[2] + ' Jours'}">25
+                                    Jours</span>
+                                </td>
+
+                                <!-- Column 3: Progress Bar (Visualizing Acquired vs Remaining) -->
+                                <!-- Logic: If Acquis=30 and Restant=25, they used very little. High remaining = Red/Warning -->
+                                <td>
+                                  <div class="d-flex align-items-center gap-2">
+                                    <div class="progress w-100"
+                                      style="height: 8px;">
+                                      <!-- Calculate percentage: (Restant / Acquis) * 100 -->
+                                      <div class="progress-bar"
+                                        role="progressbar"
+                                        th:style="'width: ' + (${row[3]} > 0 ? (${row[2]} * 100.0 / ${row[3]}) : 0) + '%'"
+                                        th:classappend="${row[2]} > 20 ? 'bg-danger' : 'bg-warning'"
+                                        aria-valuemin="0" aria-valuemax="100">
+                                      </div>
+                                    </div>
+                                    <small class="text-muted"
+                                      th:text="${row[3]} > 0 ? ${#numbers.formatInteger((row[2] * 100.0 / row[3]), 1)} + '%' : '0%'">80%</small>
+                                  </div>
+                                </td>
+
+                              </tr>
+
+                              <!-- Fallback if list is empty -->
+                              <tr th:if="${leaveAlerts.empty}">
+                                <td colspan="3"
+                                  class="text-center text-muted">Aucune alerte
+                                  congé.</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <!-- Content 3: Budget -->
+                      <!-- Content 3: Budget -->
+                      <div class="tab-pane fade" id="tab-budget"
+                        role="tabpanel">
+                        <ul class="list-group list-group-flush mt-2">
+
+                          <!-- THYMELEAF LOOP -->
+                          <!-- row[0]=Name, row[1]=Allocated, row[2]=Used, row[3]=Percentage -->
+                          <li class="list-group-item px-0"
+                            th:each="row : ${budgetAlerts}">
+                            <div
+                              class="d-flex justify-content-between align-items-center mb-1">
+
+                              <!-- Department Name -->
+                              <div>
+                                <h6 class="mb-0"
+                                  th:text="${row[0]}">Marketing</h6>
+                                <small class="text-muted">
+                                  Conso: <span th:text="${row[2]}">8000</span> /
+                                  <span th:text="${row[1]}">12000</span>
+                                </small>
+                              </div>
+
+                              <!-- Badge Status -->
+                              <span th:if="${row[3] >= 100}"
+                                class="badge bg-label-danger"
+                                th:text="'+' + (${row[3]} - 100) + '% Over'">+20%</span>
+                              <span th:if="${row[3] < 100}"
+                                class="badge bg-label-warning"
+                                th:text="${row[3]} + '%'">90%</span>
                             </div>
-                          </div>
-                        </td>
-                        <td><span class="badge bg-label-danger">Critical</span></td>
-                      </tr>
-                      
-                      <!-- Demo Row 2 -->
-                      <tr>
-                        <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>Commercial</strong></td>
-                        <td>2</td>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <span class="me-2">Med</span>
-                            <div class="progress w-100" style="height: 8px;">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"></div>
+
+                            <!-- Progress Bar -->
+                            <div class="progress" style="height: 6px;">
+                              <div class="progress-bar"
+                                role="progressbar"
+                                th:style="'width: ' + ${row[3] > 100 ? 100 : row[3]} + '%'"
+                                th:classappend="${row[3] >= 100 ? 'bg-danger' : 'bg-warning'}"
+                                aria-valuemin="0" aria-valuemax="100">
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td><span class="badge bg-label-warning">Stable</span></td>
-                      </tr>
-                      <!-- THYMELEAF LOOP END -->
+                          </li>
 
-                    </tbody>
-                  </table>
+                          <!-- Empty State -->
+                          <li class="list-group-item text-center text-muted"
+                            th:if="${budgetAlerts.empty}">
+                            Budget sous contrôle.
+                          </li>
+
+                        </ul>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RIGHT COLUMN: Service Distribution Chart (The Pie/Donut) -->
+              <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                <div class="card h-100">
+                  <div
+                    class="card-header d-flex align-items-center justify-content-between pb-0">
+                    <div class="card-title mb-0">
+                      <h5 class="m-0 me-2">Par Département</h5>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-3">
+
+                      <!-- CHART CONTAINER -->
+                      <!-- The JS file will find this ID and render the chart using these attributes -->
+                      <div id="serviceDistributionChart"
+                        th:data-series="${serviceCounts}"
+                        th:data-labels="${#strings.listJoin(serviceLabels, ',')}">
+                      </div>
+
+                    </div>
+                    <div class="text-center">
+                      <small class="text-muted">Répartition des
+                        effectifs</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- ============================================= -->
+          <!-- ROW 3: BAR & PIE CHARTS                       -->
+          <!-- ============================================= -->
+          <div class="row">
+
+            <!-- CONTRACTS CHART -->
+            <div class="col-md-6 col-lg-6 mb-4">
+              <div class="card h-100">
+                <div class="card-header">
+                  <h5 class="card-title">Répartition par Contrat</h5>
+                </div>
+                <div class="card-body">
+
+                  <!-- DATA INJECTION HERE -->
+                  <div id="contractChart"
+                    th:data-series="${contractCounts}"
+                    th:data-labels="${#strings.listJoin(contractLabels, ',')}">
+                  </div>
+
+                  <div class="d-flex justify-content-center pt-4 gap-2">
+                    <small class="text-muted">Basé sur les contrats
+                      actifs</small>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- RIGHT: Service Distribution -->
-          <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-            <div class="card h-100">
-              <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                <div class="card-title mb-0">
-                  <h5 class="m-0 me-2">Par Département</h5>
+            <!-- AGE PYRAMID -->
+            <div class="col-md-6 col-lg-6 mb-4">
+              <div class="card h-100">
+                <div class="card-header">
+                  <h5 class="card-title">Pyramide des Âges</h5>
                 </div>
-              </div>
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <!-- Chart Container -->
-                  <div id="serviceDistributionChart"></div> 
-                </div>
-                <div class="text-center">
-                    <small class="text-muted">Répartition des effectifs</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> 
+                <div class="card-body">
 
-        <!-- ============================================= -->
-        <!-- ROW 3: CONTRACTS & AGE PYRAMID                -->
-        <!-- ============================================= -->
-        <div class="row">
-          
-          <!-- REPLACED GENDER WITH CONTRACTS (Since you have contrat_id) -->
-          <div class="col-md-6 col-lg-6 mb-4">
-            <div class="card h-100">
-              <div class="card-header">
-                <h5 class="card-title">Répartition par Contrat</h5>
-              </div>
-              <div class="card-body">
-                <div id="contractChart"></div> 
-                <div class="d-flex justify-content-center pt-4 gap-2">
-                    <small class="text-muted">Basé sur les contrats actifs</small>
-                </div>
-              </div>
-            </div>
-          </div>
+                  <!-- DATA INJECTION HERE -->
+                  <div id="ageChart"
+                    th:data-series="${ageDistribution}">
+                  </div>
 
-          <!-- Age Pyramid (Global, without gender split) -->
-          <div class="col-md-6 col-lg-6 mb-4">
-            <div class="card h-100">
-              <div class="card-header">
-                <h5 class="card-title">Pyramide des Âges</h5>
-              </div>
-              <div class="card-body">
-                <div id="ageChart"></div> 
-                <div class="text-center fw-semibold pt-3 mb-2">
-                    <!-- Optional: backend variable for average age -->
+                  <div class="text-center fw-semibold pt-3 mb-2">
                     Moyenne d'âge: <span th:text="${avgAge}">29</span> Ans
+                  </div>
                 </div>
               </div>
             </div>
+
           </div>
-          
+
         </div>
-
       </div>
-    </div>
-  </div>
-  
-  <!-- ============================================= -->
-  <!-- JAVASCRIPT FOR CHARTS                         -->
-  <!-- ============================================= -->
-  <th:block layout:fragment="page-scripts">
-    <script th:inline="javascript">
-      
-      // 1. SERVICE CHART (Donut)
-      // ========================
-      const serviceChartEl = document.querySelector('#serviceDistributionChart');
-      if (serviceChartEl) {
-        /* Get data from Java: var serviceData = [[${serviceCounts}]]; */
-        var serviceData = [45, 12, 25, 10]; // Demo Data
-        var serviceLabels = ['IT', 'RH', 'Sales', 'Finance']; // Demo Labels
 
-        const serviceChartConfig = {
-          chart: { type: 'donut', height: 220 },
-          series: serviceData, 
-          labels: serviceLabels,
-          dataLabels: { enabled: false },
-          legend: { show: false },
-          colors: ['#696cff', '#8592a3', '#71dd37', '#03c3ec']
-        };
-        new ApexCharts(serviceChartEl, serviceChartConfig).render();
-      }
+      <!-- Link to the External JS file -->
+      <script src="/js/my-dashboard-charts.js"></script>
 
-      // 2. CONTRACT CHART (Replaces Gender)
-      // ===================================
-      const contractChartEl = document.querySelector('#contractChart');
-      if (contractChartEl) {
-        /* Get data from Java: var contractData = [[${contractCounts}]]; */
-        var contractData = [80, 40, 22]; // Demo Data
-        var contractLabels = ['CDI', 'CDD', 'Stage']; 
-
-        const contractChartConfig = {
-          chart: { type: 'pie', height: 250 },
-          series: contractData,
-          labels: contractLabels,
-          colors: ['#71dd37', '#ffab00', '#233446'], // Green, Orange, Dark
-          legend: { position: 'bottom' }
-        };
-        new ApexCharts(contractChartEl, contractChartConfig).render();
-      }
-
-      // 3. AGE CHART (Horizontal Bar / Pyramid style)
-      // =============================================
-      const ageChartEl = document.querySelector('#ageChart');
-      if (ageChartEl) {
-        /* Get data from Java: var ageData = [[${ageDistribution}]]; */
-        var ageData = [5, 15, 40, 20, 5]; // Demo Data
-        var ageCategories = ['18-24', '25-30', '30-40', '40-50', '50+'];
-
-        const ageChartConfig = {
-          chart: { type: 'bar', height: 250, toolbar: {show:false} },
-          series: [{ name: 'Employés', data: ageData }],
-          xaxis: { categories: ageCategories },
-          plotOptions: {
-            bar: { borderRadius: 4, horizontal: true, barHeight: '50%' }
-          },
-          colors: ['#696cff'],
-          dataLabels: { enabled: true }
-        };
-        new ApexCharts(ageChartEl, ageChartConfig).render();
-      }
-    </script>
-  </th:block>
-
-</body>
+    </div> <!-- END OF CONTENT FRAGMENT -->
+  </body>
 </html>
