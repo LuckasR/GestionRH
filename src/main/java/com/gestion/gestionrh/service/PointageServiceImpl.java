@@ -25,6 +25,9 @@ public class PointageServiceImpl implements PointageService {
     public Pointage getById(Integer id) { return repo.findById(id).orElse(null); }
     public void save(Pointage obj) { repo.save(obj); }
     public void delete(Integer id) { repo.deleteById(id); }
+        public List<Pointage> getTodayPointage(Integer empId, LocalDate today) {
+        return repo.findToday(empId, today);
+    }
     public List<Pointage> filterPointages(String empName, LocalDate date_debut, LocalDate date_fin, Integer methodeId, LocalTime heure_arrivee, LocalTime heure_depart) {
         StringBuilder queryStr = new StringBuilder("SELECT p FROM Pointage p WHERE 1=1");
 
