@@ -100,7 +100,8 @@ public class DashboardController {
         model.addAttribute("budgetAlerts", budgetAlerts);
 
 
-    
+          // Add the real Average Age
+        model.addAttribute("avgAge", dashboardService.getAvgAge());
 
 
         return "dashboard/index";

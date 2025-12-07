@@ -27,4 +27,6 @@ public interface DashboardService {
 
     List<Object[]> getBudgetAlerts();
 
+    int getAvgAge();
+
 }

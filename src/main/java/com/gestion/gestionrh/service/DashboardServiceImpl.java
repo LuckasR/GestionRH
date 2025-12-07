@@ -150,4 +150,17 @@ public class DashboardServiceImpl implements DashboardService{
 
         return em.createNativeQuery(sql).getResultList();
     }
+
+    // KPI: Average Age (Moyenne d'âge)
+    public int getAvgAge() {
+        String sql = "SELECT ROUND(AVG(EXTRACT(YEAR FROM AGE(CURRENT_DATE, info.date_naissance)))) " +
+                     "FROM information_employee info " +
+                     "JOIN contrat_employee c ON c.employee_id = info.employee_id " +
+                     "WHERE c.has_active = true";
+                     
+        Number result = (Number) em.createNativeQuery(sql).getSingleResult();
+        
+        // Return 0 if no employees exist, otherwise return the calculated integer
+        return result != null ? result.intValue() : 0;
+    }
 }
